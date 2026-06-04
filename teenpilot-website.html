@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TeenPilot — Your Co-Pilot for School, Sport and Life</title>
+  <meta name="description" content="The AI student assistant built for New Zealand secondary school students. Manage your timetable, assignments, exams, sport and social life — all in one place."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #060a0f;
+      --surface: #0d1520;
+      --surface2: #111c2e;
+      --border: rgba(255,255,255,0.07);
+      --text: #eef2f8;
+      --textMid: #8a9bb5;
+      --textDim: #4a5a72;
+      --accent: #3dff8f;
+      --accentDim: rgba(61,255,143,0.08);
+      --accentGlow: rgba(61,255,143,0.15);
+      --blue: #4a9eff;
+      --purple: #a78bfa;
+      --coral: #ff6b6b;
+      --gold: #ffd166;
+      --font: 'DM Sans', sans-serif;
+      --fontDisplay: 'Syne', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(6,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--fontDisplay);
+      font-size: 22px; font-weight: 800;
+      color: var(--text); letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      color: var(--textMid); text-decoration: none;
+      font-size: 14px; font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent); color: #050d08;
+      padding: 9px 22px; border-radius: 100px;
+      font-size: 14px; font-weight: 700;
+      text-decoration: none; transition: all 0.2s;
+      font-family: var(--fontDisplay);
+    }
+    .nav-cta:hover { background: #5fffaa; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+
+    /* Animated background grid */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(61,255,143,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,255,143,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%);
+      animation: gridMove 20s linear infinite;
+    }
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 60px 60px; }
+    }
+
+    /* Glow orbs */
+    .hero-glow {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); pointer-events: none;
+    }
+    .hero-glow-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(61,255,143,0.12) 0%, transparent 70%);
+      top: -100px; left: 50%; transform: translateX(-50%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    .hero-glow-2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(74,158,255,0.1) 0%, transparent 70%);
+      bottom: 0; right: -50px;
+      animation: pulse 6s ease-in-out infinite reverse;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+      50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 13px; color: var(--accent); font-weight: 600;
+      margin-bottom: 32px; position: relative; z-index: 1;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: blink 2s ease infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero h1 {
+      font-family: var(--fontDisplay);
+      font-size: clamp(42px, 7vw, 88px);
+      font-weight: 800; line-height: 1.0;
+      letter-spacing: -3px;
+      color: var(--text);
+      margin-bottom: 24px;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 .accent { color: var(--accent); }
+    .hero h1 .line2 { display: block; color: var(--textMid); font-size: 0.85em; }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--textMid); max-width: 560px;
+      line-height: 1.7; margin-bottom: 48px;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-ctas {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      justify-content: center;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--accent); color: #050d08;
+      padding: 14px 32px; border-radius: 100px;
+      font-size: 15px; font-weight: 700;
+      text-decoration: none; transition: all 0.2s;
+      font-family: var(--fontDisplay);
+      box-shadow: 0 0 32px rgba(61,255,143,0.3);
+    }
+    .btn-primary:hover { background: #5fffaa; transform: translateY(-2px); box-shadow: 0 0 48px rgba(61,255,143,0.4); }
+    .btn-secondary {
+      background: var(--surface); color: var(--text);
+      padding: 14px 32px; border-radius: 100px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--surface2); border-color: rgba(255,255,255,0.15); }
+
+    .hero-schools {
+      margin-top: 64px; position: relative; z-index: 1;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .hero-schools p { font-size: 12px; color: var(--textDim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+    .school-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .school-pill {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 100px; padding: 5px 14px;
+      font-size: 12px; color: var(--textMid);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── APP PREVIEW ── */
+    .preview-section {
+      padding: 40px 24px 100px;
+      display: flex; justify-content: center;
+    }
+    .app-preview {
+      width: 100%; max-width: 380px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(61,255,143,0.1);
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+    .app-preview-header {
+      background: var(--surface2);
+      padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .app-logo { font-family: var(--fontDisplay); font-weight: 800; font-size: 16px; }
+    .app-logo span { color: var(--accent); }
+    .app-badge { background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2); border-radius: 100px; padding: 3px 10px; font-size: 11px; color: var(--accent); font-weight: 600; }
+    .app-body { padding: 20px; }
+    .app-greeting { font-family: var(--fontDisplay); font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+    .app-date { font-size: 12px; color: var(--textMid); margin-bottom: 16px; }
+    .app-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px;
+      margin-bottom: 10px;
+    }
+    .app-card-label { font-size: 10px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .app-period {
+      display: flex; align-items: center; gap: 10px;
+      padding: 7px 0; border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .app-period:last-child { border-bottom: none; }
+    .app-period-time { font-size: 10px; color: var(--textDim); width: 52px; flex-shrink: 0; }
+    .app-period-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .app-period-name { color: var(--text); font-weight: 500; }
+    .app-period-room { font-size: 10px; color: var(--textDim); margin-left: auto; }
+    .app-now-bar {
+      background: linear-gradient(90deg, var(--accentDim), transparent);
+      border: 1px solid rgba(61,255,143,0.2);
+      border-radius: 6px; padding: 6px 12px;
+      font-size: 11px; color: var(--accent); font-weight: 700;
+      margin: 8px 0;
+    }
+    .app-tabbar {
+      display: flex; border-top: 1px solid var(--border);
+      padding: 10px 0 4px;
+    }
+    .app-tab {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 3px;
+      font-size: 9px; color: var(--textDim);
+    }
+    .app-tab.active { color: var(--accent); }
+    .app-tab-icon { font-size: 16px; }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 100px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px; color: var(--accent); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 16px; display: block;
+    }
+    .section-title {
+      font-family: var(--fontDisplay);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -2px; margin-bottom: 20px;
+    }
+    .section-sub {
+      font-size: 18px; color: var(--textMid);
+      max-width: 560px; line-height: 1.7;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      margin-top: 64px;
+    }
+    .feature-card {
+      background: var(--bg);
+      padding: 36px 32px;
+      transition: background 0.2s;
+    }
+    .feature-card:hover { background: var(--surface); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 20px;
+    }
+    .feature-title {
+      font-family: var(--fontDisplay);
+      font-size: 18px; font-weight: 700;
+      margin-bottom: 10px; color: var(--text);
+    }
+    .feature-desc { font-size: 14px; color: var(--textMid); line-height: 1.7; }
+    .feature-tag {
+      display: inline-block; margin-top: 12px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 100px; padding: 3px 10px;
+      font-size: 11px; color: var(--textDim);
+    }
+
+    /* ── FOR WHO ── */
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px; margin-top: 64px;
+    }
+    .who-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 28px;
+      position: relative; overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .who-card:hover { transform: translateY(-4px); }
+    .who-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+    }
+    .who-card.student::before { background: var(--accent); }
+    .who-card.parent::before { background: var(--blue); }
+    .who-card.school::before { background: var(--purple); }
+    .who-card:hover { border-color: rgba(255,255,255,0.12); }
+    .who-emoji { font-size: 40px; margin-bottom: 20px; display: block; }
+    .who-title {
+      font-family: var(--fontDisplay);
+      font-size: 22px; font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .who-desc { font-size: 14px; color: var(--textMid); line-height: 1.7; margin-bottom: 20px; }
+    .who-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .who-list li {
+      font-size: 13px; color: var(--textMid);
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .who-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+    .who-card.parent .who-list li::before { color: var(--blue); }
+    .who-card.school .who-list li::before { color: var(--purple); }
+
+    /* ── HOW IT WORKS ── */
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px; margin-top: 64px;
+      position: relative;
+    }
+    .how-step { text-align: center; }
+    .how-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--fontDisplay); font-size: 20px; font-weight: 800;
+      color: var(--accent); margin: 0 auto 20px;
+    }
+    .how-title {
+      font-family: var(--fontDisplay);
+      font-size: 16px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .how-desc { font-size: 14px; color: var(--textMid); line-height: 1.6; }
+
+    /* ── SCHOOLS ── */
+    .schools-section { background: var(--surface); }
+    .schools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px; margin-top: 48px;
+    }
+    .school-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .school-card:hover { border-color: rgba(61,255,143,0.2); }
+    .school-name { font-family: var(--fontDisplay); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .school-detail { font-size: 12px; color: var(--textDim); }
+    .school-status {
+      display: inline-block; margin-top: 10px;
+      font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px;
+    }
+    .school-status.live { background: rgba(61,255,143,0.1); color: var(--accent); }
+    .school-status.coming { background: rgba(255,255,255,0.05); color: var(--textDim); }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px; margin-top: 64px; align-items: start;
+    }
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 28px;
+      position: relative;
+    }
+    .price-card.featured {
+      border-color: rgba(61,255,143,0.3);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(61,255,143,0.03) 100%);
+    }
+    .price-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #050d08;
+      font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 100px;
+      font-family: var(--fontDisplay);
+    }
+    .price-plan { font-size: 13px; color: var(--textMid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .price-amount {
+      font-family: var(--fontDisplay);
+      font-size: 44px; font-weight: 800;
+      color: var(--text); letter-spacing: -2px;
+      margin-bottom: 4px;
+    }
+    .price-amount span { font-size: 18px; color: var(--textMid); }
+    .price-period { font-size: 12px; color: var(--textDim); margin-bottom: 24px; }
+    .price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .price-features li { font-size: 14px; color: var(--textMid); display: flex; align-items: flex-start; gap: 8px; }
+    .price-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .price-features li.no::before { content: '—'; color: var(--textDim); }
+    .price-features li.no { opacity: 0.5; }
+    .price-cta {
+      display: block; text-align: center;
+      padding: 12px; border-radius: 100px;
+      font-size: 14px; font-weight: 700;
+      text-decoration: none; transition: all 0.2s;
+      font-family: var(--fontDisplay);
+    }
+    .price-cta.primary { background: var(--accent); color: #050d08; }
+    .price-cta.primary:hover { background: #5fffaa; }
+    .price-cta.secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .price-cta.secondary:hover { border-color: rgba(255,255,255,0.2); }
+
+    /* ── WAITLIST ── */
+    .waitlist-section {
+      text-align: center;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(61,255,143,0.06) 0%, transparent 100%);
+      border-top: 1px solid var(--border);
+    }
+    .waitlist-section .section-title { color: var(--text); }
+    .waitlist-form {
+      display: flex; gap: 12px; max-width: 480px;
+      margin: 40px auto 0; flex-wrap: wrap; justify-content: center;
+    }
+    .waitlist-input {
+      flex: 1; min-width: 220px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 100px; padding: 14px 22px;
+      color: var(--text); font-size: 15px; font-family: var(--font);
+      outline: none; transition: border-color 0.2s;
+    }
+    .waitlist-input:focus { border-color: rgba(61,255,143,0.4); }
+    .waitlist-input::placeholder { color: var(--textDim); }
+    .waitlist-btn {
+      background: var(--accent); color: #050d08;
+      border: none; border-radius: 100px;
+      padding: 14px 28px; font-size: 15px; font-weight: 700;
+      cursor: pointer; font-family: var(--fontDisplay);
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .waitlist-btn:hover { background: #5fffaa; transform: translateY(-1px); }
+    .waitlist-note { font-size: 13px; color: var(--textDim); margin-top: 16px; }
+    .waitlist-success {
+      display: none; margin-top: 24px;
+      background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2);
+      border-radius: 12px; padding: 16px 24px;
+      color: var(--accent); font-weight: 600; font-size: 15px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo { font-family: var(--fontDisplay); font-size: 18px; font-weight: 800; }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { font-size: 13px; color: var(--textDim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--textMid); }
+    .footer-copy { font-size: 12px; color: var(--textDim); width: 100%; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px; background: var(--border);
+      margin: 0 24px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      footer { padding: 32px 20px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .waitlist-form { flex-direction: column; }
+      .waitlist-input { min-width: unset; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Teen<span>Pilot</span></div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#for-who">For who</a>
+    <a href="#schools">Schools</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+  <a href="https://teen-pilot.vercel.app" class="nav-cta" target="_blank">Try it free →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    Built for NZ secondary school students
+  </div>
+
+  <h1>
+    Your AI<br>
+    <span class="accent">Co-Pilot</span>
+    <span class="line2">for school, sport and life.</span>
+  </h1>
+
+  <p class="hero-sub">
+    TeenPilot combines your timetable, assignments, exams, sport and social life into one intelligent assistant — powered by AI that actually understands your day.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="https://teen-pilot.vercel.app" class="btn-primary" target="_blank">Get started free ✈️</a>
+    <a href="#features" class="btn-secondary">See how it works</a>
+  </div>
+
+  <div class="hero-schools">
+    <p>Currently supporting</p>
+    <div class="school-pills">
+      <div class="school-pill">🏫 Westlake Boys</div>
+      <div class="school-pill">More schools coming</div>
+    </div>
+  </div>
+</section>
+
+<!-- APP PREVIEW -->
+<div class="preview-section">
+  <div class="app-preview reveal">
+    <div class="app-preview-header">
+      <div class="app-logo">Teen<span>Pilot</span></div>
+      <div class="app-badge">co-pilot ✈️</div>
+    </div>
+    <div class="app-body">
+      <div class="app-greeting">Morning, Wyan ✈️</div>
+      <div class="app-date">Thursday · Day 2 · Term 2</div>
+      <div class="app-card">
+        <div class="app-card-label">Timetable: Day 2</div>
+        <div class="app-period">
+          <span class="app-period-time">8:55am</span>
+          <div class="app-period-dot" style="background:#818CF8"></div>
+          <span class="app-period-name">PE</span>
+          <span class="app-period-room">G04</span>
+        </div>
+        <div class="app-period">
+          <span class="app-period-time">9:50am</span>
+          <div class="app-period-dot" style="background:#818CF8"></div>
+          <span class="app-period-name">English</span>
+          <span class="app-period-room">T04</span>
+        </div>
+        <div class="app-now-bar">▸ Now — Interval 10:45am</div>
+        <div class="app-period">
+          <span class="app-period-time">11:10am</span>
+          <div class="app-period-dot" style="background:#818CF8"></div>
+          <span class="app-period-name">Chinese</span>
+          <span class="app-period-room">L06</span>
+        </div>
+        <div class="app-period">
+          <span class="app-period-time">12:00pm</span>
+          <div class="app-period-dot" style="background:#818CF8"></div>
+          <span class="app-period-name">Mathematics</span>
+          <span class="app-period-room">C04</span>
+        </div>
+      </div>
+      <div class="app-card" style="border-color:rgba(248,113,113,0.2);background:rgba(248,113,113,0.04)">
+        <div class="app-card-label" style="color:#f87171">📝 Exam next week</div>
+        <div style="font-size:13px;color:#eef2f8;font-weight:600">Science — Chapter 4 & 5</div>
+        <div style="font-size:11px;color:#8a9bb5;margin-top:2px">Wed 10 June · 6 days away</div>
+      </div>
+    </div>
+    <div class="app-tabbar">
+      <div class="app-tab active">
+        <div class="app-tab-icon">🏠</div>
+        Home
+      </div>
+      <div class="app-tab">
+        <div class="app-tab-icon">📅</div>
+        Calendar
+      </div>
+      <div class="app-tab">
+        <div class="app-tab-icon">✈️</div>
+        Co-Pilot
+      </div>
+      <div class="app-tab">
+        <div class="app-tab-icon">📚</div>
+        Assign
+      </div>
+      <div class="app-tab">
+        <div class="app-tab-icon">👥</div>
+        Squad
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <span class="section-label reveal">What TeenPilot does</span>
+    <h2 class="section-title reveal">Everything in one place.<br>Finally.</h2>
+    <p class="section-sub reveal">No more juggling five different apps. TeenPilot brings your whole student life together — and an AI Co-Pilot that actually knows your schedule.</p>
+
+    <div class="features-grid reveal">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(129,140,248,0.1)">📖</div>
+        <div class="feature-title">Smart Timetable</div>
+        <p class="feature-desc">Your real school timetable — subjects, rooms, bell times — synced to the right cycle day automatically. Always know what's on.</p>
+        <span class="feature-tag">6-day rotating cycle</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(61,255,143,0.1)">✈️</div>
+        <div class="feature-title">AI Co-Pilot</div>
+        <p class="feature-desc">Ask anything — "what have I got on today?", "build me a study plan for Science", "when's my next volleyball training?". Co-Pilot knows your whole life.</p>
+        <span class="feature-tag">Voice input · Read aloud</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(96,165,250,0.1)">📚</div>
+        <div class="feature-title">Assignments & Exams</div>
+        <p class="feature-desc">Track tasks and exams separately. Upload your assignment brief or exam paper and Co-Pilot generates a step-by-step plan and practice questions.</p>
+        <span class="feature-tag">Document upload · AI study plans</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(74,158,255,0.1)">📅</div>
+        <div class="feature-title">Life Calendar</div>
+        <p class="feature-desc">School, sport, work, social and assignments all on one calendar. Filter by type, see what's coming, spot when you're overloaded before it's too late.</p>
+        <span class="feature-tag">NZ school terms · Public holidays</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(74,222,128,0.1)">⚽</div>
+        <div class="feature-title">Sport & Training</div>
+        <p class="feature-desc">Log your sport, training sessions and games. Co-Pilot plans study sessions around your sport commitments — not against them.</p>
+        <span class="feature-tag">Recurring sessions · Load balancing</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(167,139,250,0.1)">👥</div>
+        <div class="feature-title">Squad</div>
+        <p class="feature-desc">Group chats with Co-Pilot as your team's AI assistant. Coordinate training, group assignments and social plans — with an AI that knows everyone's schedule.</p>
+        <span class="feature-tag">Multiple squads · Voice chat</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section id="for-who" style="background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <span class="section-label reveal">Built for everyone</span>
+    <h2 class="section-title reveal">One app.<br>Three views.</h2>
+    <p class="section-sub reveal">TeenPilot works differently for students, parents and schools — each getting exactly what they need.</p>
+
+    <div class="who-grid">
+      <div class="who-card student reveal">
+        <span class="who-emoji">🎒</span>
+        <div class="who-title">For Students</div>
+        <p class="who-desc">Your personal AI Co-Pilot that knows your timetable, keeps track of what's due, and helps you stay on top of school, sport and life.</p>
+        <ul class="who-list">
+          <li>Daily flight plan — know what's on before you leave the house</li>
+          <li>Upload worksheets and get instant AI help</li>
+          <li>Study plans and practice questions for every exam</li>
+          <li>Voice chat with Co-Pilot on the way to school</li>
+          <li>Squad chats with your team or study group</li>
+        </ul>
+      </div>
+      <div class="who-card parent reveal">
+        <span class="who-emoji">👨‍👩‍👦</span>
+        <div class="who-title">For Parents</div>
+        <p class="who-desc">A calm weekly briefing — not surveillance. Know what's coming up, spot overdue work early, and ask Co-Pilot questions about your child's week.</p>
+        <ul class="who-list" style="--accent:var(--blue)">
+          <li>Weekly AI summary — assignments, exams, sport, workload</li>
+          <li>Overdue alert before it becomes a problem</li>
+          <li>Full week schedule day by day</li>
+          <li>Ask Co-Pilot anything about your child's week</li>
+          <li>Exam tracker with topics and urgency</li>
+        </ul>
+      </div>
+      <div class="who-card school reveal">
+        <span class="who-emoji">🏫</span>
+        <div class="who-title">For Schools</div>
+        <p class="who-desc">TeenPilot integrates with Canvas (SchoolBridge) to pull timetables and assignments automatically. Students onboard in seconds.</p>
+        <ul class="who-list" style="--accent:var(--purple)">
+          <li>Canvas / SchoolBridge API integration</li>
+          <li>School-specific timetable and bell times</li>
+          <li>NZ school terms and public holidays built in</li>
+          <li>School-branded subdomain</li>
+          <li>Site licence pricing for whole school rollout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <span class="section-label reveal">Getting started</span>
+    <h2 class="section-title reveal">Up and running<br>in 3 minutes.</h2>
+
+    <div class="how-steps">
+      <div class="how-step reveal">
+        <div class="how-num">1</div>
+        <div class="how-title">Sign up</div>
+        <p class="how-desc">Enter your name, year level and school. Takes 60 seconds — no email required to start.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-num">2</div>
+        <div class="how-title">Set up your profile</div>
+        <p class="how-desc">Add your subjects, sport and training schedule. Co-Pilot uses this to plan around your life.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-num">3</div>
+        <div class="how-title">Add your first exam</div>
+        <p class="how-desc">Drop in an upcoming exam, upload the study guide, and let Co-Pilot build your revision plan.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-num">4</div>
+        <div class="how-title">Ask Co-Pilot</div>
+        <p class="how-desc">"What should I do tonight?" Co-Pilot looks at your whole week and tells you exactly what to focus on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHOOLS -->
+<section id="schools" class="schools-section">
+  <div class="container">
+    <span class="section-label reveal">Schools</span>
+    <h2 class="section-title reveal">Starting in Auckland.<br>Growing across NZ.</h2>
+    <p class="section-sub reveal">TeenPilot is built specifically for the NZ curriculum and Canvas/SchoolBridge. Every school gets their own configuration.</p>
+
+    <div class="schools-grid reveal">
+      <div class="school-card">
+        <div class="school-name">Westlake Boys</div>
+        <div class="school-detail">North Shore, Auckland</div>
+        <span class="school-status live">✓ Live now</span>
+      </div>
+      <div class="school-card">
+        <div class="school-name">Auckland Grammar</div>
+        <div class="school-detail">Epsom, Auckland</div>
+        <span class="school-status coming">Coming soon</span>
+      </div>
+      <div class="school-card">
+        <div class="school-name">Rangitoto College</div>
+        <div class="school-detail">Mairangi Bay, Auckland</div>
+        <span class="school-status coming">Coming soon</span>
+      </div>
+      <div class="school-card">
+        <div class="school-name">St Kentigern</div>
+        <div class="school-detail">Pakuranga, Auckland</div>
+        <span class="school-status coming">Coming soon</span>
+      </div>
+      <div class="school-card">
+        <div class="school-name">Westlake Girls</div>
+        <div class="school-detail">North Shore, Auckland</div>
+        <span class="school-status coming">Coming soon</span>
+      </div>
+      <div class="school-card" style="border-style:dashed">
+        <div class="school-name" style="color:var(--textDim)">Your school?</div>
+        <div class="school-detail">Get in touch</div>
+        <span class="school-status coming">Request →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <span class="section-label reveal">Pricing</span>
+    <h2 class="section-title reveal">Simple pricing.<br>Cancel anytime.</h2>
+    <p class="section-sub reveal">Free to try. Upgrade when you're ready. Parents get their own add-on.</p>
+
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="price-plan">Free</div>
+        <div class="price-amount">$<span style="font-size:44px;color:var(--text)">0</span></div>
+        <div class="price-period">forever free</div>
+        <ul class="price-features">
+          <li>Timetable and calendar</li>
+          <li>5 AI Co-Pilot messages/day</li>
+          <li>Tasks and basic assignments</li>
+          <li>Sport and social tracking</li>
+          <li class="no">Exam study plans</li>
+          <li class="no">Document upload</li>
+          <li class="no">Squad chat</li>
+          <li class="no">Parent portal</li>
+        </ul>
+        <a href="https://teen-pilot.vercel.app" class="price-cta secondary" target="_blank">Get started</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">Most popular</div>
+        <div class="price-plan">Student Pro</div>
+        <div class="price-amount">$<span>9</span></div>
+        <div class="price-period">per month · billed monthly</div>
+        <ul class="price-features">
+          <li>Everything in Free</li>
+          <li>Unlimited Co-Pilot messages</li>
+          <li>Exam study plans + practice questions</li>
+          <li>Document and photo upload</li>
+          <li>Squad chat with Co-Pilot</li>
+          <li>Voice input and read aloud</li>
+          <li>Morning flight plan notifications</li>
+          <li>Canvas / Bridge sync</li>
+        </ul>
+        <a href="https://teen-pilot.vercel.app" class="price-cta primary" target="_blank">Start free trial</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-plan">Parent Add-on</div>
+        <div class="price-amount">$<span>5</span></div>
+        <div class="price-period">per month · requires Student Pro</div>
+        <ul class="price-features">
+          <li>Weekly AI briefing</li>
+          <li>Exam and assignment tracker</li>
+          <li>Full week schedule view</li>
+          <li>Ask Co-Pilot about your child</li>
+          <li>Overdue alerts</li>
+          <li>Upload reports and documents</li>
+        </ul>
+        <a href="#waitlist" class="price-cta secondary">Join waitlist</a>
+      </div>
+    </div>
+
+    <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--textDim)">
+      Schools — contact us for site licence pricing. One price, whole school.
+    </p>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section id="waitlist" class="waitlist-section">
+  <div class="container">
+    <span class="section-label" style="display:block;margin-bottom:16px">Get early access</span>
+    <h2 class="section-title reveal">Be the first at<br>your school.</h2>
+    <p class="section-sub reveal" style="margin:0 auto">Join the waitlist and we'll let you know when TeenPilot launches at your school. No spam. One email.</p>
+
+    <div class="waitlist-form">
+      <input type="email" class="waitlist-input" placeholder="your@email.com" id="waitlist-email"/>
+      <button class="waitlist-btn" onclick="joinWaitlist()">Join waitlist ✈️</button>
+    </div>
+    <p class="waitlist-note">Already at Westlake Boys? <a href="https://teen-pilot.vercel.app" style="color:var(--accent);text-decoration:none">Try it now →</a></p>
+    <div class="waitlist-success" id="waitlist-success">
+      ✅ You're on the list! We'll be in touch when we launch at your school.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Teen<span>Pilot</span></div>
+  <div class="footer-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#schools">Schools</a>
+    <a href="mailto:hello@teenpilot.co.nz">Contact</a>
+    <a href="#">Privacy</a>
+  </div>
+  <p class="footer-copy">© 2026 TeenPilot · Built in Auckland, New Zealand · <a href="https://teen-pilot.vercel.app" style="color:var(--accent);text-decoration:none">Open app →</a></p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Stagger children of grids
+  document.querySelectorAll('.features-grid .feature-card, .who-grid .who-card, .how-steps .how-step, .schools-grid .school-card, .pricing-grid .price-card').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.08) + 's';
+  });
+
+  // Waitlist
+  function joinWaitlist() {
+    const email = document.getElementById('waitlist-email').value;
+    if (!email || !email.includes('@')) {
+      document.getElementById('waitlist-email').style.borderColor = '#f87171';
+      return;
+    }
+    document.getElementById('waitlist-success').style.display = 'block';
+    document.getElementById('waitlist-email').value = '';
+    document.querySelector('.waitlist-form').style.opacity = '0.4';
+    document.querySelector('.waitlist-form').style.pointerEvents = 'none';
+  }
+
+  // Smooth scroll for nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
