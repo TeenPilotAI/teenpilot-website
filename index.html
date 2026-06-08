@@ -6,187 +6,250 @@
   <title>TeenPilot — Never fall behind again.</title>
   <meta name="description" content="The AI co-pilot for NZ secondary school students. School, sport, work and life — all in one place. Free to start."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #060a0f; --surface: #0d1520; --surface2: #111c2e;
-      --border: rgba(255,255,255,0.07); --text: #eef2f8;
-      --textMid: #8a9bb5; --textDim: #4a5a72;
+      --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
+      --text: #eef2f8; --textMid: #8a9bb5; --textDim: #4a5a72;
       --accent: #3dff8f; --accentDim: rgba(61,255,143,0.08);
       --blue: #4a9eff; --purple: #a78bfa; --gold: #ffd166;
       --font: 'DM Sans', sans-serif; --display: 'Syne', sans-serif;
+      --radius: 16px; --radiusSm: 10px;
+      --text-base: 17px;
+      --text-sm: 15px;
+      --text-xs: 13px;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: var(--text-base); line-height: 1.7; overflow-x: hidden; }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: rgba(6,10,15,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-family: var(--display); font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; text-decoration: none; }
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: rgba(6,10,15,0.94); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--display); font-size: 23px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; text-decoration: none; }
     .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; align-items: center; gap: 28px; }
-    .nav-links a { color: var(--textMid); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a { color: var(--textMid); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
-    .nav-cta { background: var(--accent); color: #050d08; padding: 9px 22px; border-radius: 100px; font-size: 14px; font-weight: 700; text-decoration: none; font-family: var(--display); transition: all 0.2s; }
+    .nav-cta { background: var(--accent); color: #050d08; padding: 10px 24px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; font-family: var(--display); transition: all 0.2s; }
     .nav-cta:hover { background: #5fffaa; transform: translateY(-1px); }
-    @media(max-width:640px) { nav { padding: 14px 20px; } .nav-links { display: none; } }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--textMid); border-radius: 2px; transition: all 0.2s; }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--display); font-size: 28px; font-weight: 700; color: var(--text); text-decoration: none; }
+    .mobile-menu-close { position: absolute; top: 20px; right: 24px; font-size: 28px; color: var(--textMid); cursor: pointer; background: none; border: none; }
+    @media(max-width:700px) { nav { padding: 14px 20px; } .nav-links { display: none; } .hamburger { display: flex; } }
+
+    /* UTILITIES */
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 14px; }
+    .section-title { font-family: var(--display); font-size: clamp(30px, 4vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 18px; }
+    .section-sub { font-size: 18px; color: var(--textMid); max-width: 580px; line-height: 1.8; margin-bottom: 48px; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
 
     /* HERO */
     .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(61,255,143,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(61,255,143,0.04) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%); animation: gridMove 20s linear infinite; }
-    @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 60px 60px; } }
+    @keyframes gridMove { 0%{background-position:0 0} 100%{background-position:60px 60px} }
     .glow { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
     .glow-1 { width: 700px; height: 500px; background: radial-gradient(ellipse, rgba(61,255,143,0.08) 0%, transparent 70%); top: -100px; left: 50%; transform: translateX(-50%); }
     .glow-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(74,158,255,0.06) 0%, transparent 70%); bottom: 0; right: -100px; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2); border-radius: 100px; padding: 6px 16px; font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 28px; position: relative; z-index: 1; animation: fadeUp 0.5s ease both; }
-    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2); border-radius: 100px; padding: 7px 18px; font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 28px; position: relative; z-index: 1; animation: fadeUp 0.5s ease both; }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-    .hero h1 { font-family: var(--display); font-size: clamp(42px, 7vw, 88px); font-weight: 800; line-height: 0.95; letter-spacing: -4px; margin-bottom: 24px; position: relative; z-index: 1; animation: fadeUp 0.5s 0.1s ease both; }
+    .hero h1 { font-family: var(--display); font-size: clamp(44px, 7vw, 90px); font-weight: 800; line-height: 0.95; letter-spacing: -4px; margin-bottom: 24px; position: relative; z-index: 1; animation: fadeUp 0.5s 0.1s ease both; }
     .hero h1 em { color: var(--accent); font-style: normal; }
-    .hero-sub { font-size: clamp(17px, 2.2vw, 21px); color: var(--textMid); max-width: 520px; line-height: 1.7; margin-bottom: 40px; position: relative; z-index: 1; animation: fadeUp 0.5s 0.2s ease both; }
-    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; animation: fadeUp 0.5s 0.3s ease both; margin-bottom: 12px; }
-    .btn-primary { background: var(--accent); color: #050d08; padding: 16px 36px; border-radius: 100px; font-size: 16px; font-weight: 800; text-decoration: none; transition: all 0.2s; font-family: var(--display); box-shadow: 0 0 40px rgba(61,255,143,0.3); }
+    .hero-sub { font-size: clamp(18px, 2.2vw, 22px); color: var(--textMid); max-width: 540px; line-height: 1.75; margin-bottom: 40px; position: relative; z-index: 1; animation: fadeUp 0.5s 0.2s ease both; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; animation: fadeUp 0.5s 0.3s ease both; margin-bottom: 14px; }
+    .btn-primary { background: var(--accent); color: #050d08; padding: 17px 38px; border-radius: 100px; font-size: 17px; font-weight: 800; text-decoration: none; transition: all 0.2s; font-family: var(--display); box-shadow: 0 0 40px rgba(61,255,143,0.3); }
     .btn-primary:hover { background: #5fffaa; transform: translateY(-2px); }
-    .btn-ghost { color: var(--textMid); padding: 16px 24px; border-radius: 100px; font-size: 15px; font-weight: 600; text-decoration: none; transition: color 0.2s; }
+    .btn-ghost { color: var(--textMid); padding: 17px 24px; border-radius: 100px; font-size: 16px; font-weight: 600; text-decoration: none; transition: color 0.2s; }
     .btn-ghost:hover { color: var(--text); }
-    .hero-note { font-size: 12px; color: var(--textDim); position: relative; z-index: 1; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    .hero-note { font-size: 13px; color: var(--textDim); position: relative; z-index: 1; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
 
-    .container { max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 14px; }
-    .section-title { font-family: var(--display); font-size: clamp(28px, 4vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 16px; }
-    .section-sub { font-size: 17px; color: var(--textMid); max-width: 560px; line-height: 1.75; margin-bottom: 48px; }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
+    /* STORY BANNER */
+    .story-banner { background: linear-gradient(135deg, rgba(61,255,143,0.04), rgba(74,158,255,0.03)); border-top: 1px solid rgba(61,255,143,0.1); border-bottom: 1px solid rgba(61,255,143,0.1); padding: 28px 24px; text-align: center; }
+    .story-inner { max-width: 700px; margin: 0 auto; font-size: 16px; color: var(--textMid); line-height: 1.8; }
+    .story-inner strong { color: var(--text); }
 
     /* PROBLEMS */
-    .problems { padding: 80px 24px; }
-    .problems-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-    .problem-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
-    .problem-card::before { content: ''; display: block; width: 100%; height: 2px; background: #f87171; opacity: 0.5; border-radius: 2px; margin-bottom: 16px; }
-    .problem-emoji { font-size: 28px; margin-bottom: 12px; display: block; }
-    .problem-text { font-size: 15px; color: var(--textMid); line-height: 1.6; }
+    .problems { padding: 90px 24px; }
+    .problems-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .problem-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+    .problem-card::before { content: ''; display: block; width: 100%; height: 2px; background: #f87171; opacity: 0.5; border-radius: 2px; margin-bottom: 18px; }
+    .problem-emoji { font-size: 30px; margin-bottom: 14px; display: block; }
+    .problem-text { font-size: 16px; color: var(--textMid); line-height: 1.7; }
     .problem-text strong { color: var(--text); }
 
-    /* AGENTIC SHOWCASE */
+    /* FEATURES */
+    .features { padding: 90px 24px; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; margin-top: 48px; }
+    .feature { background: var(--bg); padding: 34px 30px; transition: background 0.2s; }
+    .feature:hover { background: var(--surface); }
+    .feature-icon { font-size: 30px; margin-bottom: 16px; display: block; }
+    .feature-title { font-family: var(--display); font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .feature-desc { font-size: 15px; color: var(--textMid); line-height: 1.75; }
+    .feature-tag { display: inline-block; margin-top: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px; font-size: 12px; color: var(--textDim); }
+
+    /* ADVANCED / AGENTIC */
     .agentic { padding: 100px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .agentic-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 80px; }
-    @media(max-width:768px) { .agentic-intro { grid-template-columns: 1fr; } }
-    .plan-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.3); border-radius: 100px; padding: 4px 12px; font-size: 11px; color: var(--purple); font-weight: 700; margin-bottom: 16px; }
+    @media(max-width:768px) { .agentic-intro { grid-template-columns: 1fr; gap: 32px; } }
+    .plan-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.3); border-radius: 100px; padding: 5px 14px; font-size: 12px; color: var(--purple); font-weight: 700; margin-bottom: 16px; }
 
     /* MOMENT TIMELINE */
     .moments { display: flex; flex-direction: column; gap: 0; }
     .moment { display: grid; grid-template-columns: 100px 1fr; gap: 24px; position: relative; }
     .moment:not(:last-child)::after { content: ''; position: absolute; left: 49px; top: 48px; bottom: -24px; width: 2px; background: linear-gradient(to bottom, var(--accent), transparent); opacity: 0.2; }
     .moment-time { text-align: right; padding-top: 14px; flex-shrink: 0; }
-    .moment-time-label { font-size: 11px; color: var(--accent); font-weight: 700; }
-    .moment-time-day { font-size: 10px; color: var(--textDim); margin-top: 2px; }
+    .moment-time-label { font-size: 12px; color: var(--accent); font-weight: 700; }
+    .moment-time-day { font-size: 11px; color: var(--textDim); margin-top: 2px; }
     .moment-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); position: absolute; left: 43px; top: 18px; box-shadow: 0 0 12px rgba(61,255,143,0.4); }
-    .moment-card { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 24px; margin-left: 24px; transition: border-color 0.2s; }
+    .moment-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 24px; margin-left: 24px; transition: border-color 0.2s; }
     .moment-card:hover { border-color: rgba(61,255,143,0.2); }
-    .moment-trigger { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-    .moment-title { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .moment-desc { font-size: 13px; color: var(--textMid); line-height: 1.7; margin-bottom: 10px; }
-    .moment-notification { background: linear-gradient(135deg, #0f1a28, #0a1420); border: 1px solid rgba(61,255,143,0.15); border-radius: 10px; padding: 10px 14px; font-size: 12px; color: #c8d8f0; line-height: 1.7; }
+    .moment-trigger { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .moment-title { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .moment-desc { font-size: 14px; color: var(--textMid); line-height: 1.75; margin-bottom: 12px; }
+    .moment-notification { background: linear-gradient(135deg, #0f1a28, #0a1420); border: 1px solid rgba(61,255,143,0.15); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #c8d8f0; line-height: 1.75; }
     .moment-notification strong { color: var(--accent); }
-    .moment-tag { display: inline-flex; align-items: center; gap: 4px; background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.2); border-radius: 100px; padding: 2px 8px; font-size: 10px; color: var(--purple); font-weight: 600; margin-top: 8px; }
-
-    /* FEATURES */
-    .features { padding: 80px 24px; }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; margin-top: 48px; }
-    .feature { background: var(--bg); padding: 32px 28px; transition: background 0.2s; }
-    .feature:hover { background: var(--surface); }
-    .feature-icon { font-size: 28px; margin-bottom: 16px; display: block; }
-    .feature-title { font-family: var(--display); font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-    .feature-desc { font-size: 14px; color: var(--textMid); line-height: 1.7; }
-    .feature-tag { display: inline-block; margin-top: 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 3px 10px; font-size: 11px; color: var(--textDim); }
+    .moment-tag { display: inline-flex; align-items: center; gap: 4px; background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.2); border-radius: 100px; padding: 3px 10px; font-size: 11px; color: var(--purple); font-weight: 600; margin-top: 10px; }
 
     /* AVATARS */
-    .avatars { padding: 80px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .avatars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 48px; }
-    .avatar-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px 16px; text-align: center; transition: all 0.2s; }
-    .avatar-card:hover { transform: translateY(-4px); }
-    .avatar-emoji { font-size: 36px; margin-bottom: 10px; display: block; }
-    .avatar-name { font-family: var(--display); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-    .avatar-style { font-size: 11px; color: var(--textDim); margin-bottom: 8px; }
-    .avatar-quote { font-size: 12px; color: var(--textMid); line-height: 1.5; font-style: italic; }
+    .avatars { padding: 90px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .avatars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-top: 48px; }
+    .avatar-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 18px; text-align: center; transition: all 0.2s; }
+    .avatar-card:hover { transform: translateY(-4px); border-color: var(--border2); }
+    .avatar-emoji { font-size: 38px; margin-bottom: 12px; display: block; }
+    .avatar-name { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .avatar-style { font-size: 12px; color: var(--textDim); margin-bottom: 10px; }
+    .avatar-quote { font-size: 13px; color: var(--textMid); line-height: 1.65; font-style: italic; }
 
     /* HOW */
-    .how { padding: 80px 24px; }
-    .how-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 32px; margin-top: 48px; }
+    .how { padding: 90px 24px; }
+    .how-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 36px; margin-top: 48px; }
     .how-step { text-align: center; }
-    .how-num { width: 52px; height: 52px; border-radius: 50%; background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 18px; font-weight: 800; color: var(--accent); margin: 0 auto 16px; }
-    .how-title { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-    .how-desc { font-size: 13px; color: var(--textMid); line-height: 1.65; }
+    .how-num { width: 54px; height: 54px; border-radius: 50%; background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 20px; font-weight: 800; color: var(--accent); margin: 0 auto 18px; }
+    .how-title { font-family: var(--display); font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+    .how-desc { font-size: 15px; color: var(--textMid); line-height: 1.7; }
 
     /* PARENTS */
-    .parent-section { padding: 80px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .parent-section { padding: 90px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .parent-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
     @media(max-width:768px) { .parent-inner { grid-template-columns: 1fr; } }
-    .parent-mock { background: var(--bg); border: 1px solid rgba(74,158,255,0.2); border-radius: 20px; padding: 24px; }
-    .mock-stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 12px; }
-    .mock-stat { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; }
-    .mock-stat-num { font-family: var(--display); font-size: 22px; font-weight: 800; }
-    .mock-stat-lbl { font-size: 9px; color: var(--textMid); margin-top: 2px; }
-    .mock-alert { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.2); border-radius: 8px; padding: 8px 12px; font-size: 12px; color: #f87171; font-weight: 600; margin-bottom: 10px; }
-    .mock-brief { background: linear-gradient(135deg,rgba(61,255,143,0.04),rgba(74,158,255,0.04)); border: 1px solid rgba(61,255,143,0.12); border-radius: 10px; padding: 12px; font-size: 12px; color: var(--textMid); line-height: 1.7; }
+    .parent-mock { background: var(--bg); border: 1px solid rgba(74,158,255,0.2); border-radius: 20px; padding: 26px; }
+    .mock-stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
+    .mock-stat { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; }
+    .mock-stat-num { font-family: var(--display); font-size: 24px; font-weight: 800; }
+    .mock-stat-lbl { font-size: 10px; color: var(--textMid); margin-top: 2px; }
+    .mock-alert { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.2); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #f87171; font-weight: 600; margin-bottom: 10px; }
+    .mock-brief { background: linear-gradient(135deg,rgba(61,255,143,0.04),rgba(74,158,255,0.04)); border: 1px solid rgba(61,255,143,0.12); border-radius: 10px; padding: 14px; font-size: 13px; color: var(--textMid); line-height: 1.75; }
 
     /* PRICING */
-    .pricing { padding: 80px 24px; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 16px; margin-top: 48px; align-items: start; }
-    .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 28px; position: relative; }
+    .pricing { padding: 90px 24px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 18px; margin-top: 48px; align-items: start; }
+    .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px; position: relative; }
     .price-card.featured { border-color: rgba(61,255,143,0.3); background: linear-gradient(135deg, var(--surface), rgba(61,255,143,0.02)); }
     .price-card.advanced { border-color: rgba(167,139,250,0.3); background: linear-gradient(135deg, var(--surface), rgba(167,139,250,0.02)); }
-    .price-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 700; padding: 3px 14px; border-radius: 100px; font-family: var(--display); white-space: nowrap; }
+    .price-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 700; padding: 3px 16px; border-radius: 100px; font-family: var(--display); white-space: nowrap; }
     .price-card.featured .price-badge { background: var(--accent); color: #050d08; }
     .price-card.advanced .price-badge { background: var(--purple); color: #fff; }
-    .price-plan { font-size: 11px; color: var(--textMid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-    .price-amount { font-family: var(--display); font-size: 38px; font-weight: 800; color: var(--text); letter-spacing: -2px; margin-bottom: 2px; }
-    .price-amount small { font-size: 16px; color: var(--textMid); letter-spacing: 0; }
-    .price-period { font-size: 11px; color: var(--textDim); margin-bottom: 4px; }
-    .price-annual { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 20px; }
-    .price-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
-    .price-list li { font-size: 13px; color: var(--textMid); display: flex; align-items: flex-start; gap: 7px; line-height: 1.5; }
+    .price-plan { font-size: 12px; color: var(--textMid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .price-amount { font-family: var(--display); font-size: 42px; font-weight: 800; color: var(--text); letter-spacing: -2px; margin-bottom: 2px; }
+    .price-amount small { font-size: 18px; color: var(--textMid); letter-spacing: 0; }
+    .price-period { font-size: 13px; color: var(--textDim); margin-bottom: 4px; }
+    .price-annual { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 22px; }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+    .price-list li { font-size: 14px; color: var(--textMid); display: flex; align-items: flex-start; gap: 8px; line-height: 1.6; }
     .price-list li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
     .price-list li.no::before { content: '—'; color: var(--textDim); }
     .price-list li.no { opacity: 0.4; }
-    .price-btn { display: block; text-align: center; padding: 12px; border-radius: 100px; font-size: 13px; font-weight: 700; text-decoration: none; transition: all 0.2s; font-family: var(--display); }
+    .price-btn { display: block; text-align: center; padding: 14px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; font-family: var(--display); }
     .price-btn.primary { background: var(--accent); color: #050d08; }
     .price-btn.primary:hover { background: #5fffaa; }
     .price-btn.outline { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .price-btn.outline:hover { background: var(--surface); }
     .price-btn.purple { background: var(--purple); color: #fff; }
+    .price-btn.purple:hover { opacity: 0.9; }
+
+    /* SCHOOLS */
+    .schools { padding: 90px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .schools-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    @media(max-width:768px) { .schools-inner { grid-template-columns: 1fr; } }
+    .schools-features { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+    .school-feat { display: flex; gap: 14px; align-items: flex-start; }
+    .school-feat-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .school-feat-title { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+    .school-feat-desc { font-size: 14px; color: var(--textMid); line-height: 1.65; }
 
     /* CTA */
-    .cta-bottom { padding: 80px 24px; text-align: center; border-top: 1px solid var(--border); background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(61,255,143,0.06), transparent); }
-    .cta-bottom h2 { font-family: var(--display); font-size: clamp(28px,4vw,52px); font-weight: 800; letter-spacing: -2px; margin-bottom: 16px; }
+    .cta-bottom { padding: 90px 24px; text-align: center; border-top: 1px solid var(--border); background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(61,255,143,0.06), transparent); }
+    .cta-bottom h2 { font-family: var(--display); font-size: clamp(30px,4vw,54px); font-weight: 800; letter-spacing: -2px; margin-bottom: 18px; }
 
-    footer { padding: 40px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-logo { font-family: var(--display); font-size: 18px; font-weight: 800; }
+    /* FOOTER */
+    footer { padding: 40px; border-top: 1px solid var(--border); }
+    .footer-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 32px; margin-bottom: 28px; }
+    .footer-logo { font-family: var(--display); font-size: 20px; font-weight: 800; margin-bottom: 8px; }
     .footer-logo span { color: var(--accent); }
-    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-links a { font-size: 13px; color: var(--textDim); text-decoration: none; }
-    .footer-links a:hover { color: var(--textMid); }
-    .footer-copy { font-size: 12px; color: var(--textDim); width: 100%; }
-    @media(max-width:640px) { footer { padding: 32px 20px; } }
+    .footer-tagline { font-size: 14px; color: var(--textDim); max-width: 220px; line-height: 1.6; }
+    .footer-links-group { display: flex; gap: 48px; flex-wrap: wrap; }
+    .footer-col { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col-title { font-size: 12px; font-weight: 700; color: var(--textMid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .footer-col a { font-size: 14px; color: var(--textDim); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--textMid); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: var(--textDim); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: var(--textDim); text-decoration: none; }
+    .footer-legal a:hover { color: var(--textMid); }
+    @media(max-width:640px) { footer { padding: 32px 20px; } .footer-top { flex-direction: column; } }
+
+    /* PRIVACY POLICY PAGE */
+    .policy-page { max-width: 720px; margin: 100px auto 80px; padding: 0 24px; }
+    .policy-page h1 { font-family: var(--display); font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+    .policy-page .date { font-size: 14px; color: var(--textDim); margin-bottom: 40px; }
+    .policy-page h2 { font-family: var(--display); font-size: 20px; font-weight: 700; margin: 32px 0 12px; }
+    .policy-page p { font-size: 16px; color: var(--textMid); line-height: 1.8; margin-bottom: 16px; }
+    .policy-page ul { padding-left: 20px; color: var(--textMid); font-size: 16px; line-height: 1.8; margin-bottom: 16px; }
+    .policy-page a { color: var(--accent); text-decoration: none; }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Teen<span>Pilot</span></a>
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#advanced">Advanced AI</a>
     <a href="#parents">Parents</a>
+    <a href="#schools">Schools</a>
     <a href="#pricing">Pricing</a>
   </div>
   <a href="https://app.teenpilot.co.nz" class="nav-cta" target="_blank">Try it free ✈️</a>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu">
+  <button class="mobile-menu-close" onclick="document.querySelector('.mobile-menu').classList.remove('open')">✕</button>
+  <a href="#features" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Features</a>
+  <a href="#advanced" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Advanced AI</a>
+  <a href="#parents" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Parents</a>
+  <a href="#schools" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Schools</a>
+  <a href="#pricing" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Pricing</a>
+  <a href="https://app.teenpilot.co.nz" target="_blank" style="color:var(--accent)">Try free ✈️</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="glow glow-1"></div>
   <div class="glow glow-2"></div>
-  <div class="hero-badge"><div class="badge-dot"></div>Free for NZ secondary school students</div>
+  <div class="hero-badge"><div class="badge-dot"></div>Built for NZ secondary school students</div>
   <h1>Never fall<br>behind <em>again.</em></h1>
   <p class="hero-sub">TeenPilot is the AI co-pilot that knows your timetable, sport, work and life — and tells you exactly what to do, before you have to ask.</p>
   <div class="hero-ctas">
@@ -196,16 +259,23 @@
   <div class="hero-note">Free to start · No credit card · No school approval needed</div>
 </section>
 
+<!-- STORY BANNER -->
+<div class="story-banner">
+  <div class="story-inner">
+    <strong>Built by a Year 9 student, for students like him.</strong> Wyan kept losing track of cycle days, missing assignments and struggling to balance volleyball training, school and life. So he and his dad built TeenPilot. It's real, it works, and it's designed from the inside out.
+  </div>
+</div>
+
 <!-- PROBLEMS -->
 <section class="problems">
   <div class="container">
-    <div style="text-align:center;margin-bottom:40px">
+    <div style="text-align:center;margin-bottom:44px">
       <h2 class="section-title reveal" style="max-width:600px;margin:0 auto 16px">Sound familiar?</h2>
-      <p style="font-size:17px;color:var(--textMid)">Year 9–13 is a lot. School, sport, work, social — it's hard to keep track of it all.</p>
+      <p style="font-size:18px;color:var(--textMid)">Year 9–13 is a lot. School, sport, work, social — it's hard to keep track of it all.</p>
     </div>
     <div class="problems-grid reveal">
       <div class="problem-card"><span class="problem-emoji">😩</span><p class="problem-text"><strong>You forgot an assignment was due</strong> — and only found out when the teacher asked for it.</p></div>
-      <div class="problem-card"><span class="problem-emoji">😤</span><p class="problem-text"><strong>Your football game time changed</strong> — now your whole Saturday is a mess and no one updated the plan.</p></div>
+      <div class="problem-card"><span class="problem-emoji">😤</span><p class="problem-text"><strong>Your game time changed</strong> — now your whole weekend is a mess and no one updated the plan.</p></div>
       <div class="problem-card"><span class="problem-emoji">🤯</span><p class="problem-text"><strong>Training, a work shift and two assignments</strong> all landed in the same week. No idea how to manage it.</p></div>
       <div class="problem-card"><span class="problem-emoji">📱</span><p class="problem-text"><strong>Five different apps</strong> — school portal, calendar, WhatsApp, notes, reminders. None of them talk to each other.</p></div>
     </div>
@@ -219,147 +289,118 @@
     <h2 class="section-title reveal">One app. Your whole week.</h2>
     <p class="section-sub reveal">School, sport, work, fitness and life — all connected. Co-Pilot knows your week and tells you exactly where to focus.</p>
     <div class="features-grid reveal">
-      <div class="feature"><span class="feature-icon">📖</span><div class="feature-title">Your real timetable</div><p class="feature-desc">Your actual subjects, rooms and teachers. Knows what cycle day it is. Shows what's on before you ask.</p><span class="feature-tag">Westlake cycle days · Bell times</span></div>
+      <div class="feature"><span class="feature-icon">📖</span><div class="feature-title">Your real timetable</div><p class="feature-desc">Your actual subjects, rooms and teachers. Knows what cycle day it is. Shows what's on before you ask.</p><span class="feature-tag">NZ cycle days · Bell times</span></div>
       <div class="feature"><span class="feature-icon">✈️</span><div class="feature-title">AI Co-Pilot chat</div><p class="feature-desc">"What do I have tomorrow?" "Build me a study plan." "I've got training and work Friday — when do I study?" Co-Pilot knows your whole week.</p><span class="feature-tag">Voice input · Always on</span></div>
       <div class="feature"><span class="feature-icon">📚</span><div class="feature-title">Assignments and exams</div><p class="feature-desc">Track what's due. Upload your exam paper and Co-Pilot builds a day-by-day revision plan from the actual content.</p><span class="feature-tag">Study plans · Practice questions</span></div>
       <div class="feature"><span class="feature-icon">⚽</span><div class="feature-title">Sport and training</div><p class="feature-desc">Add your sessions and fixtures. Co-Pilot plans study around your sport — not against it. Fixture change? Update once, everything adjusts.</p><span class="feature-tag">Weekly schedule · Load balance</span></div>
-      <div class="feature"><span class="feature-icon">💼</span><div class="feature-title">Part-time work</div><p class="feature-desc">Log your shifts. New shift at New World Thursday 2pm? Add it and Co-Pilot replans your whole week around it.</p><span class="feature-tag">Shift tracker · Auto-replan</span></div>
+      <div class="feature"><span class="feature-icon">💼</span><div class="feature-title">Part-time work</div><p class="feature-desc">Log your shifts. New shift on Thursday? Add it and Co-Pilot replans your whole week around it automatically.</p><span class="feature-tag">Shift tracker · Auto-replan</span></div>
       <div class="feature"><span class="feature-icon">💪</span><div class="feature-title">Fitness and nutrition</div><p class="feature-desc">AI-generated gym program based on your sport and goals. Fuel tips timed around training. Science-backed, NZ-sourced.</p><span class="feature-tag">NSCA guidelines · Sport NZ</span></div>
     </div>
   </div>
 </section>
 
-<!-- ADVANCED AI SHOWCASE -->
+<!-- ADVANCED AI -->
 <section class="agentic" id="advanced">
   <div class="container">
     <div class="agentic-intro">
       <div>
-        <div class="plan-badge">🚀 Advanced AI — $19.99/mo</div>
-        <h2 class="section-title reveal" style="margin-bottom:16px">Co-Pilot that acts.<br>Not just answers.</h2>
-        <p style="font-size:17px;color:var(--textMid);line-height:1.8;margin-bottom:20px" class="reveal">
-          Advanced Co-Pilot doesn't wait to be asked. It watches your week, spots problems before they happen, and acts on your behalf — automatically.
-        </p>
-        <p style="font-size:15px;color:var(--textMid);line-height:1.8" class="reveal">
-          Football game time changed? Co-Pilot updates your calendar and adjusts your study plan.<br>
+        <div class="plan-badge">🚀 Advanced AI — $29.99/mo</div>
+        <h2 class="section-title reveal" style="margin-bottom:18px">Co-Pilot that acts.<br>Not just answers.</h2>
+        <p style="font-size:18px;color:var(--textMid);line-height:1.85;margin-bottom:20px" class="reveal">Advanced Co-Pilot doesn't wait to be asked. It watches your week, spots problems before they happen, and acts on your behalf — automatically.</p>
+        <p style="font-size:16px;color:var(--textMid);line-height:1.85" class="reveal">
+          Game time changed? Co-Pilot updates your calendar and adjusts your study plan.<br>
           New work shift? Co-Pilot finds your study windows and protects them.<br>
           Sick day? Co-Pilot drafts the absence email — your parent approves in one tap.
         </p>
       </div>
-      <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:20px;padding:24px" class="reveal">
-        <div style="font-size:10px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:16px">🚀 Advanced — what changes</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:10px;font-size:13px;color:var(--textMid)"><span style="color:var(--textDim)">Pro</span><span>→</span><span>Co-Pilot answers when you ask</span></div>
+      <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:20px;padding:26px" class="reveal">
+        <div style="font-size:11px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:18px">🚀 Advanced — what changes</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:10px;font-size:15px;color:var(--textMid)"><span style="color:var(--textDim);width:60px;flex-shrink:0">Pro</span><span>Co-Pilot answers when you ask</span></div>
           <div style="height:1px;background:var(--border)"></div>
-          <div style="display:flex;gap:10px;font-size:13px;color:var(--text);font-weight:600"><span style="color:var(--purple)">Advanced</span><span>→</span><span>Co-Pilot acts before you ask</span></div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
-            <div style="display:flex;gap:8px;font-size:12px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>7am morning briefing — automatic</div>
-            <div style="display:flex;gap:8px;font-size:12px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>Absence notification — one tap</div>
-            <div style="display:flex;gap:8px;font-size:12px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>Schedule changes auto-replanned</div>
-            <div style="display:flex;gap:8px;font-size:12px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>Deadline risk alerts — unprompted</div>
-            <div style="display:flex;gap:8px;font-size:12px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>Digital balance · Study mode</div>
-            <div style="display:flex;gap:8px;font-size:12px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>NCEA credit tracking (coming soon)</div>
+          <div style="display:flex;gap:10px;font-size:15px;color:var(--text);font-weight:600"><span style="color:var(--purple);width:60px;flex-shrink:0">Advanced</span><span>Co-Pilot acts before you ask</span></div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+            <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>7am morning briefing — automatic</div>
+            <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>Absence notification — parent approves in one tap</div>
+            <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>Schedule changes auto-replanned</div>
+            <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>Deadline risk alerts — unprompted</div>
+            <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>Digital balance · Study mode</div>
+            <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:var(--purple)">✓</span>Powered by Claude Opus 4.8 — Anthropic's best model</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- MOMENT TIMELINE -->
-    <h3 style="font-family:var(--display);font-size:24px;font-weight:800;letter-spacing:-1px;margin-bottom:8px;text-align:center" class="reveal">A week in Wyan's life with Advanced</h3>
-    <p style="font-size:15px;color:var(--textMid);text-align:center;margin-bottom:48px" class="reveal">Every one of these happened without Wyan doing anything.</p>
+    <h3 style="font-family:var(--display);font-size:26px;font-weight:800;letter-spacing:-1px;margin-bottom:10px;text-align:center" class="reveal">A week in a student's life with Advanced</h3>
+    <p style="font-size:16px;color:var(--textMid);text-align:center;margin-bottom:52px" class="reveal">Every one of these happened without the student doing anything.</p>
 
     <div class="moments reveal">
-
-      <!-- Monday 7am -->
       <div class="moment">
         <div class="moment-time"><div class="moment-time-label">7:00am</div><div class="moment-time-day">Monday</div></div>
         <div class="moment-dot"></div>
         <div class="moment-card">
           <div class="moment-trigger">✈️ Morning Agent fired automatically</div>
           <div class="moment-title">Daily flight plan delivered before school</div>
-          <div class="moment-desc">Co-Pilot analysed Wyan's timetable, sport, work and assignments overnight. Push notification arrived at 7am.</div>
-          <div class="moment-notification">
-            <strong>Morning Wyan ✈️</strong> Today: English P1, Maths P3 (algebra test Thursday — revise tonight), Volleyball 4pm.<br>
-            Tonight: 30 mins English essay intro, 45 mins Maths revision. You've got this.
-          </div>
+          <div class="moment-desc">Co-Pilot analysed the timetable, sport, work and assignments overnight. Push notification arrived at 7am — before the alarm went off.</div>
+          <div class="moment-notification"><strong>Morning ✈️</strong> Today: English P1, Maths P3 (algebra test Thursday — revise tonight), Volleyball 4pm.<br>Tonight: 30 mins English essay intro, 45 mins Maths revision. You've got this.</div>
           <div class="moment-tag">🚀 Advanced · Auto-generated · No input needed</div>
         </div>
       </div>
-
-      <!-- Tuesday - fixture change -->
       <div class="moment">
         <div class="moment-time"><div class="moment-time-label">3:45pm</div><div class="moment-time-day">Tuesday</div></div>
         <div class="moment-dot"></div>
         <div class="moment-card">
-          <div class="moment-trigger">⚽ Fixture update detected</div>
+          <div class="moment-trigger">⚽ Fixture update</div>
           <div class="moment-title">Football Saturday changed — Co-Pilot replanned</div>
-          <div class="moment-desc">Wyan updated his football game: Field 2 → Field 3, 9:30am → 10:30am at Westlake. Co-Pilot automatically adjusted Saturday's plan and moved his pre-game meal timing.</div>
-          <div class="moment-notification">
-            <strong>Fixture updated ✓</strong> Saturday football now 10:30am Field 3, Westlake. Pre-game meal moved to 8:45am. Friday evening kept light — early night recommended before game day.
-          </div>
+          <div class="moment-desc">Game updated: Field 2 → Field 3, 9:30am → 10:30am. Co-Pilot automatically adjusted Saturday's plan and moved the pre-game meal timing.</div>
+          <div class="moment-notification"><strong>Fixture updated ✓</strong> Saturday football now 10:30am Field 3. Pre-game meal moved to 8:45am. Friday evening kept light — early night recommended.</div>
           <div class="moment-tag">🚀 Advanced · Calendar auto-updated · Study protected</div>
         </div>
       </div>
-
-      <!-- Wednesday - new work shift -->
       <div class="moment">
         <div class="moment-time"><div class="moment-time-label">4:15pm</div><div class="moment-time-day">Wednesday</div></div>
         <div class="moment-dot"></div>
         <div class="moment-card">
           <div class="moment-trigger">💼 New work shift added</div>
-          <div class="moment-title">New World Milford shift — week auto-replanned</div>
-          <div class="moment-desc">Wyan added a new shift: New World Milford, Thursday 2pm–5pm. Co-Pilot spotted a conflict with his planned Science study and automatically moved it.</div>
-          <div class="moment-notification">
-            <strong>Shift added ✓</strong> New World Milford, Thu 2–5pm. Science study moved to Wednesday 7pm (you're free). Thursday morning kept for Maths revision before the shift.
-          </div>
+          <div class="moment-title">New shift Thursday 2pm — week auto-replanned</div>
+          <div class="moment-desc">New shift added: Thursday 2pm–5pm. Co-Pilot spotted a conflict with planned Science study and automatically moved it without being asked.</div>
+          <div class="moment-notification"><strong>Shift added ✓</strong> Thu 2–5pm. Science study moved to Wednesday 7pm (you're free). Thursday morning kept for Maths revision before the shift.</div>
           <div class="moment-tag">🚀 Advanced · Conflict detected · Auto-resolved</div>
         </div>
       </div>
-
-      <!-- Thursday - deadline risk -->
       <div class="moment">
         <div class="moment-time"><div class="moment-time-label">6:30pm</div><div class="moment-time-day">Thursday</div></div>
         <div class="moment-dot"></div>
         <div class="moment-card">
-          <div class="moment-trigger">⚠️ Deadline risk agent fired</div>
+          <div class="moment-trigger">⚠️ Deadline risk alert</div>
           <div class="moment-title">English essay at risk — Co-Pilot intervened</div>
-          <div class="moment-desc">English essay due Friday. Wyan hadn't started the conclusion. Co-Pilot detected the risk and sent an unprompted alert — no assignment tracking app had flagged this.</div>
-          <div class="moment-notification">
-            <strong>⚠️ English essay due tomorrow.</strong> You've got the intro and body done. Conclusion takes 20 minutes. You're free right now. Do it before the shift tomorrow — you'll thank yourself.
-          </div>
-          <div class="moment-tag">🚀 Advanced · Unprompted alert · Genuine AI judgement</div>
+          <div class="moment-desc">English essay due Friday. Conclusion not started. Co-Pilot detected the risk and sent an unprompted alert — without being asked to check.</div>
+          <div class="moment-notification"><strong>⚠️ English essay due tomorrow.</strong> Intro and body done. Conclusion takes 20 minutes. You're free right now. Do it tonight — you'll thank yourself.</div>
+          <div class="moment-tag">🚀 Advanced · Unprompted · Genuine AI judgement</div>
         </div>
       </div>
-
-      <!-- Friday - sick day -->
       <div class="moment">
         <div class="moment-time"><div class="moment-time-label">7:15am</div><div class="moment-time-day">Friday</div></div>
         <div class="moment-dot"></div>
         <div class="moment-card">
-          <div class="moment-trigger">🤒 Absence notification</div>
-          <div class="moment-title">Sick day — handled in 30 seconds</div>
-          <div class="moment-desc">Wyan woke up unwell. Tapped "Not at school today" → selected Sick → Co-Pilot drafted a formal absence email. His dad got a notification, reviewed it, tapped approve. Done.</div>
-          <div class="moment-notification">
-            <strong>Absence sent ✓</strong> Email to Westlake office from hadleigh.fisher@gmail.com. Wyan Fisher, Year 9, absent Friday 12 June — illness. School notified before roll call.
-          </div>
-          <div class="moment-tag">🚀 Advanced · Parent approved · School notified automatically</div>
+          <div class="moment-trigger">🤒 Sick day</div>
+          <div class="moment-title">Absence handled in 30 seconds</div>
+          <div class="moment-desc">Woke up unwell. Tapped "Not at school today" → selected Sick → Co-Pilot drafted a formal absence email. Parent got a notification, reviewed it, tapped approve. Done.</div>
+          <div class="moment-notification"><strong>Absence sent ✓</strong> Email to school office from parent's email. Student absent Friday — illness. School notified before roll call.</div>
+          <div class="moment-tag">🚀 Advanced · Parent approved · School notified</div>
         </div>
       </div>
-
-      <!-- Saturday - game day -->
       <div class="moment">
         <div class="moment-time"><div class="moment-time-label">8:45am</div><div class="moment-time-day">Saturday</div></div>
         <div class="moment-dot"></div>
         <div class="moment-card">
           <div class="moment-trigger">✈️ Game day briefing</div>
-          <div class="moment-title">Football game day — Co-Pilot prepared him</div>
-          <div class="moment-desc">Pre-game morning notification with everything Wyan needed. No searching, no forgetting.</div>
-          <div class="moment-notification">
-            <strong>Game day ✈️</strong> Football 10:30am Field 3, Westlake. Eat now — carbs, nothing heavy. Kit ready? Drive time: 20 mins. You trained 3x this week — good prep. Play well.
-          </div>
+          <div class="moment-title">Game day — Co-Pilot prepared everything</div>
+          <div class="moment-desc">Pre-game notification with everything needed. Correct field, correct time, nutrition reminder, travel time. No searching, no forgetting.</div>
+          <div class="moment-notification"><strong>Game day ✈️</strong> Football 10:30am Field 3. Eat now — carbs, nothing heavy. Kit ready? Drive time: 20 mins. You trained 3x this week — good prep. Play well.</div>
           <div class="moment-tag">🚀 Advanced · Sport-aware · Nutrition timed</div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -369,12 +410,12 @@
   <div class="container">
     <span class="section-label reveal">Co-Pilot styles</span>
     <h2 class="section-title reveal">Pick your Co-Pilot. Make it yours.</h2>
-    <p class="section-sub reveal">Same powerful AI. Completely different personality. Choose who you actually want to talk to.</p>
+    <p class="section-sub reveal">Same powerful AI. Completely different personality. Choose who you actually want to talk to every day.</p>
     <div class="avatars-grid reveal">
-      <div class="avatar-card" style="border-color:rgba(74,222,128,0.3)"><span class="avatar-emoji">✈️</span><div class="avatar-name">Co-Pilot</div><div class="avatar-style">Classic · Aviation</div><p class="avatar-quote">"Cleared for takeoff, Wyan. Maths test Thursday — let's get that revision locked in."</p></div>
+      <div class="avatar-card" style="border-color:rgba(74,222,128,0.3)"><span class="avatar-emoji">✈️</span><div class="avatar-name">Co-Pilot</div><div class="avatar-style">Classic · Aviation</div><p class="avatar-quote">"Cleared for takeoff. Maths test Thursday — let's get that revision locked in tonight."</p></div>
       <div class="avatar-card" style="border-color:rgba(146,117,74,0.4)"><span class="avatar-emoji">🟫</span><div class="avatar-name">BlockBrain</div><div class="avatar-style">Minecraft</div><p class="avatar-quote">"That Science exam is a diamond-tier challenge. Let's mine through it before Thursday."</p></div>
       <div class="avatar-card" style="border-color:rgba(239,68,68,0.3)"><span class="avatar-emoji">⚙️</span><div class="avatar-name">ARIA</div><div class="avatar-style">Iron Man AI</div><p class="avatar-quote">"Running the calculations. 48 minutes before training. Efficiency rating: use them."</p></div>
-      <div class="avatar-card" style="border-color:rgba(167,139,250,0.3)"><span class="avatar-emoji">⭐</span><div class="avatar-name">Hoshi-sensei</div><div class="avatar-style">Anime</div><p class="avatar-quote">"Wyan-kun! Today we begin an EPIC revision quest! Ganbatte — you've totally got this!"</p></div>
+      <div class="avatar-card" style="border-color:rgba(167,139,250,0.3)"><span class="avatar-emoji">⭐</span><div class="avatar-name">Hoshi-sensei</div><div class="avatar-style">Anime</div><p class="avatar-quote">"Today we begin an EPIC revision quest! Ganbatte — you've totally got this!"</p></div>
       <div class="avatar-card" style="border-color:rgba(34,211,238,0.3)"><span class="avatar-emoji">🦕</span><div class="avatar-name">Rex</div><div class="avatar-style">Dino Tutor</div><p class="avatar-quote">"RAWR. My ancestors didn't study and look what happened. Let's not make that mistake."</p></div>
       <div class="avatar-card" style="border-color:rgba(251,191,36,0.3)"><span class="avatar-emoji">🖥️</span><div class="avatar-name">Neo</div><div class="avatar-style">Retro Game</div><p class="avatar-quote">"ACHIEVEMENT UNLOCKED: Assignment submitted. +50 XP. Ready for the next level?"</p></div>
     </div>
@@ -386,7 +427,7 @@
   <div class="container">
     <span class="section-label reveal">Getting started</span>
     <h2 class="section-title reveal">Up and running in 3 minutes.</h2>
-    <p class="section-sub reveal">No school approval. No IT department. Just you and 3 minutes.</p>
+    <p class="section-sub reveal">No school approval. No IT department. No credit card. Just you and 3 minutes.</p>
     <div class="how-steps">
       <div class="how-step reveal"><div class="how-num">1</div><div class="how-title">Create your account</div><p class="how-desc">Sign up free with your email. No credit card, no school approval needed.</p></div>
       <div class="how-step reveal"><div class="how-num">2</div><div class="how-title">Add your life</div><p class="how-desc">School, sport, work, fitness. Takes 3 minutes. The more you add, the smarter Co-Pilot gets.</p></div>
@@ -403,48 +444,86 @@
       <div>
         <span class="section-label reveal">For parents</span>
         <h2 class="section-title reveal">Know what's coming up<br>without nagging.</h2>
-        <p style="font-size:16px;color:var(--textMid);line-height:1.8;margin-bottom:20px" class="reveal">If your teenager uses TeenPilot, you get a parent view — a calm weekly briefing with what's due, what's coming and what needs attention. No logging into school portals. No asking "do you have any homework?"</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px" class="reveal">
-          <li style="font-size:14px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Weekly AI briefing — assignments, exams, sport and workload</li>
-          <li style="font-size:14px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Overdue alert before it becomes a crisis conversation</li>
-          <li style="font-size:14px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Exam tracker — what's coming, how far away, what topics</li>
-          <li style="font-size:14px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Absence approval — one tap from your phone</li>
-          <li style="font-size:14px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Wellbeing never shared — student's privacy protected</li>
+        <p style="font-size:17px;color:var(--textMid);line-height:1.85;margin-bottom:22px" class="reveal">If your teenager uses TeenPilot, you get a parent view — a calm weekly briefing with what's due, what's coming and what needs attention. No logging into school portals. No asking "do you have any homework?"</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px" class="reveal">
+          <li style="font-size:15px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Weekly AI briefing — assignments, exams, sport and workload</li>
+          <li style="font-size:15px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Overdue alert before it becomes a crisis conversation</li>
+          <li style="font-size:15px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Exam tracker — what's coming, how far away, what topics</li>
+          <li style="font-size:15px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Absence approval — review and send in one tap</li>
+          <li style="font-size:15px;color:var(--textMid);display:flex;gap:10px"><span style="color:var(--blue);font-weight:700">✓</span>Wellbeing never shared — student's privacy always protected</li>
         </ul>
-        <div style="background:var(--surface2);border:1px solid rgba(74,158,255,0.2);border-radius:14px;padding:16px" class="reveal">
-          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px">Included in Student Pro · $9.99/mo</div>
-          <div style="font-size:13px;color:var(--textMid);line-height:1.6">Your child sets up their account. You get a separate parent login. They control their app. You get the overview.</div>
+        <div style="background:var(--surface2);border:1px solid rgba(74,158,255,0.2);border-radius:14px;padding:18px" class="reveal">
+          <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px">Included in Student Pro · $14.99/mo</div>
+          <div style="font-size:14px;color:var(--textMid);line-height:1.7">Your child sets up their account. You get a separate parent login. They control their app. You get the overview.</div>
         </div>
       </div>
       <div class="parent-mock reveal">
-        <div style="font-family:var(--display);font-size:16px;font-weight:800;margin-bottom:2px">Wyan's week</div>
-        <div style="font-size:11px;color:var(--textMid);margin-bottom:12px">2–8 June 2026</div>
+        <div style="font-family:var(--display);font-size:17px;font-weight:800;margin-bottom:2px">Your child's week</div>
+        <div style="font-size:12px;color:var(--textMid);margin-bottom:14px">AI briefing · updated daily</div>
         <div class="mock-stat-row">
           <div class="mock-stat"><div class="mock-stat-num" style="color:#60a5fa">3</div><div class="mock-stat-lbl">Due soon</div></div>
           <div class="mock-stat"><div class="mock-stat-num" style="color:#4ade80">4</div><div class="mock-stat-lbl">Trainings</div></div>
           <div class="mock-stat"><div class="mock-stat-num" style="color:#fbbf24">Mod</div><div class="mock-stat-lbl">Load</div></div>
         </div>
         <div class="mock-alert">⚠️ Science report overdue — 2 days</div>
-        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(248,113,113,0.15);border-radius:8px;padding:8px 10px;font-size:11px;margin-bottom:8px">
-          <div style="font-size:9px;color:#f87171;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">📝 Upcoming exam</div>
-          <div style="font-weight:600">Science · Wed 10 Jun · 6 days</div>
-          <div style="font-size:10px;color:var(--textMid);margin-top:2px">Chapters 4 & 5 · Study plan active</div>
+        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(248,113,113,0.15);border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:10px">
+          <div style="font-size:10px;color:#f87171;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">📝 Upcoming exam</div>
+          <div style="font-weight:600;font-size:13px">Science · Wed this week · 6 days</div>
+          <div style="font-size:11px;color:var(--textMid);margin-top:2px">Chapters 4 & 5 · Study plan active</div>
         </div>
         <div class="mock-brief">
-          <div style="font-size:9px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">✈️ Co-Pilot's briefing</div>
-          Wyan has a moderate week. Science exam Wednesday needs attention. Football Saturday 10:30am (updated from 9:30am). Work shift Thursday 2–5pm. Worth checking in Sunday evening.
+          <div style="font-size:10px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">✈️ Co-Pilot's weekly briefing</div>
+          Moderate week ahead. Science exam Wednesday needs attention — study plan is active. Football Saturday (time updated). Work shift Thursday 2–5pm. Worth checking in Sunday evening.
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- SCHOOLS -->
+<section class="schools" id="schools">
+  <div class="container">
+    <div class="schools-inner">
+      <div>
+        <span class="section-label reveal">For schools</span>
+        <h2 class="section-title reveal">The AI layer your students already want.</h2>
+        <p style="font-size:17px;color:var(--textMid);line-height:1.85;margin-bottom:24px" class="reveal">TeenPilot works without school involvement — but works better with it. Schools get a population-level dashboard showing workload, wellbeing trends and engagement. No individual data. No privacy issues.</p>
+        <div class="schools-features reveal">
+          <div class="school-feat"><div class="school-feat-icon">📊</div><div><div class="school-feat-title">School dashboard</div><div class="school-feat-desc">Workload trends, XP engagement levels, wellbeing mood data — all anonymised and aggregated.</div></div></div>
+          <div class="school-feat"><div class="school-feat-icon">🔒</div><div><div class="school-feat-title">Privacy first</div><div class="school-feat-desc">Student conversations and wellbeing check-ins are never visible to school admin. Compliant with NZ Privacy Act 2020.</div></div></div>
+          <div class="school-feat"><div class="school-feat-icon">🏫</div><div><div class="school-feat-title">KAMAR integration</div><div class="school-feat-desc">Timetable, cycle days and NCEA credits sync automatically when school approves API access. Students onboard in seconds.</div></div></div>
+          <div class="school-feat"><div class="school-feat-icon">💙</div><div><div class="school-feat-title">Wellbeing support</div><div class="school-feat-desc">Co-Pilot surfaces NZ mental health resources when students are struggling — always pointing to real human support.</div></div></div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="mailto:schools@teenpilot.co.nz" class="btn-primary" style="font-size:15px;padding:14px 28px">Contact us about schools →</a>
+        </div>
+      </div>
+      <div class="reveal" style="background:var(--bg);border:1px solid rgba(74,222,128,0.15);border-radius:20px;padding:26px">
+        <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:18px">School site licence</div>
+        <div style="font-family:var(--display);font-size:38px;font-weight:800;letter-spacing:-2px;margin-bottom:4px">$49<small style="font-size:18px;color:var(--textMid);font-weight:400;letter-spacing:0">/student</small></div>
+        <div style="font-size:14px;color:var(--textDim);margin-bottom:20px">per year · NZD · billed to school</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:22px">
+          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>Full Pro features for every student</div>
+          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>School dashboard and analytics</div>
+          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>Teacher portal and class insights</div>
+          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>KAMAR timetable integration</div>
+          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>Microsoft 365 and Google Workspace</div>
+          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>NZ Privacy Act 2020 compliant</div>
+          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>Oracle Cloud Infrastructure</div>
+        </div>
+        <a href="mailto:schools@teenpilot.co.nz" style="display:block;text-align:center;padding:13px;background:var(--accentDim);border:1px solid rgba(61,255,143,0.25);color:var(--accent);border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;font-family:var(--display)">Get in touch →</a>
+        <div style="font-size:12px;color:var(--textDim);text-align:center;margin-top:10px">Minimum 50 students · Custom pricing for large schools</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PRICING -->
-<section class="pricing" id="pricing" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+<section class="pricing" id="pricing">
   <div class="container">
     <span class="section-label reveal">Pricing</span>
     <h2 class="section-title reveal">Less than one takeaway meal a month.</h2>
-    <p class="section-sub reveal">Free to start. Upgrade when you're ready. Your parents will say yes.</p>
+    <p class="section-sub reveal">Free to start. Upgrade when you're ready. Cancel anytime.</p>
     <div class="pricing-grid reveal">
       <div class="price-card">
         <div class="price-plan">Free</div>
@@ -466,13 +545,13 @@
       <div class="price-card featured">
         <div class="price-badge">Most popular</div>
         <div class="price-plan">Student Pro</div>
-        <div class="price-amount"><small>$</small>9.99</div>
+        <div class="price-amount"><small>$</small>14.99</div>
         <div class="price-period">per month · NZD</div>
-        <div class="price-annual">or $99/year — save $21</div>
+        <div class="price-annual">or $149/year — save $30</div>
         <ul class="price-list">
           <li>Everything in Free</li>
-          <li>100 Co-Pilot messages/day</li>
-          <li>Exam study plans + practice Qs</li>
+          <li>30 Co-Pilot messages/day</li>
+          <li>Exam study plans + practice questions</li>
           <li>Upload worksheets and exam papers</li>
           <li>Squad chat with Co-Pilot</li>
           <li>Voice input · Read aloud</li>
@@ -485,24 +564,24 @@
       <div class="price-card advanced">
         <div class="price-badge">Advanced AI</div>
         <div class="price-plan">Advanced</div>
-        <div class="price-amount"><small>$</small>19.99</div>
+        <div class="price-amount"><small>$</small>29.99</div>
         <div class="price-period">per month · NZD</div>
-        <div class="price-annual">or $199/year — save $41 · Powered by Agentec</div>
+        <div class="price-annual">or $299/year — save $60 · Powered by Agentec</div>
         <ul class="price-list">
           <li>Everything in Pro</li>
-          <li>Unlimited Co-Pilot messages</li>
-          <li>7am morning agent — automatic</li>
-          <li>Absence notification — one tap</li>
+          <li>60 Co-Pilot messages/day</li>
+          <li>Claude Opus 4.8 — Anthropic's best AI</li>
+          <li>7am morning agent — automatic daily brief</li>
+          <li>Absence notification — parent one-tap approval</li>
           <li>Deadline risk alerts — unprompted</li>
           <li>Schedule change auto-replanning</li>
           <li>Digital balance + study mode</li>
-          <li>NCEA credit tracking (coming soon)</li>
         </ul>
         <a href="https://app.teenpilot.co.nz" class="price-btn purple" target="_blank">Try Advanced</a>
       </div>
     </div>
-    <div style="text-align:center;margin-top:28px;font-size:13px;color:var(--textDim)">
-      All prices NZD · Cancel anytime · Schools: <a href="mailto:schools@teenpilot.co.nz" style="color:var(--accent);text-decoration:none">schools@teenpilot.co.nz</a> for site licence · Powered by Agentec · Oracle Cloud Infrastructure
+    <div style="text-align:center;margin-top:28px;font-size:14px;color:var(--textDim)">
+      All prices NZD · Cancel anytime · Schools contact <a href="mailto:schools@teenpilot.co.nz" style="color:var(--accent);text-decoration:none">schools@teenpilot.co.nz</a> · Powered by Agentec · Oracle Cloud Infrastructure
     </div>
   </div>
 </section>
@@ -511,39 +590,107 @@
 <section class="cta-bottom">
   <div class="container">
     <h2 class="reveal">Stop stressing.<br>Start <em style="color:var(--accent);font-style:normal">flying.</em></h2>
-    <p style="font-size:17px;color:var(--textMid);margin-bottom:36px" class="reveal">Free to start. 3 minutes to set up. No school approval needed.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:12px" class="reveal">
+    <p style="font-size:18px;color:var(--textMid);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.75" class="reveal">Free to start. 3 minutes to set up. No school approval needed.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:14px" class="reveal">
       <a href="https://app.teenpilot.co.nz" class="btn-primary" target="_blank">Try it free ✈️</a>
     </div>
-    <div style="font-size:12px;color:var(--textDim)" class="reveal">
+    <div style="font-size:14px;color:var(--textDim)" class="reveal">
       Already using it? Share with a mate →
       <a href="https://app.teenpilot.co.nz" style="color:var(--accent);text-decoration:none;margin-left:4px">app.teenpilot.co.nz</a>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Teen<span>Pilot</span></div>
-  <div class="footer-links">
-    <a href="#features">Features</a>
-    <a href="#advanced">Advanced AI</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#parents">Parents</a>
-    <a href="mailto:hello@teenpilot.co.nz">Contact</a>
-    <a href="mailto:schools@teenpilot.co.nz">Schools</a>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Teen<span>Pilot</span></div>
+      <div class="footer-tagline">The AI co-pilot for NZ secondary school students. Built in Auckland.</div>
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <a href="#features">Features</a>
+        <a href="#advanced">Advanced AI</a>
+        <a href="#pricing">Pricing</a>
+        <a href="https://app.teenpilot.co.nz" target="_blank">Open app</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">For</div>
+        <a href="#parents">Parents</a>
+        <a href="#schools">Schools</a>
+        <a href="mailto:schools@teenpilot.co.nz">School enquiries</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="mailto:hello@teenpilot.co.nz">Contact us</a>
+        <a href="https://agentec.co.nz" target="_blank">Agentec</a>
+        <a href="#privacy">Privacy policy</a>
+        <a href="#terms">Terms of use</a>
+      </div>
+    </div>
   </div>
-  <p class="footer-copy">
-    © 2026 TeenPilot · Built in Auckland, New Zealand ·
-    <span style="color:var(--accent);font-weight:600">Powered by Agentec · Oracle Cloud Infrastructure</span> ·
-    <a href="https://app.teenpilot.co.nz" style="color:var(--accent);text-decoration:none">Open app →</a>
-  </p>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 TeenPilot · A product of Agentec Ltd · Auckland, New Zealand · <span style="color:var(--accent)">Powered by Oracle Cloud Infrastructure</span></div>
+    <div class="footer-legal">
+      <a href="#privacy">Privacy</a>
+      <a href="#terms">Terms</a>
+      <a href="mailto:hello@teenpilot.co.nz">Contact</a>
+    </div>
+  </div>
 </footer>
 
+<!-- PRIVACY POLICY (inline, anchor linked) -->
+<div id="privacy" style="background:var(--surface);border-top:1px solid var(--border);">
+  <div class="policy-page">
+    <h1>Privacy Policy</h1>
+    <div class="date">Effective 1 June 2026 · TeenPilot / Agentec Ltd</div>
+    <h2>What we collect</h2>
+    <p>TeenPilot collects information you provide directly — your name, email, year level, school, timetable, assignments, sport and work schedule. We also collect usage data to improve the product.</p>
+    <h2>What we never share</h2>
+    <p>Your Co-Pilot conversations, wellbeing check-ins and personal messages are private. We never share individual student data with schools, teachers or third parties without your explicit consent.</p>
+    <h2>School data</h2>
+    <p>If your school connects KAMAR or Microsoft 365, we access only the data needed to power your experience — timetable, assignments and calendar. This is read-only. You can disconnect at any time.</p>
+    <h2>Parent access</h2>
+    <p>Parents see aggregated information — upcoming assignments, exam dates, sport schedule and workload level. They never see your Co-Pilot conversations or wellbeing check-ins.</p>
+    <h2>Data storage</h2>
+    <p>Your data is stored securely in New Zealand and Australia on Oracle Cloud Infrastructure, operated by Agentec Ltd. We comply with the New Zealand Privacy Act 2020.</p>
+    <h2>Your rights</h2>
+    <p>You can request access to, correction of, or deletion of your data at any time by emailing <a href="mailto:privacy@teenpilot.co.nz">privacy@teenpilot.co.nz</a>.</p>
+    <h2>Contact</h2>
+    <p>Questions about privacy: <a href="mailto:privacy@teenpilot.co.nz">privacy@teenpilot.co.nz</a> · Agentec Ltd · Auckland, New Zealand</p>
+  </div>
+</div>
+
+<!-- TERMS (inline) -->
+<div id="terms" style="background:var(--bg);border-top:1px solid var(--border);">
+  <div class="policy-page">
+    <h1>Terms of Use</h1>
+    <div class="date">Effective 1 June 2026 · TeenPilot / Agentec Ltd</div>
+    <h2>Using TeenPilot</h2>
+    <p>TeenPilot is designed for secondary school students aged 13 and over. By using TeenPilot you agree to use it honestly and responsibly.</p>
+    <h2>Free and paid plans</h2>
+    <p>The free plan is available with no time limit. Paid plans (Pro and Advanced) are billed monthly or annually in NZD. You can cancel at any time — no refunds for partial months.</p>
+    <h2>Fair use</h2>
+    <p>Message limits apply per plan. We reserve the right to suspend accounts that abuse the service or attempt to circumvent limits.</p>
+    <h2>AI-generated content</h2>
+    <p>Co-Pilot responses are AI-generated and for guidance only. They are not a substitute for professional academic, medical or mental health advice. Always refer to a trusted adult or professional for serious matters.</p>
+    <h2>Wellbeing</h2>
+    <p>TeenPilot provides links to NZ mental health resources. In a crisis, please contact What's Up (0800 942 8787), Youthline (0800 376 633) or 1737.</p>
+    <h2>Contact</h2>
+    <p>Questions: <a href="mailto:hello@teenpilot.co.nz">hello@teenpilot.co.nz</a> · Agentec Ltd · Auckland, New Zealand</p>
+  </div>
+</div>
+
 <script>
+  // Scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const t = document.querySelector(a.getAttribute('href'));
