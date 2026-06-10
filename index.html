@@ -149,7 +149,7 @@
 
     /* PRICING */
     .pricing { padding: 90px 24px; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 18px; margin-top: 48px; align-items: start; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; margin-top: 48px; align-items: start; }
     .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px; position: relative; }
     .price-card.featured { border-color: rgba(61,255,143,0.3); background: linear-gradient(135deg, var(--surface), rgba(61,255,143,0.02)); }
     .price-card.advanced { border-color: rgba(167,139,250,0.3); background: linear-gradient(135deg, var(--surface), rgba(167,139,250,0.02)); }
@@ -323,7 +323,7 @@
           <p style="font-size:15px;color:var(--textMid);line-height:1.8">When your child asks Co-Pilot to build a study plan, break down an assignment or plan their week — it actually understands what they need. And it knows when to support, and when to point to a real person.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;min-width:200px">
-          <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Frontier AI</span> — Claude Opus 4.8, Anthropic's most capable model</div>
+          <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Frontier AI</span> — Claude Fable 5 &amp; Opus 4.8 — Anthropic's most advanced models</div>
           <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Safety first</span> — Anthropic is the world's leading AI safety research company</div>
           <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Helps, never cheats</span> — guides learning, never just gives answers</div>
           <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Wellbeing aware</span> — recognises distress, always points to real support</div>
@@ -727,8 +727,8 @@
 <section class="pricing" id="pricing">
   <div class="container">
     <span class="section-label reveal">Pricing</span>
-    <h2 class="section-title reveal">Less than one takeaway meal a month.</h2>
-    <p class="section-sub reveal">Free to start. Upgrade when you're ready. Cancel anytime.</p>
+    <h2 class="section-title reveal">One app. Every part of student life.</h2>
+    <p class="section-sub reveal">Free to start. Upgrade when you're ready. From basic to the most advanced AI available — there's a plan for every student.</p>
     <div class="pricing-grid reveal">
       <div class="price-card">
         <div class="price-plan">Free</div>
@@ -771,22 +771,45 @@
         <div class="price-plan">Advanced</div>
         <div class="price-amount"><small>$</small>29.99</div>
         <div class="price-period">per month · NZD</div>
-        <div class="price-annual">or $299/year — save $60 · Powered by Agentec</div>
+        <div class="price-annual">or $299/year — save $60</div>
         <ul class="price-list">
           <li>Everything in Pro</li>
           <li>60 Co-Pilot messages/day</li>
           <li>Claude Opus 4.8 — Anthropic's best AI</li>
+          <li>Avatar voices — Co-Pilot speaks to you</li>
           <li>7am morning agent — automatic daily brief</li>
           <li>Absence notification — parent one-tap approval</li>
           <li>Deadline risk alerts — unprompted</li>
           <li>Schedule change auto-replanning</li>
+          <li>Live transport — real-time bus and train</li>
           <li>Digital balance + study mode</li>
         </ul>
         <a href="https://app.teenpilot.co.nz" class="price-btn purple" target="_blank">Try Advanced</a>
       </div>
+
+      <div class="price-card" style="border:1px solid rgba(251,191,36,0.3);background:linear-gradient(135deg,rgba(251,191,36,0.04),rgba(251,146,60,0.04))">
+        <div class="price-badge" style="background:linear-gradient(135deg,#fbbf24,#fb923c);color:#050d08">Premium ✨</div>
+        <div class="price-plan" style="color:#fbbf24">Premium</div>
+        <div class="price-amount" style="color:#fbbf24"><small>$</small>49.99</div>
+        <div class="price-period">per month · NZD</div>
+        <div class="price-annual" style="color:rgba(251,191,36,0.7)">or $499/year — save $100</div>
+        <ul class="price-list">
+          <li>Everything in Advanced</li>
+          <li>100 Co-Pilot messages/day</li>
+          <li style="color:#fbbf24;font-weight:600">Claude Fable 5 — Anthropic's most advanced AI</li>
+          <li>Long-running study sessions — Co-Pilot works independently</li>
+          <li>Deep exam prep — full paper analysis and revision plan</li>
+          <li>TeenPilot Academy — AI-led tutorials and courses</li>
+          <li>Voice calls — Co-Pilot speaks, listens and responds</li>
+          <li>Group video study sessions</li>
+          <li>Advanced parent dashboard — weekly AI briefing</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://app.teenpilot.co.nz" class="price-btn" style="background:linear-gradient(135deg,#fbbf24,#fb923c);color:#050d08;font-weight:700;border:none" target="_blank">Try Premium</a>
+      </div>
     </div>
     <div style="text-align:center;margin-top:28px;font-size:14px;color:var(--textDim)">
-      All prices NZD · Cancel anytime · Schools contact <a href="mailto:schools@teenpilot.co.nz" style="color:var(--accent);text-decoration:none">schools@teenpilot.co.nz</a> · Powered by Agentec · Oracle Cloud Infrastructure
+      All prices NZD · Cancel anytime · Schools contact <a href="mailto:schools@teenpilot.co.nz" style="color:var(--accent);text-decoration:none">schools@teenpilot.co.nz</a> · Powered by Claude Fable 5, Opus 4.8, Sonnet 4.6 &amp; Haiku 4.5 · Oracle Cloud Infrastructure
     </div>
   </div>
 </section>
