@@ -17,14 +17,9 @@
       --blue: #4a9eff; --purple: #a78bfa; --gold: #ffd166;
       --font: 'DM Sans', sans-serif; --display: 'Syne', sans-serif;
       --radius: 16px; --radiusSm: 10px;
-      --text-base: 17px;
-      --text-sm: 15px;
-      --text-xs: 13px;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: var(--text-base); line-height: 1.7; overflow-x: hidden; }
-
-    /* NAV */
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; overflow-x: hidden; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: rgba(6,10,15,0.94); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
     .nav-logo { font-family: var(--display); font-size: 23px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; text-decoration: none; }
     .nav-logo span { color: var(--accent); }
@@ -34,22 +29,18 @@
     .nav-cta { background: var(--accent); color: #050d08; padding: 10px 24px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; font-family: var(--display); transition: all 0.2s; }
     .nav-cta:hover { background: #5fffaa; transform: translateY(-1px); }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--textMid); border-radius: 2px; transition: all 0.2s; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--textMid); border-radius: 2px; }
     .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-family: var(--display); font-size: 28px; font-weight: 700; color: var(--text); text-decoration: none; }
     .mobile-menu-close { position: absolute; top: 20px; right: 24px; font-size: 28px; color: var(--textMid); cursor: pointer; background: none; border: none; }
     @media(max-width:700px) { nav { padding: 14px 20px; } .nav-links { display: none; } .hamburger { display: flex; } }
-
-    /* UTILITIES */
     .container { max-width: 1100px; margin: 0 auto; }
     .section-label { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 14px; }
     .section-title { font-family: var(--display); font-size: clamp(30px, 4vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 18px; }
     .section-sub { font-size: 18px; color: var(--textMid); max-width: 580px; line-height: 1.8; margin-bottom: 48px; }
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: none; }
-
-    /* HERO */
     .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(61,255,143,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(61,255,143,0.04) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%); animation: gridMove 20s linear infinite; }
     @keyframes gridMove { 0%{background-position:0 0} 100%{background-position:60px 60px} }
@@ -69,13 +60,9 @@
     .btn-ghost:hover { color: var(--text); }
     .hero-note { font-size: 13px; color: var(--textDim); position: relative; z-index: 1; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
-
-    /* STORY BANNER */
     .story-banner { background: linear-gradient(135deg, rgba(61,255,143,0.04), rgba(74,158,255,0.03)); border-top: 1px solid rgba(61,255,143,0.1); border-bottom: 1px solid rgba(61,255,143,0.1); padding: 28px 24px; text-align: center; }
     .story-inner { max-width: 700px; margin: 0 auto; font-size: 16px; color: var(--textMid); line-height: 1.8; }
     .story-inner strong { color: var(--text); }
-
-    /* PROBLEMS */
     .problems { padding: 90px 24px; }
     .problems-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
     .problem-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
@@ -83,8 +70,6 @@
     .problem-emoji { font-size: 30px; margin-bottom: 14px; display: block; }
     .problem-text { font-size: 16px; color: var(--textMid); line-height: 1.7; }
     .problem-text strong { color: var(--text); }
-
-    /* FEATURES */
     .features { padding: 90px 24px; }
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; margin-top: 48px; }
     .feature { background: var(--bg); padding: 34px 30px; transition: background 0.2s; }
@@ -93,14 +78,10 @@
     .feature-title { font-family: var(--display); font-size: 18px; font-weight: 700; margin-bottom: 10px; }
     .feature-desc { font-size: 15px; color: var(--textMid); line-height: 1.75; }
     .feature-tag { display: inline-block; margin-top: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px; font-size: 12px; color: var(--textDim); }
-
-    /* ADVANCED / AGENTIC */
     .agentic { padding: 100px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .agentic-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 80px; }
     @media(max-width:768px) { .agentic-intro { grid-template-columns: 1fr; gap: 32px; } }
     .plan-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.3); border-radius: 100px; padding: 5px 14px; font-size: 12px; color: var(--purple); font-weight: 700; margin-bottom: 16px; }
-
-    /* MOMENT TIMELINE */
     .moments { display: flex; flex-direction: column; gap: 0; }
     .moment { display: grid; grid-template-columns: 100px 1fr; gap: 24px; position: relative; }
     .moment:not(:last-child)::after { content: ''; position: absolute; left: 49px; top: 48px; bottom: -24px; width: 2px; background: linear-gradient(to bottom, var(--accent), transparent); opacity: 0.2; }
@@ -116,8 +97,6 @@
     .moment-notification { background: linear-gradient(135deg, #0f1a28, #0a1420); border: 1px solid rgba(61,255,143,0.15); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #c8d8f0; line-height: 1.75; }
     .moment-notification strong { color: var(--accent); }
     .moment-tag { display: inline-flex; align-items: center; gap: 4px; background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.2); border-radius: 100px; padding: 3px 10px; font-size: 11px; color: var(--purple); font-weight: 600; margin-top: 10px; }
-
-    /* AVATARS */
     .avatars { padding: 90px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .avatars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-top: 48px; }
     .avatar-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 18px; text-align: center; transition: all 0.2s; }
@@ -126,16 +105,12 @@
     .avatar-name { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
     .avatar-style { font-size: 12px; color: var(--textDim); margin-bottom: 10px; }
     .avatar-quote { font-size: 13px; color: var(--textMid); line-height: 1.65; font-style: italic; }
-
-    /* HOW */
     .how { padding: 90px 24px; }
     .how-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 36px; margin-top: 48px; }
     .how-step { text-align: center; }
     .how-num { width: 54px; height: 54px; border-radius: 50%; background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 20px; font-weight: 800; color: var(--accent); margin: 0 auto 18px; }
     .how-title { font-family: var(--display); font-size: 16px; font-weight: 700; margin-bottom: 10px; }
     .how-desc { font-size: 15px; color: var(--textMid); line-height: 1.7; }
-
-    /* PARENTS */
     .parent-section { padding: 90px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .parent-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
     @media(max-width:768px) { .parent-inner { grid-template-columns: 1fr; } }
@@ -146,8 +121,6 @@
     .mock-stat-lbl { font-size: 10px; color: var(--textMid); margin-top: 2px; }
     .mock-alert { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.2); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #f87171; font-weight: 600; margin-bottom: 10px; }
     .mock-brief { background: linear-gradient(135deg,rgba(61,255,143,0.04),rgba(74,158,255,0.04)); border: 1px solid rgba(61,255,143,0.12); border-radius: 10px; padding: 14px; font-size: 13px; color: var(--textMid); line-height: 1.75; }
-
-    /* PRICING */
     .pricing { padding: 90px 24px; }
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap: 16px; margin-top: 48px; align-items: start; }
     .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px; position: relative; }
@@ -173,8 +146,6 @@
     .price-btn.outline:hover { background: var(--surface); }
     .price-btn.purple { background: var(--purple); color: #fff; }
     .price-btn.purple:hover { opacity: 0.9; }
-
-    /* SCHOOLS */
     .schools { padding: 90px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .schools-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
     @media(max-width:768px) { .schools-inner { grid-template-columns: 1fr; } }
@@ -183,12 +154,8 @@
     .school-feat-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
     .school-feat-title { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
     .school-feat-desc { font-size: 14px; color: var(--textMid); line-height: 1.65; }
-
-    /* CTA */
     .cta-bottom { padding: 90px 24px; text-align: center; border-top: 1px solid var(--border); background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(61,255,143,0.06), transparent); }
     .cta-bottom h2 { font-family: var(--display); font-size: clamp(30px,4vw,54px); font-weight: 800; letter-spacing: -2px; margin-bottom: 18px; }
-
-    /* FOOTER */
     footer { padding: 40px; border-top: 1px solid var(--border); }
     .footer-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 32px; margin-bottom: 28px; }
     .footer-logo { font-family: var(--display); font-size: 20px; font-weight: 800; margin-bottom: 8px; }
@@ -205,8 +172,6 @@
     .footer-legal a { font-size: 13px; color: var(--textDim); text-decoration: none; }
     .footer-legal a:hover { color: var(--textMid); }
     @media(max-width:640px) { footer { padding: 32px 20px; } .footer-top { flex-direction: column; } }
-
-    /* PRIVACY POLICY PAGE */
     .policy-page { max-width: 720px; margin: 100px auto 80px; padding: 0 24px; }
     .policy-page h1 { font-family: var(--display); font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
     .policy-page .date { font-size: 14px; color: var(--textDim); margin-bottom: 40px; }
@@ -292,16 +257,16 @@
   <div class="container">
     <span class="section-label reveal">What TeenPilot does</span>
     <h2 class="section-title reveal">One app. Your whole week.</h2>
-    <p class="section-sub reveal">Whether you're juggling school and sport, training for a team, working part-time, hitting the gym, or just need a safe place to chat — TeenPilot connects it all. Co-Pilot knows your whole life and tells you exactly where to focus.</p>
+    <p class="section-sub reveal">Whether you're juggling school and sport, training for a team, working part-time, hitting the gym, or just need a safe place to chat — TeenPilot connects it all.</p>
     <div class="features-grid reveal">
       <div class="feature"><span class="feature-icon">📖</span><div class="feature-title">Your real timetable</div><p class="feature-desc">Your actual subjects, rooms and teachers. Knows what cycle day it is. Shows what's on before you ask.</p><span class="feature-tag">NZ cycle days · Bell times</span></div>
       <div class="feature"><span class="feature-icon">✈️</span><div class="feature-title">AI Co-Pilot chat</div><p class="feature-desc">"What do I have tomorrow?" "Build me a study plan." "I've got training and work Friday — when do I study?" Co-Pilot knows your whole week.</p><span class="feature-tag">Voice input · Always on</span></div>
-      <div class="feature"><span class="feature-icon">📚</span><div class="feature-title">Assignments and exams</div><p class="feature-desc">Track what's due. Upload your exam paper and Co-Pilot builds a personalised revision plan — practice questions, key concepts, study scheduling. Co-Pilot helps you learn and prepare, never just hands you the answers.</p><span class="feature-tag">Study plans · Practice questions · Ethical AI</span></div>
-      <div class="feature"><span class="feature-icon">⚽</span><div class="feature-title">Sport and training</div><p class="feature-desc">Add your sessions, fixtures and team. Co-Pilot plans your week around sport — not against it. Fixture change? Update once, everything adjusts. Works for any sport, any team, any level.</p><span class="feature-tag">Any sport · Team coordination · Load balance</span></div>
-      <div class="feature"><span class="feature-icon">💬</span><div class="feature-title">Squad chat — safe and smart</div><p class="feature-desc">Group chats for your team, class, band, gym crew or mates. Every message screened by AI before delivery — no harmful content gets through. Type @Co-Pilot in any squad and AI helps the whole group plan, coordinate and get stuff done.</p><span class="feature-tag">AI moderated · @Co-Pilot · Any group</span></div>
-      <div class="feature"><span class="feature-icon">🚌</span><div class="feature-title">Public transport</div><p class="feature-desc">Save your key places — home, school, training, gym, work. Tap any destination to see live bus and train departures from your current location. One tap opens Google Maps with transit directions. Co-Pilot knows your timetable and can tell you exactly when to leave.</p><span class="feature-tag">Live AT data · Google Maps · GPS · Any city</span></div>
-      <div class="feature"><span class="feature-icon">💼</span><div class="feature-title">Part-time work</div><p class="feature-desc">Log your shifts. New shift on Thursday? Add it and Co-Pilot replans your whole week around it automatically.</p><span class="feature-tag">Shift tracker · Auto-replan</span></div>
-      <div class="feature"><span class="feature-icon">💪</span><div class="feature-title">Gym, fitness and nutrition</div><p class="feature-desc">AI-generated gym program built around your goals — strength, performance, weight, fitness. Meal timing around training. Whether you're a serious athlete or just starting out, Co-Pilot builds the program for you.</p><span class="feature-tag">NSCA guidelines · Sport NZ · Any goal</span></div>
+      <div class="feature"><span class="feature-icon">📚</span><div class="feature-title">Assignments and exams</div><p class="feature-desc">Track what's due. Upload your exam paper and Co-Pilot builds a personalised revision plan. Helps you learn and prepare — never just hands you the answers.</p><span class="feature-tag">Study plans · Ethical AI</span></div>
+      <div class="feature"><span class="feature-icon">⚽</span><div class="feature-title">Sport and training</div><p class="feature-desc">Add your sessions and fixtures. Co-Pilot plans study around your sport. Works for any sport, any team, any level.</p><span class="feature-tag">Any sport · Team coordination</span></div>
+      <div class="feature"><span class="feature-icon">💬</span><div class="feature-title">Squad chat — safe and smart</div><p class="feature-desc">Group chats for your team, class, band or mates. Every message screened by AI before delivery. Type @Co-Pilot in any squad for AI help.</p><span class="feature-tag">AI moderated · @Co-Pilot · Any group</span></div>
+      <div class="feature"><span class="feature-icon">🚌</span><div class="feature-title">Public transport</div><p class="feature-desc">Save your key places — home, school, training, gym, work. Tap any destination to see live departures. One tap opens Google Maps with transit directions.</p><span class="feature-tag">Live AT data · Google Maps · GPS</span></div>
+      <div class="feature"><span class="feature-icon">💼</span><div class="feature-title">Part-time work</div><p class="feature-desc">Log your shifts. New shift on Thursday? Co-Pilot replans your whole week around it automatically.</p><span class="feature-tag">Shift tracker · Auto-replan</span></div>
+      <div class="feature"><span class="feature-icon">💪</span><div class="feature-title">Gym, fitness and nutrition</div><p class="feature-desc">AI-generated gym program built around your goals. Meal timing around training. Whether you're a serious athlete or just starting out.</p><span class="feature-tag">Any goal · Sport NZ · NSCA</span></div>
     </div>
   </div>
 </section>
@@ -309,75 +274,66 @@
 <!-- ADVANCED AI -->
 <section class="agentic" id="advanced">
   <div class="container">
-
-    <!-- Hero intro -->
     <div style="text-align:center;margin-bottom:64px">
       <div class="plan-badge" style="margin:0 auto 16px;display:inline-flex">🚀 Advanced AI — $29.99/mo · Powered by Claude Opus 4.8</div>
       <h2 class="section-title reveal" style="margin-bottom:18px">A helping hand<br>in a busy life.</h2>
       <p style="font-size:18px;color:var(--textMid);line-height:1.85;max-width:620px;margin:0 auto" class="reveal">Advanced Co-Pilot doesn't wait to be asked. It watches your whole life — school, sport, work, health, social — spots what needs attention, and acts before you even realise there's a problem.</p>
     </div>
 
-    <!-- Who it helps -->
+    <!-- Audience cards -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:64px" class="reveal">
-
       <div style="background:var(--bg);border:1px solid rgba(74,222,128,0.2);border-radius:var(--radius);padding:24px">
         <div style="font-size:28px;margin-bottom:12px">🎒</div>
         <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:var(--accent)">For students</div>
         <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Your AI handles the invisible load — tracking what's due, watching your calendar, adjusting your week when life changes. You focus on living. Co-Pilot handles the rest.</p>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Exam study plans</strong> — upload your paper, get a personalised day-by-day revision plan built from the actual content</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Assignment breakdown</strong> — paste any brief, get step-by-step guidance on how to approach it</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Deadline risk alerts</strong> — Co-Pilot notices when something is at risk and tells you before it's too late</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Morning briefing</strong> — a personalised daily plan lands at 7am, built overnight</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Sick day handled</strong> — absence email drafted, parent approves in one tap, school notified</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Helps you learn</strong> — practice questions, concept explanations, study strategies. Never just gives you the answers</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Exam study plans</strong> — upload your paper, get a personalised day-by-day revision plan</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Assignment breakdown</strong> — paste any brief, get step-by-step guidance</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Deadline risk alerts</strong> — Co-Pilot tells you before it's too late</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Morning briefing</strong> — personalised daily plan at 7am, built overnight</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Sick day handled</strong> — absence email drafted, parent approves in one tap</span></div>
         </div>
       </div>
-
       <div style="background:var(--bg);border:1px solid rgba(74,158,255,0.2);border-radius:var(--radius);padding:24px">
         <div style="font-size:28px;margin-bottom:12px">👨‍👩‍👦</div>
         <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:#4a9eff">For parents</div>
-        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Stay informed without hovering. TeenPilot gives you the overview you need without your teenager feeling watched — and the peace of mind that their digital world is genuinely safe. A helping hand for them. Confidence for you.</p>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Weekly AI briefing</strong> — what's coming up, what's overdue, exam dates, workload level. No logging into school portals. No asking "do you have homework?"</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Absence one-tap approval</strong> — Co-Pilot drafts the school email, you review and approve in seconds. School notified before roll call.</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Overdue alerts</strong> — know before the crisis conversation, not after. Co-Pilot flags it early so there's still time to help.</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Sport and schedule visibility</strong> — games, training, work shifts — all in one view. Always know where they are and what's coming up.</span></div>
+        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Stay informed without hovering. A calm weekly briefing, not a surveillance tool. And the peace of mind that their digital world is genuinely safe.</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Weekly AI briefing</strong> — what's coming up, what's overdue, exam dates, workload level</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Absence one-tap approval</strong> — Co-Pilot drafts the email, you approve in seconds</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Overdue alerts</strong> — know before the crisis conversation, not after</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Sport and schedule visibility</strong> — games, training, work shifts in one view</span></div>
           <div style="height:1px;background:rgba(74,158,255,0.1);margin:4px 0"></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">🛡️</span><span><strong style="color:var(--text)">Safe by design</strong> — every message AI screened. No harmful content reaches your child. <a href="#safe" style="color:#4a9eff">See how it works →</a></span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Privacy respected</strong> — Co-Pilot conversations are never shared with parents. Trust is built, not broken.</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">🛡️</span><span><strong style="color:var(--text)">Safe by design</strong> — every message AI screened. <a href="#safe" style="color:#4a9eff">See how it works →</a></span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Privacy respected</strong> — Co-Pilot conversations never shared with parents</span></div>
         </div>
       </div>
-
       <div style="background:var(--bg);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius);padding:24px">
         <div style="font-size:28px;margin-bottom:12px">📋</div>
         <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:#fbbf24">For teachers</div>
-        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">See your class in context. Advanced gives teachers population-level insight — not individual surveillance, but genuine understanding of how your class is tracking.</p>
+        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Population-level insight — not surveillance. Genuine understanding of how your class is tracking.</p>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Class workload overview</strong> — see if your class is overwhelmed before assignments pile up</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Completion trends</strong> — which assignments are students struggling with across the class</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Exam pressure forecasting</strong> — AI flags when multiple assessments land in the same week</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Class workload overview</strong> — see if your class is overwhelmed before it happens</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Completion trends</strong> — which assignments students struggle with</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Exam pressure forecasting</strong> — AI flags assessment pile-ups</span></div>
           <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Coming soon</strong> — teacher portal with class insights dashboard</span></div>
         </div>
       </div>
-
       <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius);padding:24px">
         <div style="font-size:28px;margin-bottom:12px">⚽</div>
         <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:var(--purple)">For sports clubs</div>
-        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Replace the clunky team apps and endless WhatsApp threads. Advanced squad chat gives coaches and managers a proper coordination tool — with AI that helps the whole team plan.</p>
+        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Replace clunky team apps and endless WhatsApp threads. AI that helps the whole team plan.</p>
         <div style="display:flex;flex-direction:column;gap:8px">
           <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Team squad chat</strong> — safe, moderated, everyone in one place</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Fixture management</strong> — update once, everyone's calendar syncs automatically</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">@Co-Pilot for the team</strong> — "who's available Saturday?" AI checks and reports back</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Works for any club</strong> — football, netball, swimming, band, dance, gym, you name it</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">No more Team Reach</strong> — better features, built for the students already using it</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Live transport integration</strong> — players see exactly how to get to the venue, with live bus times and Google Maps directions in one tap</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Fixture management</strong> — update once, everyone's calendar syncs</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">@Co-Pilot for the team</strong> — "who's available Saturday?" AI checks and responds</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Live transport</strong> — players see exactly how to get to the venue</span></div>
+          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Works for any club</strong> — football, netball, swimming, band, dance, gym</span></div>
         </div>
       </div>
-
     </div>
 
-    <!-- Pro vs Advanced vs Premium comparison -->
+    <!-- Tier comparison -->
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:64px" class="reveal">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
         <div style="font-family:var(--display);font-size:18px;font-weight:800">What actually changes at each tier</div>
@@ -432,6 +388,7 @@
       </div>
     </div>
 
+    <!-- Invisible work panel -->
     <div class="agentic-intro">
       <div>
         <span class="section-label">A week in a student's life</span>
@@ -466,76 +423,16 @@
       </div>
     </div>
 
+    <!-- Week timeline -->
     <h3 style="font-family:var(--display);font-size:26px;font-weight:800;letter-spacing:-1px;margin-bottom:10px;text-align:center" class="reveal">A real week. Advanced in the background.</h3>
     <p style="font-size:16px;color:var(--textMid);text-align:center;margin-bottom:52px" class="reveal">Every one of these happened automatically — no input from the student needed.</p>
-
     <div class="moments reveal">
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">7:00am</div><div class="moment-time-day">Monday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">✈️ Morning Agent fired automatically</div>
-          <div class="moment-title">Daily flight plan delivered before school</div>
-          <div class="moment-desc">Co-Pilot analysed the timetable, sport, work and assignments overnight. Push notification arrived at 7am — before the alarm went off.</div>
-          <div class="moment-notification"><strong>Morning ✈️</strong> Today: English P1, Maths P3 (algebra test Thursday — revise tonight), Volleyball 4pm.<br>Tonight: 30 mins English essay intro, 45 mins Maths revision. You've got this.</div>
-          <div class="moment-tag">🚀 Advanced · Auto-generated · No input needed</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">3:45pm</div><div class="moment-time-day">Tuesday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">⚽ Fixture update</div>
-          <div class="moment-title">Football Saturday changed — Co-Pilot replanned</div>
-          <div class="moment-desc">Game updated: Field 2 → Field 3, 9:30am → 10:30am. Co-Pilot automatically adjusted Saturday's plan and moved the pre-game meal timing.</div>
-          <div class="moment-notification"><strong>Fixture updated ✓</strong> Saturday football now 10:30am Field 3. Pre-game meal moved to 8:45am. Friday evening kept light — early night recommended.</div>
-          <div class="moment-tag">🚀 Advanced · Calendar auto-updated · Study protected</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">4:15pm</div><div class="moment-time-day">Wednesday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">💼 New work shift added</div>
-          <div class="moment-title">New shift Thursday 2pm — week auto-replanned</div>
-          <div class="moment-desc">New shift added: Thursday 2pm–5pm. Co-Pilot spotted a conflict with planned Science study and automatically moved it without being asked.</div>
-          <div class="moment-notification"><strong>Shift added ✓</strong> Thu 2–5pm. Science study moved to Wednesday 7pm (you're free). Thursday morning kept for Maths revision before the shift.</div>
-          <div class="moment-tag">🚀 Advanced · Conflict detected · Auto-resolved</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">6:30pm</div><div class="moment-time-day">Thursday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">⚠️ Deadline risk alert</div>
-          <div class="moment-title">English essay at risk — Co-Pilot intervened</div>
-          <div class="moment-desc">English essay due Friday. Conclusion not started. Co-Pilot detected the risk and sent an unprompted alert — without being asked to check.</div>
-          <div class="moment-notification"><strong>⚠️ English essay due tomorrow.</strong> Intro and body done. Conclusion takes 20 minutes. You're free right now. Do it tonight — you'll thank yourself.</div>
-          <div class="moment-tag">🚀 Advanced · Unprompted · Genuine AI judgement</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">7:15am</div><div class="moment-time-day">Friday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">🤒 Sick day</div>
-          <div class="moment-title">Absence handled in 30 seconds</div>
-          <div class="moment-desc">Woke up unwell. Tapped "Not at school today" → selected Sick → Co-Pilot drafted a formal absence email. Parent got a notification, reviewed it, tapped approve. Done.</div>
-          <div class="moment-notification"><strong>Absence sent ✓</strong> Email to school office from parent's email. Student absent Friday — illness. School notified before roll call.</div>
-          <div class="moment-tag">🚀 Advanced · Parent approved · School notified</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">8:45am</div><div class="moment-time-day">Saturday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">✈️ Game day briefing</div>
-          <div class="moment-title">Game day — Co-Pilot prepared everything</div>
-          <div class="moment-desc">Pre-game notification with everything needed. Correct field, correct time, nutrition reminder, travel time. No searching, no forgetting.</div>
-          <div class="moment-notification"><strong>Game day ✈️</strong> Football 10:30am Field 3. Eat now — carbs, nothing heavy. Kit ready? Drive time: 20 mins. You trained 3x this week — good prep. Play well.</div>
-          <div class="moment-tag">🚀 Advanced · Sport-aware · Nutrition timed</div>
-        </div>
-      </div>
+      <div class="moment"><div class="moment-time"><div class="moment-time-label">7:00am</div><div class="moment-time-day">Monday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger">✈️ Morning Agent fired automatically</div><div class="moment-title">Daily flight plan delivered before school</div><div class="moment-desc">Co-Pilot analysed the timetable, sport, work and assignments overnight. Push notification arrived at 7am — before the alarm went off.</div><div class="moment-notification"><strong>Morning ✈️</strong> Today: English P1, Maths P3 (algebra test Thursday — revise tonight), Volleyball 4pm.<br>Tonight: 30 mins English essay intro, 45 mins Maths revision. You've got this.</div><div class="moment-tag">🚀 Advanced · Auto-generated · No input needed</div></div></div>
+      <div class="moment"><div class="moment-time"><div class="moment-time-label">3:45pm</div><div class="moment-time-day">Tuesday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger">⚽ Fixture update</div><div class="moment-title">Football Saturday changed — Co-Pilot replanned</div><div class="moment-desc">Game updated: Field 2 → Field 3, 9:30am → 10:30am. Co-Pilot automatically adjusted Saturday's plan and moved the pre-game meal timing.</div><div class="moment-notification"><strong>Fixture updated ✓</strong> Saturday football now 10:30am Field 3. Pre-game meal moved to 8:45am. Friday evening kept light — early night recommended.</div><div class="moment-tag">🚀 Advanced · Calendar auto-updated · Study protected</div></div></div>
+      <div class="moment"><div class="moment-time"><div class="moment-time-label">4:15pm</div><div class="moment-time-day">Wednesday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger">💼 New work shift added</div><div class="moment-title">New shift Thursday 2pm — week auto-replanned</div><div class="moment-desc">New shift added: Thursday 2pm–5pm. Co-Pilot spotted a conflict with planned Science study and automatically moved it without being asked.</div><div class="moment-notification"><strong>Shift added ✓</strong> Thu 2–5pm. Science study moved to Wednesday 7pm (you're free). Thursday morning kept for Maths revision before the shift.</div><div class="moment-tag">🚀 Advanced · Conflict detected · Auto-resolved</div></div></div>
+      <div class="moment"><div class="moment-time"><div class="moment-time-label">6:30pm</div><div class="moment-time-day">Thursday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger">⚠️ Deadline risk alert</div><div class="moment-title">English essay at risk — Co-Pilot intervened</div><div class="moment-desc">English essay due Friday. Conclusion not started. Co-Pilot detected the risk and sent an unprompted alert — without being asked to check.</div><div class="moment-notification"><strong>⚠️ English essay due tomorrow.</strong> Intro and body done. Conclusion takes 20 minutes. You're free right now. Do it tonight — you'll thank yourself.</div><div class="moment-tag">🚀 Advanced · Unprompted · Genuine AI judgement</div></div></div>
+      <div class="moment"><div class="moment-time"><div class="moment-time-label">7:15am</div><div class="moment-time-day">Friday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger">🤒 Sick day</div><div class="moment-title">Absence handled in 30 seconds</div><div class="moment-desc">Woke up unwell. Tapped "Not at school today" → selected Sick → Co-Pilot drafted a formal absence email. Parent got a notification, reviewed it, tapped approve. Done.</div><div class="moment-notification"><strong>Absence sent ✓</strong> Email to school office from parent's email. Student absent Friday — illness. School notified before roll call.</div><div class="moment-tag">🚀 Advanced · Parent approved · School notified</div></div></div>
+      <div class="moment"><div class="moment-time"><div class="moment-time-label">8:45am</div><div class="moment-time-day">Saturday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger">✈️ Game day briefing</div><div class="moment-title">Game day — Co-Pilot prepared everything</div><div class="moment-desc">Pre-game notification with everything needed. Correct field, correct time, nutrition reminder, travel time. No searching, no forgetting.</div><div class="moment-notification"><strong>Game day ✈️</strong> Football 10:30am Field 3. Eat now — carbs, nothing heavy. Kit ready? Drive time: 20 mins. You trained 3x this week — good prep. Play well.</div><div class="moment-tag">🚀 Advanced · Sport-aware · Nutrition timed</div></div></div>
     </div>
   </div>
 </section>
@@ -548,7 +445,7 @@
     <p class="section-sub reveal">Same powerful AI. Completely different personality. Choose who you actually want to talk to every day.</p>
     <div class="avatars-grid reveal">
       <div class="avatar-card" style="border-color:rgba(74,222,128,0.3)"><span class="avatar-emoji">✈️</span><div class="avatar-name">Co-Pilot</div><div class="avatar-style">Classic · Aviation</div><p class="avatar-quote">"Cleared for takeoff. Maths test Thursday — let's get that revision locked in tonight."</p></div>
-      <div class="avatar-card" style="border-color:rgba(244,114,182,0.4)"><span class="avatar-emoji">🎵</span><div class="avatar-name">Luna</div><div class="avatar-style">Music & Creative</div><p class="avatar-quote">"Every subject has its own rhythm. Let's find yours and make this revision flow."</p></div>
+      <div class="avatar-card" style="border-color:rgba(244,114,182,0.4)"><span class="avatar-emoji">🎵</span><div class="avatar-name">Luna</div><div class="avatar-style">Music &amp; Creative</div><p class="avatar-quote">"Every subject has its own rhythm. Let's find yours and make this revision flow."</p></div>
       <div class="avatar-card" style="border-color:rgba(146,117,74,0.4)"><span class="avatar-emoji">🟫</span><div class="avatar-name">BlockBrain</div><div class="avatar-style">Minecraft</div><p class="avatar-quote">"That Science exam is a diamond-tier challenge. Let's mine through it before Thursday."</p></div>
       <div class="avatar-card" style="border-color:rgba(239,68,68,0.3)"><span class="avatar-emoji">⚙️</span><div class="avatar-name">ARIA</div><div class="avatar-style">Iron Man AI</div><p class="avatar-quote">"Running the calculations. 48 minutes before training. Efficiency rating: use them."</p></div>
       <div class="avatar-card" style="border-color:rgba(167,139,250,0.3)"><span class="avatar-emoji">⭐</span><div class="avatar-name">Hoshi-sensei</div><div class="avatar-style">Anime</div><p class="avatar-quote">"Today we begin an EPIC revision quest! Ganbatte — you've totally got this!"</p></div>
@@ -558,308 +455,18 @@
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="how" id="how" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-  <div class="container">
-    <span class="section-label reveal">Getting started</span>
-    <h2 class="section-title reveal">Up and running in 3 minutes.</h2>
-    <p class="section-sub reveal">No school approval. No IT department. No credit card. Just you and 3 minutes.</p>
-    <div class="how-steps">
-      <div class="how-step reveal"><div class="how-num">1</div><div class="how-title">Create your account</div><p class="how-desc">Sign up free with your email. No credit card, no school approval needed.</p></div>
-      <div class="how-step reveal"><div class="how-num">2</div><div class="how-title">Add your life</div><p class="how-desc">School, sport, work, fitness. Takes 3 minutes. The more you add, the smarter Co-Pilot gets.</p></div>
-      <div class="how-step reveal"><div class="how-num">3</div><div class="how-title">Connect your school</div><p class="how-desc">Sign in with Microsoft Teams or Google to pull assignments in automatically.</p></div>
-      <div class="how-step reveal"><div class="how-num">4</div><div class="how-title">Ask Co-Pilot</div><p class="how-desc">"What should I do tonight?" Co-Pilot looks at your whole week and tells you exactly where to focus.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- PARENTS -->
-<section class="parent-section" id="parents">
-  <div class="container">
-<!-- ADVANCED AI -->
-<section class="agentic" id="advanced">
-  <div class="container">
-
-    <!-- Hero intro -->
-    <div style="text-align:center;margin-bottom:64px">
-      <div class="plan-badge" style="margin:0 auto 16px;display:inline-flex">🚀 Advanced AI — $29.99/mo · Powered by Claude Opus 4.8</div>
-      <h2 class="section-title reveal" style="margin-bottom:18px">A helping hand<br>in a busy life.</h2>
-      <p style="font-size:18px;color:var(--textMid);line-height:1.85;max-width:620px;margin:0 auto" class="reveal">Advanced Co-Pilot doesn't wait to be asked. It watches your whole life — school, sport, work, health, social — spots what needs attention, and acts before you even realise there's a problem.</p>
-    </div>
-
-    <!-- Who it helps -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:64px" class="reveal">
-
-      <div style="background:var(--bg);border:1px solid rgba(74,222,128,0.2);border-radius:var(--radius);padding:24px">
-        <div style="font-size:28px;margin-bottom:12px">🎒</div>
-        <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:var(--accent)">For students</div>
-        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Your AI handles the invisible load — tracking what's due, watching your calendar, adjusting your week when life changes. You focus on living. Co-Pilot handles the rest.</p>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Exam study plans</strong> — upload your paper, get a personalised day-by-day revision plan built from the actual content</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Assignment breakdown</strong> — paste any brief, get step-by-step guidance on how to approach it</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Deadline risk alerts</strong> — Co-Pilot notices when something is at risk and tells you before it's too late</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Morning briefing</strong> — a personalised daily plan lands at 7am, built overnight</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Sick day handled</strong> — absence email drafted, parent approves in one tap, school notified</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Helps you learn</strong> — practice questions, concept explanations, study strategies. Never just gives you the answers</span></div>
-        </div>
-      </div>
-
-      <div style="background:var(--bg);border:1px solid rgba(74,158,255,0.2);border-radius:var(--radius);padding:24px">
-        <div style="font-size:28px;margin-bottom:12px">👨‍👩‍👦</div>
-        <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:#4a9eff">For parents</div>
-        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Stay informed without hovering. TeenPilot gives you the overview you need without your teenager feeling watched — and the peace of mind that their digital world is genuinely safe. A helping hand for them. Confidence for you.</p>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Weekly AI briefing</strong> — what's coming up, what's overdue, exam dates, workload level. No logging into school portals. No asking "do you have homework?"</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Absence one-tap approval</strong> — Co-Pilot drafts the school email, you review and approve in seconds. School notified before roll call.</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Overdue alerts</strong> — know before the crisis conversation, not after. Co-Pilot flags it early so there's still time to help.</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Sport and schedule visibility</strong> — games, training, work shifts — all in one view. Always know where they are and what's coming up.</span></div>
-          <div style="height:1px;background:rgba(74,158,255,0.1);margin:4px 0"></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">🛡️</span><span><strong style="color:var(--text)">Safe by design</strong> — every message AI screened. No harmful content reaches your child. <a href="#safe" style="color:#4a9eff">See how it works →</a></span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Privacy respected</strong> — Co-Pilot conversations are never shared with parents. Trust is built, not broken.</span></div>
-        </div>
-      </div>
-
-      <div style="background:var(--bg);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius);padding:24px">
-        <div style="font-size:28px;margin-bottom:12px">📋</div>
-        <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:#fbbf24">For teachers</div>
-        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">See your class in context. Advanced gives teachers population-level insight — not individual surveillance, but genuine understanding of how your class is tracking.</p>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Class workload overview</strong> — see if your class is overwhelmed before assignments pile up</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Completion trends</strong> — which assignments are students struggling with across the class</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Exam pressure forecasting</strong> — AI flags when multiple assessments land in the same week</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Coming soon</strong> — teacher portal with class insights dashboard</span></div>
-        </div>
-      </div>
-
-      <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius);padding:24px">
-        <div style="font-size:28px;margin-bottom:12px">⚽</div>
-        <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:var(--purple)">For sports clubs</div>
-        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Replace the clunky team apps and endless WhatsApp threads. Advanced squad chat gives coaches and managers a proper coordination tool — with AI that helps the whole team plan.</p>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Team squad chat</strong> — safe, moderated, everyone in one place</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Fixture management</strong> — update once, everyone's calendar syncs automatically</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">@Co-Pilot for the team</strong> — "who's available Saturday?" AI checks and reports back</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Works for any club</strong> — football, netball, swimming, band, dance, gym, you name it</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">No more Team Reach</strong> — better features, built for the students already using it</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Live transport integration</strong> — players see exactly how to get to the venue, with live bus times and Google Maps directions in one tap</span></div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Pro vs Advanced vs Premium comparison -->
-    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:64px" class="reveal">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
-        <div style="font-family:var(--display);font-size:18px;font-weight:800">What actually changes at each tier</div>
-        <div style="font-size:13px;color:var(--textDim)">Haiku · Sonnet · Opus 4.8 · Fable 5</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden">
-        <div style="padding:18px;border-right:1px solid var(--border)">
-          <div style="font-size:12px;font-weight:700;color:var(--textDim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px">Free — get started</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span>💬</span>10 messages/day · Haiku 4.5</div>
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span>📖</span>Timetable and calendar</div>
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span>📚</span>Assignments tracker</div>
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span>💬</span>Squad chat</div>
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span>🎒</span>Sport + social calendar</div>
-          </div>
-        </div>
-        <div style="padding:18px;border-right:1px solid var(--border)">
-          <div style="font-size:12px;font-weight:700;color:var(--textMid);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px">Pro — answers when you ask</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span>💬</span>30 messages/day · Sonnet 4.6</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span>📚</span>Exam study plans</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span>📄</span>Document upload</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span>👨‍👩‍👦</span>Parent portal</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span>💬</span>Squad chat + DMs</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span>🎵</span>Avatar voices</div>
-          </div>
-        </div>
-        <div style="padding:20px;border-right:1px solid var(--border);background:rgba(167,139,250,0.04)">
-          <div style="font-size:13px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px">Advanced — acts before you ask</div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">🚀</span>60 messages/day · Opus 4.8</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>7am morning briefing — automatic</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Deadline risk alerts — unprompted</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Schedule auto-replanned</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Sick day handled end to end</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Live transport integration</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>AI gym + nutrition timing</div>
-          </div>
-        </div>
-        <div style="padding:20px;background:rgba(251,191,36,0.04)">
-          <div style="font-size:13px;font-weight:700;color:#fbbf24;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px">Premium ✨ — the full picture</div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>100 messages/day · Claude Fable 5</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Long-running study sessions</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Deep exam prep — full paper analysis</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>TeenPilot Academy — AI tutorials</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Voice calls — Co-Pilot speaks and listens</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Group video study sessions</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Advanced parent weekly briefing</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="agentic-intro">
-      <div>
-        <span class="section-label">A week in a student's life</span>
-        <h2 class="section-title reveal" style="margin-bottom:18px">Advanced &amp; Premium<br>in action.</h2>
-        <p style="font-size:17px;color:var(--textMid);line-height:1.85" class="reveal">Every one of these happened without the student doing anything. Advanced and Premium work in the background — so you can focus on living, not managing.</p>
-      </div>
-      <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:20px;padding:24px" class="reveal">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div>
-            <div style="font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Advanced does this automatically</div>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">↗</span>Monitors deadlines overnight</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">↗</span>Checks calendar for conflicts</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">↗</span>Rebuilds study plan when life changes</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">↗</span>Generates morning brief overnight</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">↗</span>Handles absence emails end to end</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">↗</span>Times nutrition around training</div>
-            </div>
-          </div>
-          <div>
-            <div style="font-size:12px;color:#fbbf24;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Premium adds Fable 5 power</div>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Works independently for hours</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Reads and analyses full exam papers</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Verifies its own work and corrections</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Leads interactive Academy tutorials</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Speaks and listens in voice calls</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Joins group video study sessions</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="font-family:var(--display);font-size:26px;font-weight:800;letter-spacing:-1px;margin-bottom:10px;text-align:center" class="reveal">A real week. Advanced in the background.</h3>
-    <p style="font-size:16px;color:var(--textMid);text-align:center;margin-bottom:52px" class="reveal">Every one of these happened automatically — no input from the student needed.</p>
-
-    <div class="moments reveal">
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">7:00am</div><div class="moment-time-day">Monday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">✈️ Morning Agent fired automatically</div>
-          <div class="moment-title">Daily flight plan delivered before school</div>
-          <div class="moment-desc">Co-Pilot analysed the timetable, sport, work and assignments overnight. Push notification arrived at 7am — before the alarm went off.</div>
-          <div class="moment-notification"><strong>Morning ✈️</strong> Today: English P1, Maths P3 (algebra test Thursday — revise tonight), Volleyball 4pm.<br>Tonight: 30 mins English essay intro, 45 mins Maths revision. You've got this.</div>
-          <div class="moment-tag">🚀 Advanced · Auto-generated · No input needed</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">3:45pm</div><div class="moment-time-day">Tuesday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">⚽ Fixture update</div>
-          <div class="moment-title">Football Saturday changed — Co-Pilot replanned</div>
-          <div class="moment-desc">Game updated: Field 2 → Field 3, 9:30am → 10:30am. Co-Pilot automatically adjusted Saturday's plan and moved the pre-game meal timing.</div>
-          <div class="moment-notification"><strong>Fixture updated ✓</strong> Saturday football now 10:30am Field 3. Pre-game meal moved to 8:45am. Friday evening kept light — early night recommended.</div>
-          <div class="moment-tag">🚀 Advanced · Calendar auto-updated · Study protected</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">4:15pm</div><div class="moment-time-day">Wednesday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">💼 New work shift added</div>
-          <div class="moment-title">New shift Thursday 2pm — week auto-replanned</div>
-          <div class="moment-desc">New shift added: Thursday 2pm–5pm. Co-Pilot spotted a conflict with planned Science study and automatically moved it without being asked.</div>
-          <div class="moment-notification"><strong>Shift added ✓</strong> Thu 2–5pm. Science study moved to Wednesday 7pm (you're free). Thursday morning kept for Maths revision before the shift.</div>
-          <div class="moment-tag">🚀 Advanced · Conflict detected · Auto-resolved</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">6:30pm</div><div class="moment-time-day">Thursday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">⚠️ Deadline risk alert</div>
-          <div class="moment-title">English essay at risk — Co-Pilot intervened</div>
-          <div class="moment-desc">English essay due Friday. Conclusion not started. Co-Pilot detected the risk and sent an unprompted alert — without being asked to check.</div>
-          <div class="moment-notification"><strong>⚠️ English essay due tomorrow.</strong> Intro and body done. Conclusion takes 20 minutes. You're free right now. Do it tonight — you'll thank yourself.</div>
-          <div class="moment-tag">🚀 Advanced · Unprompted · Genuine AI judgement</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">7:15am</div><div class="moment-time-day">Friday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">🤒 Sick day</div>
-          <div class="moment-title">Absence handled in 30 seconds</div>
-          <div class="moment-desc">Woke up unwell. Tapped "Not at school today" → selected Sick → Co-Pilot drafted a formal absence email. Parent got a notification, reviewed it, tapped approve. Done.</div>
-          <div class="moment-notification"><strong>Absence sent ✓</strong> Email to school office from parent's email. Student absent Friday — illness. School notified before roll call.</div>
-          <div class="moment-tag">🚀 Advanced · Parent approved · School notified</div>
-        </div>
-      </div>
-      <div class="moment">
-        <div class="moment-time"><div class="moment-time-label">8:45am</div><div class="moment-time-day">Saturday</div></div>
-        <div class="moment-dot"></div>
-        <div class="moment-card">
-          <div class="moment-trigger">✈️ Game day briefing</div>
-          <div class="moment-title">Game day — Co-Pilot prepared everything</div>
-          <div class="moment-desc">Pre-game notification with everything needed. Correct field, correct time, nutrition reminder, travel time. No searching, no forgetting.</div>
-          <div class="moment-notification"><strong>Game day ✈️</strong> Football 10:30am Field 3. Eat now — carbs, nothing heavy. Kit ready? Drive time: 20 mins. You trained 3x this week — good prep. Play well.</div>
-          <div class="moment-tag">🚀 Advanced · Sport-aware · Nutrition timed</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AVATARS -->
-<section class="avatars">
-  <div class="container">
-    <span class="section-label reveal">Co-Pilot styles</span>
-    <h2 class="section-title reveal">Pick your Co-Pilot. Make it yours.</h2>
-    <p class="section-sub reveal">Same powerful AI. Completely different personality. Choose who you actually want to talk to every day.</p>
-    <div class="avatars-grid reveal">
-      <div class="avatar-card" style="border-color:rgba(74,222,128,0.3)"><span class="avatar-emoji">✈️</span><div class="avatar-name">Co-Pilot</div><div class="avatar-style">Classic · Aviation</div><p class="avatar-quote">"Cleared for takeoff. Maths test Thursday — let's get that revision locked in tonight."</p></div>
-      <div class="avatar-card" style="border-color:rgba(244,114,182,0.4)"><span class="avatar-emoji">🎵</span><div class="avatar-name">Luna</div><div class="avatar-style">Music & Creative</div><p class="avatar-quote">"Every subject has its own rhythm. Let's find yours and make this revision flow."</p></div>
-      <div class="avatar-card" style="border-color:rgba(146,117,74,0.4)"><span class="avatar-emoji">🟫</span><div class="avatar-name">BlockBrain</div><div class="avatar-style">Minecraft</div><p class="avatar-quote">"That Science exam is a diamond-tier challenge. Let's mine through it before Thursday."</p></div>
-      <div class="avatar-card" style="border-color:rgba(239,68,68,0.3)"><span class="avatar-emoji">⚙️</span><div class="avatar-name">ARIA</div><div class="avatar-style">Iron Man AI</div><p class="avatar-quote">"Running the calculations. 48 minutes before training. Efficiency rating: use them."</p></div>
-      <div class="avatar-card" style="border-color:rgba(167,139,250,0.3)"><span class="avatar-emoji">⭐</span><div class="avatar-name">Hoshi-sensei</div><div class="avatar-style">Anime</div><p class="avatar-quote">"Today we begin an EPIC revision quest! Ganbatte — you've totally got this!"</p></div>
-      <div class="avatar-card" style="border-color:rgba(34,211,238,0.3)"><span class="avatar-emoji">🦕</span><div class="avatar-name">Rex</div><div class="avatar-style">Dino Tutor</div><p class="avatar-quote">"RAWR. My ancestors didn't study and look what happened. Let's not make that mistake."</p></div>
-      <div class="avatar-card" style="border-color:rgba(251,191,36,0.3)"><span class="avatar-emoji">🖥️</span><div class="avatar-name">Neo</div><div class="avatar-style">Retro Game</div><p class="avatar-quote">"ACHIEVEMENT UNLOCKED: Assignment submitted. +50 XP. Ready for the next level?"</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how" id="how" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-  <div class="container">
-    <span class="section-label reveal">Getting started</span>
-    <h2 class="section-title reveal">Up and running in 3 minutes.</h2>
-    <p class="section-sub reveal">No school approval. No IT department. No credit card. Just you and 3 minutes.</p>
-    <div class="how-steps">
-      <div class="how-step reveal"><div class="how-num">1</div><div class="how-title">Create your account</div><p class="how-desc">Sign up free with your email. No credit card, no school approval needed.</p></div>
-      <div class="how-step reveal"><div class="how-num">2</div><div class="how-title">Add your life</div><p class="how-desc">School, sport, work, fitness. Takes 3 minutes. The more you add, the smarter Co-Pilot gets.</p></div>
-      <div class="how-step reveal"><div class="how-num">3</div><div class="how-title">Connect your school</div><p class="how-desc">Sign in with Microsoft Teams or Google to pull assignments in automatically.</p></div>
-      <div class="how-step reveal"><div class="how-num">4</div><div class="how-title">Ask Co-Pilot</div><p class="how-desc">"What should I do tonight?" Co-Pilot looks at your whole week and tells you exactly where to focus.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- PARENTS -->
-<section class="parent-section" id="parents">
-  <div class="container">
 <!-- SAFE BY DESIGN -->
 <section id="safe" style="padding:90px 24px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="container">
     <span class="section-label reveal">Safe by design</span>
     <h2 class="section-title reveal">The safest place<br>for teenagers to chat.</h2>
     <p class="section-sub reveal">TeenPilot is the only platform where AI moderation is built into every conversation — squad chats, 1:1 direct messages and Co-Pilot. Not filtered after the fact. Stopped before it sends.</p>
-
-    <!-- Real AI explanation -->
     <div style="background:linear-gradient(135deg,#0f1a10,#0a1420);border:1px solid rgba(74,222,128,0.2);border-radius:var(--radius);padding:28px;margin-bottom:28px" class="reveal">
       <div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap">
         <div style="flex:1;min-width:240px">
           <div style="font-size:12px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">What Co-Pilot actually is</div>
           <h3 style="font-family:var(--display);font-size:22px;font-weight:800;margin-bottom:12px">Real AI. Not a chatbot.</h3>
-          <p style="font-size:15px;color:var(--textMid);line-height:1.8;margin-bottom:12px">Co-Pilot is powered by Claude — the frontier AI model built by Anthropic, one of the world's leading AI safety companies. This is the same class of AI used by researchers, doctors and engineers. Not scripted responses. Not keyword matching. Genuine reasoning and genuine understanding.</p>
+          <p style="font-size:15px;color:var(--textMid);line-height:1.8;margin-bottom:12px">Co-Pilot is powered by Claude — the frontier AI model built by Anthropic, one of the world's leading AI safety companies. Not scripted responses. Not keyword matching. Genuine reasoning and understanding.</p>
           <p style="font-size:15px;color:var(--textMid);line-height:1.8">When your child asks Co-Pilot to build a study plan, break down an assignment or plan their week — it actually understands what they need. And it knows when to support, and when to point to a real person.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;min-width:200px">
@@ -870,91 +477,54 @@
         </div>
       </div>
     </div>
-
-    <!-- Moderation across all chat types -->
     <div style="background:var(--bg);border:1px solid rgba(248,113,113,0.2);border-radius:var(--radius);padding:28px;margin-bottom:28px" class="reveal">
       <div style="font-size:12px;color:#f87171;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">AI content moderation — every conversation type</div>
       <h3 style="font-family:var(--display);font-size:20px;font-weight:800;margin-bottom:16px">Every message. Every image. Before it reaches anyone.</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:20px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px">
-          <div style="font-size:20px;margin-bottom:8px">💬</div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Squad chats</div>
-          <p style="font-size:13px;color:var(--textMid);line-height:1.7">Every message and image screened before delivery to any member. No harmful content gets through.</p>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px">
-          <div style="font-size:20px;margin-bottom:8px">💌</div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">1:1 Direct Messages <span style="color:var(--textDim);font-weight:400">(coming soon)</span></div>
-          <p style="font-size:13px;color:var(--textMid);line-height:1.7">Private messages carry the same AI moderation. No exceptions, no workarounds.</p>
-        </div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px">
-          <div style="font-size:20px;margin-bottom:8px">✈️</div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Co-Pilot conversations</div>
-          <p style="font-size:13px;color:var(--textMid);line-height:1.7">Built on safety-first AI. Will not produce harmful content. Designed to recognise when a student needs real support.</p>
-        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px"><div style="font-size:20px;margin-bottom:8px">💬</div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Squad chats</div><p style="font-size:13px;color:var(--textMid);line-height:1.7">Every message and image screened before delivery. No harmful content gets through.</p></div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px"><div style="font-size:20px;margin-bottom:8px">💌</div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">1:1 Direct Messages</div><p style="font-size:13px;color:var(--textMid);line-height:1.7">Private messages carry the same AI moderation. No exceptions, no workarounds.</p></div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px"><div style="font-size:20px;margin-bottom:8px">✈️</div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Co-Pilot conversations</div><p style="font-size:13px;color:var(--textMid);line-height:1.7">Built on safety-first AI. Will not produce harmful content. Recognises when a student needs real support.</p></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:#f87171">🛡️</span><span><strong style="color:var(--text)">AI content moderation</strong> — every message and image in squad chat screened by AI before it reaches anyone. Nude images, violent content and serious threats blocked automatically. Not filtered after — stopped before it sends.</span></div>
+        <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:#f87171">🛡️</span><span><strong style="color:var(--text)">AI content moderation</strong> — every message and image screened before it reaches anyone. Nude images, violent content and serious threats blocked automatically. Not filtered after — stopped before it sends.</span></div>
         <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:#f87171">🛡️</span><span><strong style="color:var(--text)">No harmful content reaches your child</strong> — TeenPilot is the only student messaging platform with AI moderation built in as a core feature, not an afterthought.</span></div>
         <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:#f87171">🛡️</span><span><strong style="color:var(--text)">Meets proposed digital safety standards</strong> — as governments move to mandate content moderation for under-18s, TeenPilot already complies. Recommend it to other parents with confidence.</span></div>
         <div style="display:flex;gap:10px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span><span><strong style="color:var(--text)">Privacy respected</strong> — Co-Pilot conversations and wellbeing check-ins are never shared with parents. Your child has their space. You have your overview. Trust is built, not broken.</span></div>
       </div>
     </div>
-
-    <!-- Audience cards -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:28px" class="reveal">
-      <div style="background:var(--bg);border:1px solid rgba(74,222,128,0.2);border-radius:var(--radius);padding:22px">
-        <div style="font-size:26px;margin-bottom:10px">🎒</div>
-        <div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For students</div>
-        <p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">Express yourself freely. Your banter, humour and culture are welcome. TeenPilot doesn't police normal teen conversation — it stops content that could genuinely hurt someone.</p>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span>Normal chat, slang and banter — all fine</div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span>You'll know if something is blocked and why</div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span>No one can send you content you don't want</div>
-        </div>
-      </div>
-      <div style="background:var(--bg);border:1px solid rgba(74,158,255,0.2);border-radius:var(--radius);padding:22px">
-        <div style="font-size:26px;margin-bottom:10px">👨‍👩‍👦</div>
-        <div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For parents</div>
-        <p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">Every image screened before delivery. Harmful content blocked before anyone sees it. Secured by Oracle Cloud — enterprise-grade infrastructure, data stored in NZ/AU, never sold.</p>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>Every message and image AI screened</div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>No nude images can be sent or received</div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>NZ Privacy Act 2020 compliant</div>
-        </div>
-      </div>
-      <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius);padding:22px">
-        <div style="font-size:26px;margin-bottom:10px">🏫</div>
-        <div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For schools</div>
-        <p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">TeenPilot already meets the standards governments are moving to mandate. Safe messaging is core, not an add-on. Recommend it to parents with confidence.</p>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Meets proposed UK and NZ digital safety standards</div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>No school liability from student messaging</div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Recommend to parents with confidence</div>
-        </div>
-      </div>
+      <div style="background:var(--bg);border:1px solid rgba(74,222,128,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px">🎒</div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For students</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">Express yourself freely. Your banter, humour and culture are welcome. TeenPilot doesn't police normal teen conversation — it stops content that could genuinely hurt someone.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span>Normal chat, slang and banter — all fine</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span>You'll know if something is blocked and why</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span>No one can send you content you don't want</div></div></div>
+      <div style="background:var(--bg);border:1px solid rgba(74,158,255,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px">👨‍👩‍👦</div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For parents</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">Every image screened before delivery. Harmful content blocked before anyone sees it. Secured by Oracle Cloud — data stored in NZ/AU, never sold.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>Every message and image AI screened</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>No nude images can be sent or received</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>NZ Privacy Act 2020 compliant</div></div></div>
+      <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px">🏫</div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For schools</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">TeenPilot already meets the standards governments are moving to mandate. Safe messaging is core, not an add-on.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Meets proposed UK and NZ digital safety standards</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>No school liability from student messaging</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Recommend to parents with confidence</div></div></div>
     </div>
-
-    <!-- How it works -->
     <div style="background:linear-gradient(135deg,rgba(61,255,143,0.04),rgba(74,158,255,0.04));border:1px solid rgba(61,255,143,0.15);border-radius:var(--radius);padding:24px;text-align:center" class="reveal">
       <div style="font-family:var(--display);font-size:18px;font-weight:800;margin-bottom:8px">How moderation works</div>
-      <p style="font-size:15px;color:var(--textMid);max-width:540px;margin:0 auto 16px;line-height:1.7">Under a second. Invisible when safe. Clear feedback when blocked. Works across all three conversation types.</p>
+      <p style="font-size:15px;color:var(--textMid);max-width:540px;margin:0 auto 16px;line-height:1.7">Under a second. Invisible when safe. Clear feedback when blocked.</p>
       <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--textMid)">
-        <span>✈️ Message sent</span>
-        <span style="color:var(--textDim)">→</span>
-        <span>🤖 AI screens &lt;1 second</span>
-        <span style="color:var(--textDim)">→</span>
-        <span style="color:var(--accent)">✓ Safe — delivered instantly</span>
-        <span style="color:var(--textDim)">or</span>
-        <span style="color:#f87171">✗ Blocked — sender told why</span>
+        <span>✈️ Message sent</span><span style="color:var(--textDim)">→</span><span>🤖 AI screens &lt;1 second</span><span style="color:var(--textDim)">→</span><span style="color:var(--accent)">✓ Safe — delivered</span><span style="color:var(--textDim)">or</span><span style="color:#f87171">✗ Blocked — sender told why</span>
       </div>
     </div>
-
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
+<section class="how" id="how" style="background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <span class="section-label reveal">Getting started</span>
+    <h2 class="section-title reveal">Up and running in 3 minutes.</h2>
+    <p class="section-sub reveal">No school approval. No IT department. No credit card. Just you and 3 minutes.</p>
+    <div class="how-steps">
+      <div class="how-step reveal"><div class="how-num">1</div><div class="how-title">Create your account</div><p class="how-desc">Sign up free with your email. No credit card, no school approval needed.</p></div>
+      <div class="how-step reveal"><div class="how-num">2</div><div class="how-title">Add your life</div><p class="how-desc">School, sport, work, fitness. Takes 3 minutes. The more you add, the smarter Co-Pilot gets.</p></div>
+      <div class="how-step reveal"><div class="how-num">3</div><div class="how-title">Connect your school</div><p class="how-desc">Sign in with Microsoft Teams or Google to pull assignments in automatically.</p></div>
+      <div class="how-step reveal"><div class="how-num">4</div><div class="how-title">Ask Co-Pilot</div><p class="how-desc">"What should I do tonight?" Co-Pilot looks at your whole week and tells you exactly where to focus.</p></div>
+    </div>
+  </div>
+</section>
 
-
-
+<!-- PARENTS -->
+<section class="parent-section" id="parents">
+  <div class="container">
     <div class="parent-inner">
       <div>
         <span class="section-label reveal">For parents</span>
@@ -984,7 +554,7 @@
         <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(248,113,113,0.15);border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:10px">
           <div style="font-size:10px;color:#f87171;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">📝 Upcoming exam</div>
           <div style="font-weight:600;font-size:13px">Science · Wed this week · 6 days</div>
-          <div style="font-size:11px;color:var(--textMid);margin-top:2px">Chapters 4 & 5 · Study plan active</div>
+          <div style="font-size:11px;color:var(--textMid);margin-top:2px">Chapters 4 &amp; 5 · Study plan active</div>
         </div>
         <div class="mock-brief">
           <div style="font-size:10px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">✈️ Co-Pilot's weekly briefing</div>
@@ -1002,11 +572,11 @@
       <div>
         <span class="section-label reveal">For schools</span>
         <h2 class="section-title reveal">The AI layer your students already want.</h2>
-        <p style="font-size:17px;color:var(--textMid);line-height:1.85;margin-bottom:24px" class="reveal">TeenPilot works without school involvement — but works better with it. Schools get a population-level dashboard showing workload, wellbeing trends and engagement. No individual data. No privacy issues.</p>
+        <p style="font-size:17px;color:var(--textMid);line-height:1.85;margin-bottom:24px" class="reveal">TeenPilot works without school involvement — but works better with it. Schools get a population-level dashboard showing workload, wellbeing trends and engagement.</p>
         <div class="schools-features reveal">
           <div class="school-feat"><div class="school-feat-icon">📊</div><div><div class="school-feat-title">School dashboard</div><div class="school-feat-desc">Workload trends, XP engagement levels, wellbeing mood data — all anonymised and aggregated.</div></div></div>
           <div class="school-feat"><div class="school-feat-icon">🔒</div><div><div class="school-feat-title">Privacy first</div><div class="school-feat-desc">Student conversations and wellbeing check-ins are never visible to school admin. Compliant with NZ Privacy Act 2020.</div></div></div>
-          <div class="school-feat"><div class="school-feat-icon">🏫</div><div><div class="school-feat-title">KAMAR integration</div><div class="school-feat-desc">Timetable, cycle days and NCEA credits sync automatically when school approves API access. Students onboard in seconds.</div></div></div>
+          <div class="school-feat"><div class="school-feat-icon">🏫</div><div><div class="school-feat-title">KAMAR integration</div><div class="school-feat-desc">Timetable, cycle days and NCEA credits sync automatically when school approves API access.</div></div></div>
           <div class="school-feat"><div class="school-feat-icon">💙</div><div><div class="school-feat-title">Wellbeing support</div><div class="school-feat-desc">Co-Pilot surfaces NZ mental health resources when students are struggling — always pointing to real human support.</div></div></div>
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -1048,16 +618,14 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="container">
     <span class="section-label reveal">Pricing</span>
     <h2 class="section-title reveal">One app. Every part of student life.</h2>
-    <p class="section-sub reveal">Try the demo first — no account needed. Create a free account and get 10 Co-Pilot messages every day. Upgrade when you're ready. There's a plan for every student.</p>
+    <p class="section-sub reveal">Try the demo first — no account needed. Create a free account and get 10 Co-Pilot messages every day. Upgrade when you're ready.</p>
     <div style="display:flex;justify-content:center;margin-bottom:32px" class="reveal">
-      <a href="https://app.teenpilot.co.nz" target="_blank"
-        style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0f1a10,#0a1420);border:1px solid rgba(74,222,128,0.25);border-radius:14px;padding:14px 24px;text-decoration:none">
+      <a href="https://app.teenpilot.co.nz" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0f1a10,#0a1420);border:1px solid rgba(74,222,128,0.25);border-radius:14px;padding:14px 24px;text-decoration:none">
         <span style="font-size:22px">✈️</span>
         <div>
           <div style="font-family:var(--display);font-weight:700;font-size:15px;color:var(--text)">Try the demo first</div>
@@ -1101,7 +669,7 @@
           <li>Voice input · Read aloud</li>
           <li>Microsoft Teams + Google sync</li>
           <li>Parent portal included</li>
-          <li>All 6 Co-Pilot styles</li>
+          <li>All 7 Co-Pilot avatar styles</li>
         </ul>
         <a href="https://app.teenpilot.co.nz" class="price-btn primary" target="_blank">Start free trial</a>
       </div>
@@ -1125,7 +693,6 @@
         </ul>
         <a href="https://app.teenpilot.co.nz" class="price-btn purple" target="_blank">Try Advanced</a>
       </div>
-
       <div class="price-card" style="border:1px solid rgba(251,191,36,0.3);background:linear-gradient(135deg,rgba(251,191,36,0.04),rgba(251,146,60,0.04))">
         <div class="price-badge" style="background:linear-gradient(135deg,#fbbf24,#fb923c);color:#050d08">Premium ✨</div>
         <div class="price-plan" style="color:#fbbf24">Premium</div>
@@ -1157,30 +724,16 @@
 <div style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 24px">
   <div class="container">
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:28px;align-items:center">
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)">
-        <span style="font-size:18px">🔒</span>
-        <span><strong style="color:var(--text)">Oracle Cloud Infrastructure</strong> · Enterprise-grade security</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)">
-        <span style="font-size:18px">🛡️</span>
-        <span><strong style="color:var(--text)">AI Content Moderation</strong> · Every message screened</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)">
-        <span style="font-size:18px">🏛️</span>
-        <span><strong style="color:var(--text)">NZ Privacy Act 2020</strong> · Compliant by design</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)">
-        <span style="font-size:18px">🤖</span>
-        <span><strong style="color:var(--text)">Powered by Anthropic Claude</strong> · Leading AI safety research</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)">
-        <span style="font-size:18px">🇳🇿</span>
-        <span><strong style="color:var(--text)">Data stored in NZ/AU</strong> · Never sold, never shared</span>
-      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px">🔒</span><span><strong style="color:var(--text)">Oracle Cloud Infrastructure</strong> · Enterprise-grade security</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px">🛡️</span><span><strong style="color:var(--text)">AI Content Moderation</strong> · Every message screened</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px">🏛️</span><span><strong style="color:var(--text)">NZ Privacy Act 2020</strong> · Compliant by design</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px">🤖</span><span><strong style="color:var(--text)">Powered by Anthropic Claude</strong> · Leading AI safety research</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px">🇳🇿</span><span><strong style="color:var(--text)">Data stored in NZ/AU</strong> · Never sold, never shared</span></div>
     </div>
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div>
@@ -1212,15 +765,11 @@
   </div>
   <div class="footer-bottom">
     <div class="footer-copy">© 2026 TeenPilot · A product of Agentec Ltd · Auckland, New Zealand · <span style="color:var(--accent)">Secured by Oracle Cloud Infrastructure</span></div>
-    <div class="footer-legal">
-      <a href="#privacy">Privacy</a>
-      <a href="#terms">Terms</a>
-      <a href="mailto:hello@teenpilot.co.nz">Contact</a>
-    </div>
+    <div class="footer-legal"><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="mailto:hello@teenpilot.co.nz">Contact</a></div>
   </div>
 </footer>
 
-<!-- PRIVACY POLICY (inline, anchor linked) -->
+<!-- PRIVACY -->
 <div id="privacy" style="background:var(--surface);border-top:1px solid var(--border);">
   <div class="policy-page">
     <h1>Privacy Policy</h1>
@@ -1242,7 +791,7 @@
   </div>
 </div>
 
-<!-- TERMS (inline) -->
+<!-- TERMS -->
 <div id="terms" style="background:var(--bg);border-top:1px solid var(--border);">
   <div class="policy-page">
     <h1>Terms of Use</h1>
@@ -1250,11 +799,11 @@
     <h2>Using TeenPilot</h2>
     <p>TeenPilot is designed for secondary school students aged 13 and over. By using TeenPilot you agree to use it honestly and responsibly.</p>
     <h2>Free and paid plans</h2>
-    <p>The free plan is available with no time limit. Paid plans (Pro and Advanced) are billed monthly or annually in NZD. You can cancel at any time — no refunds for partial months.</p>
+    <p>The free plan is available with no time limit. Paid plans are billed monthly or annually in NZD. You can cancel at any time — no refunds for partial months.</p>
     <h2>Fair use</h2>
     <p>Message limits apply per plan. We reserve the right to suspend accounts that abuse the service or attempt to circumvent limits.</p>
     <h2>AI-generated content</h2>
-    <p>Co-Pilot responses are AI-generated and for guidance only. They are not a substitute for professional academic, medical or mental health advice. Always refer to a trusted adult or professional for serious matters.</p>
+    <p>Co-Pilot responses are AI-generated and for guidance only. They are not a substitute for professional academic, medical or mental health advice.</p>
     <h2>Wellbeing</h2>
     <p>TeenPilot provides links to NZ mental health resources. In a crisis, please contact What's Up (0800 942 8787), Youthline (0800 376 633) or 1737.</p>
     <h2>Contact</h2>
@@ -1263,13 +812,10 @@
 </div>
 
 <script>
-  // Scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const t = document.querySelector(a.getAttribute('href'));
