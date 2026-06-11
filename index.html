@@ -512,12 +512,19 @@
         <h2 class="section-title reveal" style="margin-bottom:18px">Advanced &amp; Premium<br>in action.</h2>
         <p style="font-size:17px;color:var(--textMid);line-height:1.85" class="reveal">A week where the AI worked and you didn't. Tap through it.</p>
         <div class="dl-chips reveal" id="wkChips" style="margin:26px 0 20px"></div>
-        <div class="wk-stage reveal">
-          <div id="wkBadge" class="wk-badge adv">Advanced</div>
-          <div class="dl-icon" id="wkIcon"><i class="ti ti-sunrise"></i></div>
-          <div class="dl-line" id="wkLine"></div>
-          <div class="dl-sub" id="wkSub"></div>
-          <div class="wk-none">YOUR INPUT: NONE</div>
+        <div class="wk-stage reveal" style="max-width:640px;text-align:left">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div><span id="wkTime" style="font-family:var(--display);font-weight:800;font-size:15px;color:var(--text)"></span> <span id="wkDay" style="font-size:12px;color:var(--textDim);margin-left:6px;text-transform:uppercase;letter-spacing:1px"></span></div>
+            <div id="wkBadge" class="wk-badge adv" style="margin-bottom:0">Advanced</div>
+          </div>
+          <div id="wkTrig" style="font-size:12px;color:var(--accent);font-weight:700;margin-bottom:4px"></div>
+          <div class="dl-line" id="wkLine" style="font-size:18px"></div>
+          <div class="dl-sub" id="wkSub" style="margin-bottom:14px"></div>
+          <div style="background:#0d1320;border:1px solid var(--border2);border-radius:12px;padding:11px 13px;display:flex;gap:9px;align-items:flex-start">
+            <div style="width:26px;height:26px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#050d08;font-size:13px;flex-shrink:0"><i class="ti ti-plane-tilt"></i></div>
+            <div id="wkNote" style="font-size:12.5px;color:var(--textMid);line-height:1.55"></div>
+          </div>
+          <div id="wkTags" style="margin-top:12px;font-size:11px;color:var(--textDim);font-weight:700;letter-spacing:.5px;text-transform:uppercase"></div>
         </div>
       </div>
       <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:20px;padding:24px" class="reveal">
@@ -548,17 +555,6 @@
       </div>
     </div>
 
-    <!-- Week timeline -->
-    <h3 style="font-family:var(--display);font-size:26px;font-weight:800;letter-spacing:-1px;margin-bottom:10px;text-align:center" class="reveal">A real week. Advanced in the background.</h3>
-    <p style="font-size:16px;color:var(--textMid);text-align:center;margin-bottom:52px" class="reveal">Every one of these happened automatically — no input from the student needed.</p>
-    <div class="moments reveal">
-      <div class="moment"><div class="moment-time"><div class="moment-time-label">7:00am</div><div class="moment-time-day">Monday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger"><i class="ti ti-plane-tilt" style="color:var(--accent)"></i> Morning Agent fired automatically</div><div class="moment-title">Daily flight plan delivered before school</div><div class="moment-desc">Co-Pilot analysed the timetable, sport, work and assignments overnight. Push notification arrived at 7am — before the alarm went off.</div><div class="moment-notification"><strong>Morning <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></strong> Today: English P1, Maths P3 (algebra test Thursday — revise tonight), Volleyball 4pm.<br>Tonight: 30 mins English essay intro, 45 mins Maths revision. You've got this.</div><div class="moment-tag"><i class="ti ti-rocket" style="color:#a78bfa"></i> Advanced · Auto-generated · No input needed</div></div></div>
-      <div class="moment"><div class="moment-time"><div class="moment-time-label">3:45pm</div><div class="moment-time-day">Tuesday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger"><i class="ti ti-ball-football" style="color:var(--accent)"></i> Fixture update</div><div class="moment-title">Football Saturday changed — Co-Pilot replanned</div><div class="moment-desc">Game updated: Field 2 → Field 3, 9:30am → 10:30am. Co-Pilot automatically adjusted Saturday's plan and moved the pre-game meal timing.</div><div class="moment-notification"><strong>Fixture updated ✓</strong> Saturday football now 10:30am Field 3. Pre-game meal moved to 8:45am. Friday evening kept light — early night recommended.</div><div class="moment-tag"><i class="ti ti-rocket" style="color:#a78bfa"></i> Advanced · Calendar auto-updated · Study protected</div></div></div>
-      <div class="moment"><div class="moment-time"><div class="moment-time-label">4:15pm</div><div class="moment-time-day">Wednesday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger"><i class="ti ti-briefcase" style="color:#f97316"></i> New work shift added</div><div class="moment-title">New shift Thursday 2pm — week auto-replanned</div><div class="moment-desc">New shift added: Thursday 2pm–5pm. Co-Pilot spotted a conflict with planned Science study and automatically moved it without being asked.</div><div class="moment-notification"><strong>Shift added ✓</strong> Thu 2–5pm. Science study moved to Wednesday 7pm (you're free). Thursday morning kept for Maths revision before the shift.</div><div class="moment-tag"><i class="ti ti-rocket" style="color:#a78bfa"></i> Advanced · Conflict detected · Auto-resolved</div></div></div>
-      <div class="moment"><div class="moment-time"><div class="moment-time-label">6:30pm</div><div class="moment-time-day">Thursday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger"><i class="ti ti-alert-triangle" style="color:#fbbf24"></i> Deadline risk alert</div><div class="moment-title">English essay at risk — Co-Pilot intervened</div><div class="moment-desc">English essay due Friday. Conclusion not started. Co-Pilot detected the risk and sent an unprompted alert — without being asked to check.</div><div class="moment-notification"><strong><i class="ti ti-alert-triangle" style="color:#fbbf24"></i> English essay due tomorrow.</strong> Intro and body done. Conclusion takes 20 minutes. You're free right now. Do it tonight — you'll thank yourself.</div><div class="moment-tag"><i class="ti ti-rocket" style="color:#a78bfa"></i> Advanced · Unprompted · Genuine AI judgement</div></div></div>
-      <div class="moment"><div class="moment-time"><div class="moment-time-label">7:15am</div><div class="moment-time-day">Friday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger"><i class="ti ti-thermometer" style="color:#fbbf24"></i> Sick day</div><div class="moment-title">Absence handled in 30 seconds</div><div class="moment-desc">Woke up unwell. Tapped "Not at school today" → selected Sick → Co-Pilot drafted a formal absence email. Parent got a notification, reviewed it, tapped approve. Done.</div><div class="moment-notification"><strong>Absence sent ✓</strong> Email to school office from parent's email. Student absent Friday — illness. School notified before roll call.</div><div class="moment-tag"><i class="ti ti-rocket" style="color:#a78bfa"></i> Advanced · Parent approved · School notified</div></div></div>
-      <div class="moment"><div class="moment-time"><div class="moment-time-label">8:45am</div><div class="moment-time-day">Saturday</div></div><div class="moment-dot"></div><div class="moment-card"><div class="moment-trigger"><i class="ti ti-plane-tilt" style="color:var(--accent)"></i> Game day briefing</div><div class="moment-title">Game day — Co-Pilot prepared everything</div><div class="moment-desc">Pre-game notification with everything needed. Correct field, correct time, nutrition reminder, travel time. No searching, no forgetting.</div><div class="moment-notification"><strong>Game day <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></strong> Football 10:30am Field 3. Eat now — carbs, nothing heavy. Kit ready? Drive time: 20 mins. You trained 3x this week — good prep. Play well.</div><div class="moment-tag"><i class="ti ti-rocket" style="color:#a78bfa"></i> Advanced · Sport-aware · Nutrition timed</div></div></div>
-    </div>
   </div>
 </section>
 
@@ -1056,20 +1052,6 @@
     dlShow(0);
     dlTimer=setInterval(()=>{ if(!dlTouched) dlShow((dlIdx+1)%DAY.length); },3200);
   }
-  // ── Collapse long story grids: show 2, expand on demand ──
-  const agSec=document.querySelector(".agentic");
-  if(agSec){
-    const grids=[...agSec.querySelectorAll("div")].filter(d=>d.children.length>=4 && [...d.children].every(ch=>ch.tagName==="DIV"));
-    const grid=grids.sort((a,b)=>b.children.length-a.children.length)[0];
-    if(grid && grid.children.length>2){
-      const kids=[...grid.children];
-      kids.slice(2).forEach(k=>k.style.display="none");
-      const btn=document.createElement("button"); btn.className="more-btn"; btn.textContent="More stories ↓";
-      let open=false;
-      btn.onclick=()=>{ open=!open; kids.slice(2).forEach(k=>k.style.display=open?"":"none"); btn.textContent=open?"Show less ↑":"More stories ↓"; };
-      grid.parentNode.insertBefore(btn, grid.nextSibling);
-    }
-  }
 
   const AV_META={
     copilot:["Classic · Aviation","Cleared for takeoff. Maths test Thursday — let's get that revision locked in tonight."],
@@ -1109,27 +1091,29 @@
 
   // ── Agentic week timeline ──
   const WEEK=[
-    ["Mon","adv","sunrise","7am brief — before you woke","Morning agent read your timetable, weather and training, then briefed your whole day. You were still asleep."],
-    ["Tue","adv","bus-stop","Bus cancelled — replanned","AT cancelled the 3:24. Your afternoon was re-routed and your study block moved before you reached the gate."],
-    ["Wed","adv","thermometer","Sick day — handled","You tapped 'unwell'. A parent got one-tap approval, school was notified, and missed work was queued for later."],
-    ["Thu","adv","alert-triangle","Deadline risk — caught early","English essay was trending late. Co-Pilot flagged it 3 days out and rebuilt the plan. Crisis cancelled."],
-    ["Fri","adv","ball-volleyball","Training moved — so did your week","Coach shifted practice to 5pm. Study, dinner and bus times re-shuffled themselves in seconds."],
-    ["Sat","prem","file-analytics","Fable 5 deep prep","Premium analysed your uploaded past paper, found your weak topics, and built a full revision plan from them."],
-    ["Sun","prem","mail-heart","Parents briefed · week loaded","A weekly AI summary reached your parents, and next week's flight plan is already built."]
+    ["Mon","7:00am","adv","Morning Agent fired automatically","Daily flight plan delivered before school","Co-Pilot analysed the timetable, sport, work and assignments overnight. The push arrived at 7am — before the alarm went off.","Today: English P1, Maths P3 (algebra test Thursday — revise tonight), Volleyball 4pm. Tonight: 30 mins essay intro, 45 mins Maths. You've got this.","Advanced · Auto-generated · No input needed"],
+    ["Tue","3:45pm","adv","Fixture update","Football Saturday changed — Co-Pilot replanned","Game moved: Field 2 → 3, 9:30 → 10:30am. Saturday's plan and the pre-game meal moved themselves.","Fixture updated ✓ Saturday football now 10:30am Field 3. Pre-game meal 8:45am. Friday kept light — early night recommended.","Advanced · Calendar auto-updated · Study protected"],
+    ["Wed","4:15pm","adv","New work shift added","New shift Thursday 2pm — week auto-replanned","Co-Pilot spotted the clash with planned Science study and moved it. Nobody asked it to.","Shift added ✓ Thu 2–5pm. Science study → Wednesday 7pm (you're free). Thursday morning kept for Maths revision.","Advanced · Conflict detected · Auto-resolved"],
+    ["Thu","6:30pm","adv","Deadline risk alert","English essay at risk — Co-Pilot intervened","Essay due Friday, conclusion not started. Co-Pilot detected the risk and sent an unprompted alert.","English essay due tomorrow. Intro and body done. Conclusion takes 20 minutes — you're free right now. Do it tonight.","Advanced · Unprompted · Genuine AI judgement"],
+    ["Fri","7:15am","adv","Sick day","Absence handled in 30 seconds","Woke up unwell → tapped 'Not at school' → parent approved with one tap. Done before roll call.","Absence sent ✓ Formal email to school office from parent's email. Student absent Friday — illness.","Advanced · Parent approved · School notified"],
+    ["Sat","8:45am","adv","Game day briefing","Game day — Co-Pilot prepared everything","Correct field, correct time, nutrition, travel — one notification. No searching, no forgetting.","Game day ✓ Football 10:30am Field 3. Eat now — carbs, nothing heavy. Drive: 20 mins. You trained 3x this week. Play well.","Advanced · Sport-aware · Nutrition timed"],
+    ["Sun","6:00pm","prem","Fable 5 weekly wrap","Parents briefed · next week pre-built","Premium's Fable 5 analysed the week, built next week's plan, and sent parents a clear AI summary.","Weekly wrap ✓ 4 study blocks completed, essay submitted, game won. Next week's flight plan is live. Parent briefing sent.","Premium · Fable 5 · Fully autonomous"]
   ];
-  const wkChips=document.getElementById("wkChips"),wkB=document.getElementById("wkBadge"),wkI=document.getElementById("wkIcon"),wkL=document.getElementById("wkLine"),wkS=document.getElementById("wkSub");
+  const wkChips=document.getElementById("wkChips"),wkB=document.getElementById("wkBadge"),wkL=document.getElementById("wkLine"),wkS=document.getElementById("wkSub");
+  const wkT=document.getElementById("wkTime"),wkD=document.getElementById("wkDay"),wkTr=document.getElementById("wkTrig"),wkN=document.getElementById("wkNote"),wkTg=document.getElementById("wkTags");
   let wkIdx=0, wkTouched=false, wkTimer=null;
   function wkShow(i){
-    wkIdx=i; const [d,tier,icon,line,sub]=WEEK[i];
+    wkIdx=i; const [d,time,tier,trig,line,sub,note,tags]=WEEK[i];
+    wkT.textContent=time; wkD.textContent=d+"DAY".replace("DAY",""); wkD.textContent={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday",Sat:"Saturday",Sun:"Sunday"}[d];
     wkB.textContent = tier==="prem" ? "Premium · Fable 5" : "Advanced";
     wkB.className = "wk-badge " + (tier==="prem"?"prem":"adv");
-    wkI.innerHTML='<i class="ti ti-'+icon+'"></i>'; wkL.textContent=line; wkS.textContent=sub;
+    wkTr.textContent=trig; wkL.textContent=line; wkS.textContent=sub; wkN.textContent=note; wkTg.textContent=tags;
     [...wkChips.children].forEach((ch,j)=>ch.classList.toggle("on",j===i));
   }
   if(wkChips){
     WEEK.forEach(([d],i)=>{ const b=document.createElement("button"); b.className="dl-chip"; b.textContent=d; b.onclick=()=>{wkTouched=true; clearInterval(wkTimer); wkShow(i);}; wkChips.appendChild(b); });
     wkShow(0);
-    wkTimer=setInterval(()=>{ if(!wkTouched) wkShow((wkIdx+1)%WEEK.length); },3400);
+    wkTimer=setInterval(()=>{ if(!wkTouched) wkShow((wkIdx+1)%WEEK.length); },4200);
   }
   takeover(curAv, false);
 </script>
