@@ -7,6 +7,7 @@
   <meta name="description" content="The AI co-pilot for NZ secondary school students. School, sport, work and life — all in one place. Free to start."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -179,6 +180,32 @@
     .policy-page p { font-size: 16px; color: var(--textMid); line-height: 1.8; margin-bottom: 16px; }
     .policy-page ul { padding-left: 20px; color: var(--textMid); font-size: 16px; line-height: 1.8; margin-bottom: 16px; }
     .policy-page a { color: var(--accent); text-decoration: none; }
+
+    /* ── Avatar tiles + voice ── */
+    .av-tile{width:58px;height:58px;border-radius:17px;background:var(--bg);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:27px;border:1px solid var(--border2)}
+    .av-hero{background:var(--accent)!important;border:none!important;color:#050d08!important}
+    .voice-btn{margin-top:12px;background:transparent;border:1px solid var(--border2);color:var(--textMid);font-size:12px;font-weight:600;padding:6px 12px;border-radius:100px;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:5px;transition:all .2s}
+    .voice-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .voice-btn.playing{background:rgba(74,222,128,.1);border-color:var(--accent);color:var(--accent)}
+    /* ── Hero plane ── */
+    .hero-plane{position:absolute;top:64%;left:-60px;font-size:30px;color:var(--accent);opacity:0;animation:heroFly 9s ease-in-out 1.2s infinite;z-index:0;pointer-events:none}
+    @keyframes heroFly{0%{left:-60px;top:64%;opacity:0}6%{opacity:.8}48%{opacity:.8}58%{left:105%;top:10%;opacity:0}100%{left:105%;top:10%;opacity:0}}
+    /* ── Hero phone demo ── */
+    .hero-phone{max-width:330px;margin:44px auto 0;background:#0d1320;border:1px solid var(--border2);border-radius:26px;padding:14px;position:relative;z-index:1;box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 44px rgba(74,222,128,.07);text-align:left}
+    .hp-head{display:flex;align-items:center;gap:9px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+    .hp-tile{width:30px;height:30px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#050d08;font-size:15px}
+    .hp-name{font-family:var(--display);font-weight:700;font-size:13px;color:var(--text)}
+    .hp-status{font-size:10px;color:var(--accent)}
+    .hp-body{padding:12px 2px 2px;min-height:158px;display:flex;flex-direction:column;gap:8px}
+    .hp-msg{max-width:86%;padding:8px 11px;border-radius:13px;font-size:12.5px;line-height:1.5;opacity:0;transform:translateY(8px);transition:all .35s}
+    .hp-msg.show{opacity:1;transform:none}
+    .hp-me{align-self:flex-end;background:rgba(74,222,128,.14);border:1px solid rgba(74,222,128,.25);color:var(--text)}
+    .hp-ai{align-self:flex-start;background:var(--surface);border:1px solid var(--border);color:var(--textMid)}
+    .hp-typing{align-self:flex-start;display:none;gap:3px;padding:9px 12px}
+    .hp-typing.show{display:flex}
+    .hp-typing span{width:5px;height:5px;border-radius:50%;background:var(--textDim);animation:hpDot 1s infinite}
+    .hp-typing span:nth-child(2){animation-delay:.15s}.hp-typing span:nth-child(3){animation-delay:.3s}
+    @keyframes hpDot{0%,100%{opacity:.25}50%{opacity:1}}
   </style>
 </head>
 <body>
@@ -214,6 +241,7 @@
 <section class="hero">
   <div class="glow glow-1"></div>
   <div class="glow glow-2"></div>
+  <div class="hero-plane"><i class="ti ti-plane-tilt"></i></div>
   <div class="hero-badge"><div class="badge-dot"></div>Built for NZ secondary school students</div>
   <h1>Never fall<br>behind <em>again.</em></h1>
   <p class="hero-sub">School. Sport. Gym. Work. Friends. Music. Transport. Life. TeenPilot is the AI co-pilot that connects everything a teenager goes through — and tells you exactly what to do, before you have to ask.</p>
@@ -223,6 +251,10 @@
   </div>
   <div style="font-size:15px;color:var(--textMid);margin-bottom:8px;position:relative;z-index:1;font-style:italic">A helping hand in a busy life.</div>
   <div class="hero-note">Free to start · No credit card · No school approval needed</div>
+  <div class="hero-phone reveal visible">
+    <div class="hp-head"><div class="hp-tile"><i class="ti ti-plane-tilt"></i></div><div><div class="hp-name">Co-Pilot</div><div class="hp-status">&#9679; online &middot; knows your week</div></div></div>
+    <div class="hp-body" id="hpBody"></div>
+  </div>
 </section>
 
 <!-- STORY BANNER -->
@@ -444,13 +476,14 @@
     <h2 class="section-title reveal">Pick your Co-Pilot. Make it yours.</h2>
     <p class="section-sub reveal">Same powerful AI. Completely different personality. Choose who you actually want to talk to every day.</p>
     <div class="avatars-grid reveal">
-      <div class="avatar-card" style="border-color:rgba(74,222,128,0.3)"><span class="avatar-emoji">✈️</span><div class="avatar-name">Co-Pilot</div><div class="avatar-style">Classic · Aviation</div><p class="avatar-quote">"Cleared for takeoff. Maths test Thursday — let's get that revision locked in tonight."</p></div>
-      <div class="avatar-card" style="border-color:rgba(244,114,182,0.4)"><span class="avatar-emoji">🎵</span><div class="avatar-name">Luna</div><div class="avatar-style">Music &amp; Creative</div><p class="avatar-quote">"Every subject has its own rhythm. Let's find yours and make this revision flow."</p></div>
-      <div class="avatar-card" style="border-color:rgba(146,117,74,0.4)"><span class="avatar-emoji">🟫</span><div class="avatar-name">BlockBrain</div><div class="avatar-style">Minecraft</div><p class="avatar-quote">"That Science exam is a diamond-tier challenge. Let's mine through it before Thursday."</p></div>
-      <div class="avatar-card" style="border-color:rgba(239,68,68,0.3)"><span class="avatar-emoji">⚙️</span><div class="avatar-name">ARIA</div><div class="avatar-style">Iron Man AI</div><p class="avatar-quote">"Running the calculations. 48 minutes before training. Efficiency rating: use them."</p></div>
-      <div class="avatar-card" style="border-color:rgba(167,139,250,0.3)"><span class="avatar-emoji">⭐</span><div class="avatar-name">Hoshi-sensei</div><div class="avatar-style">Anime</div><p class="avatar-quote">"Today we begin an EPIC revision quest! Ganbatte — you've totally got this!"</p></div>
-      <div class="avatar-card" style="border-color:rgba(34,211,238,0.3)"><span class="avatar-emoji">🦕</span><div class="avatar-name">Rex</div><div class="avatar-style">Dino Tutor</div><p class="avatar-quote">"RAWR. My ancestors didn't study and look what happened. Let's not make that mistake."</p></div>
-      <div class="avatar-card" style="border-color:rgba(251,191,36,0.3)"><span class="avatar-emoji">🖥️</span><div class="avatar-name">Neo</div><div class="avatar-style">Retro Game</div><p class="avatar-quote">"ACHIEVEMENT UNLOCKED: Assignment submitted. +50 XP. Ready for the next level?"</p></div>
+      <div class="avatar-card" style="border-color:rgba(74,222,128,0.3)"><div class="av-tile av-hero"><i class="ti ti-plane-tilt"></i></div><div class="avatar-name">Co-Pilot</div><div class="avatar-style">Classic · Aviation</div><p class="avatar-quote">"Cleared for takeoff. Maths test Thursday — let's get that revision locked in tonight."</p><button class="voice-btn" onclick="playVoice('copilot', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
+      <div class="avatar-card" style="border-color:#f472b644"><div class="av-tile" style="border-color:#f472b666;color:#f472b6"><i class="ti ti-music"></i></div><div class="avatar-name">Luna</div><div class="avatar-style">Music & Creative</div><p class="avatar-quote">"Every subject has its own rhythm. Let's find yours and make this revision flow."</p><button class="voice-btn" onclick="playVoice('luna', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
+      <div class="avatar-card" style="border-color:#fbbf2444"><div class="av-tile" style="border-color:#fbbf2466;color:#fbbf24"><i class="ti ti-cube"></i></div><div class="avatar-name">BlockBrain</div><div class="avatar-style">Minecraft</div><p class="avatar-quote">"That Science exam is a diamond-tier challenge. Let's mine through it before Thursday."</p><button class="voice-btn" onclick="playVoice('blockbrain', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
+      <div class="avatar-card" style="border-color:#60a5fa44"><div class="av-tile" style="border-color:#60a5fa66;color:#60a5fa"><i class="ti ti-atom"></i></div><div class="avatar-name">ARIA</div><div class="avatar-style">Marvel / Iron Man</div><p class="avatar-quote">"Study plan engineered and optimised. Run the numbers with me — every session counts."</p><button class="voice-btn" onclick="playVoice('aria', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
+      <div class="avatar-card" style="border-color:#a78bfa44"><div class="av-tile" style="border-color:#a78bfa66;color:#a78bfa"><i class="ti ti-torii"></i></div><div class="avatar-name">Hoshi-sensei</div><div class="avatar-style">Anime</div><p class="avatar-quote">"Every test is a training arc! Dramatic improvement awaits — let's begin!"</p><button class="voice-btn" onclick="playVoice('hoshi', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
+      <div class="avatar-card" style="border-color:#fb923c44"><div class="av-tile" style="border-color:#fb923c66;color:#fb923c"><i class="ti ti-bone"></i></div><div class="avatar-name">Rex</div><div class="avatar-style">Dino Tutor</div><p class="avatar-quote">"Chill. We'll break it into bite-sized chunks — hard stuff gets easy when a dino explains it."</p><button class="voice-btn" onclick="playVoice('rex', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
+      <div class="avatar-card" style="border-color:#f8717144"><div class="av-tile" style="border-color:#f8717166;color:#f87171"><i class="ti ti-trophy"></i></div><div class="avatar-name">Coach</div><div class="avatar-style">Sport & Fitness</div><p class="avatar-quote">"Champions train their brains too. Study sessions are reps, exams are game day. Let's go!"</p><button class="voice-btn" onclick="playVoice('coach', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
+      <div class="avatar-card" style="border-color:#22d3ee44"><div class="av-tile" style="border-color:#22d3ee66;color:#22d3ee"><i class="ti ti-device-gamepad-2"></i></div><div class="avatar-name">Neo</div><div class="avatar-style">Retro Gaming</div><p class="avatar-quote">"New quest unlocked: Science exam. Beat the boss, bank the XP. Ready?"</p><button class="voice-btn" onclick="playVoice('neo', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
     </div>
   </div>
 </section>
@@ -669,7 +702,7 @@
           <li>Voice input · Read aloud</li>
           <li>Microsoft Teams + Google sync</li>
           <li>Parent portal included</li>
-          <li>All 7 Co-Pilot avatar styles</li>
+          <li>All 8 Co-Pilot avatar styles</li>
         </ul>
         <a href="https://app.teenpilot.co.nz" class="price-btn primary" target="_blank">Start free trial</a>
       </div>
@@ -811,6 +844,45 @@
   </div>
 </div>
 
+<script>
+  // Avatar voice previews
+  let curAudio=null, curBtn=null;
+  function playVoice(id, btn){
+    if(curAudio){ curAudio.pause(); if(curBtn){ curBtn.classList.remove('playing'); curBtn.innerHTML=curBtn.dataset.label; } const same=(curBtn===btn); curAudio=null; curBtn=null; if(same) return; }
+    const a = new Audio('/audio/voice-'+id+'.mp3');
+    btn.dataset.label = btn.innerHTML;
+    a.onerror = () => { btn.innerHTML = 'Voice previews launching July ✨'; setTimeout(()=>{ btn.innerHTML = btn.dataset.label; }, 2200); };
+    a.onended = () => { btn.classList.remove('playing'); btn.innerHTML = btn.dataset.label; curAudio=null; curBtn=null; };
+    a.play().then(()=>{ btn.classList.add('playing'); btn.innerHTML = '<i class="ti ti-player-stop"></i> Playing...'; curAudio=a; curBtn=btn; }).catch(()=>{});
+  }
+  // Hero typing demo
+  const hpConvo = [
+    {who:'me', text:"What's my day look like?"},
+    {who:'ai', text:"Science P3, volleyball 4pm, work 6\u20139. Maths test Thursday \u2014 I've planned 40 mins revision tonight at 7:30."},
+    {who:'me', text:"What bus after training?"},
+    {who:'ai', text:"The 5:43 from Lloyd Elsmore \u2014 leave by 5:30. I'll remind you. \u2708\ufe0f"}
+  ];
+  const hpBody = document.getElementById('hpBody');
+  function hpRun(i){
+    if(!hpBody) return;
+    if(i===0) hpBody.innerHTML = '<div class="hp-typing" id="hpTy"><span></span><span></span><span></span></div>';
+    const ty = document.getElementById('hpTy');
+    if(i >= hpConvo.length){ setTimeout(()=>hpRun(0), 5200); return; }
+    const m = hpConvo[i];
+    const delay = m.who==='ai' ? 1300 : 700;
+    if(m.who==='ai' && ty) ty.classList.add('show');
+    setTimeout(()=>{
+      if(ty) ty.classList.remove('show');
+      const d = document.createElement('div');
+      d.className = 'hp-msg hp-'+m.who;
+      d.textContent = m.text;
+      hpBody.insertBefore(d, ty);
+      requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('show')));
+      hpRun(i+1);
+    }, delay);
+  }
+  setTimeout(()=>hpRun(0), 900);
+</script>
 <script>
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
