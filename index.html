@@ -271,6 +271,16 @@
     .wk-badge.adv{background:rgba(167,139,250,.15);color:#a78bfa;border:1px solid rgba(167,139,250,.35)}
     .wk-badge.prem{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.35)}
     .wk-none{margin-top:12px;font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.5px}
+
+    /* ── Boarding pass generator ── */
+    .bpass{padding:84px 24px;background:var(--surface);border-top:1px solid var(--border)}
+    .bp-input{display:flex;gap:8px;justify-content:center;margin:26px auto 22px;max-width:380px}
+    .bp-input input{flex:1;background:var(--bg);border:1.5px solid var(--border2);border-radius:100px;padding:12px 18px;color:var(--text);font-family:var(--font);font-size:15px;outline:none;text-align:center}
+    .bp-input input:focus{border-color:var(--accent)}
+    .bp-wrap{display:flex;justify-content:center}
+    #bpCanvas{width:300px;max-width:88vw;border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 50px rgba(74,222,128,.08)}
+    .bp-dl{display:inline-flex;align-items:center;gap:7px;margin-top:18px;background:var(--accent);color:#050d08;border:none;font-family:var(--display);font-weight:800;font-size:15px;padding:13px 26px;border-radius:100px;cursor:pointer;transition:transform .15s}
+    .bp-dl:hover{transform:translateY(-2px)}
   </style>
 </head>
 <body>
@@ -723,6 +733,22 @@
 </section>
 
 <!-- PRICING -->
+
+<!-- BOARDING PASS GENERATOR -->
+<section class="bpass" id="boardingpass">
+  <div class="container" style="text-align:center">
+    <span class="section-label reveal">Launch · 20 July 2026</span>
+    <h2 class="section-title reveal">Claim your boarding pass.</h2>
+    <p class="section-sub reveal" style="margin-bottom:0">Your name. Your Co-Pilot's colours. Post it — your seat's reserved.</p>
+    <div class="bp-input reveal">
+      <input id="bpName" maxlength="14" placeholder="Type your first name..." autocomplete="off">
+    </div>
+    <div class="bp-wrap reveal"><canvas id="bpCanvas" width="540" height="960"></canvas></div>
+    <button class="bp-dl reveal" id="bpDl"><i class="ti ti-download"></i> Save my pass</button>
+    <div style="margin-top:14px;font-size:13px;color:var(--textDim)" class="reveal">Then board the real thing — <a href="https://app.teenpilot.co.nz" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">try the app free →</a></div>
+  </div>
+</section>
+
 <section class="pricing" id="pricing">
   <div class="container">
     <span class="section-label reveal">Pricing</span>
@@ -979,6 +1005,7 @@
     const nm=document.querySelector(".hp-name"); if(nm) nm.textContent=a.name;
     const info=document.getElementById("avpInfo");
     if(info){ const m=AV_META[id]; info.style.display="block"; info.innerHTML='<div class="ai-name">'+a.name+'</div><div class="ai-style">'+m[0]+'</div><div class="ai-quote">"'+m[1]+'"</div>'; }
+    if(typeof drawPass==="function") drawPass();
     if(user){ unlock("pick"); playVoice(id, null); resetChips(); }
   }
 
@@ -1120,6 +1147,60 @@
     wkShow(0);
     wkTimer=setInterval(()=>{ if(!wkTouched) wkShow((wkIdx+1)%WEEK.length); },4200);
   }
+
+  // ── Boarding pass generator ──
+  const ACH_PASS=["Boarding Pass",100,"ticket"]; ACH.pass=ACH_PASS;
+  const bpC=document.getElementById("bpCanvas"), bpN=document.getElementById("bpName"), bpD=document.getElementById("bpDl");
+  function drawPass(){
+    if(!bpC) return;
+    const x=bpC.getContext("2d"), W=540, H=960;
+    const a=AVS[curAv], tint=a.tint;
+    const name=(bpN.value||"YOUR NAME").trim().toUpperCase().slice(0,14);
+    x.fillStyle="#0a0f1a"; x.fillRect(0,0,W,H);
+    // accent header
+    x.fillStyle=tint; x.fillRect(0,0,W,14);
+    const g=x.createLinearGradient(0,0,0,H); g.addColorStop(0,tint+"14"); g.addColorStop(.5,"transparent"); x.fillStyle=g; x.fillRect(0,0,W,H);
+    // top brand
+    x.fillStyle="#f0f4ff"; x.font="800 34px Syne, sans-serif"; x.textAlign="left";
+    x.fillText("Teen", 44, 86); const w1=x.measureText("Teen").width;
+    x.fillStyle=tint; x.fillText("Pilot", 44+w1, 86);
+    x.fillStyle="#8899bb"; x.font="700 15px 'DM Sans', sans-serif"; x.textAlign="right";
+    x.fillText("BOARDING PASS", W-44, 82);
+    // plane glyph
+    x.fillStyle=tint; x.font="120px sans-serif"; x.textAlign="center";
+    x.fillText("\u2708", W/2, 250);
+    // passenger
+    x.textAlign="left"; x.fillStyle="#4a5568"; x.font="700 14px 'DM Sans', sans-serif";
+    x.fillText("PASSENGER", 44, 330);
+    x.fillStyle="#f0f4ff"; x.font="800 52px Syne, sans-serif";
+    x.fillText(name, 44, 384);
+    // co-pilot row
+    x.fillStyle="#4a5568"; x.font="700 14px 'DM Sans', sans-serif"; x.fillText("CO-PILOT", 44, 446);
+    x.fillStyle=tint; x.font="800 30px Syne, sans-serif"; x.fillText(a.name.toUpperCase(), 44, 482);
+    // flight / gate / seat
+    const cols=[["FLIGHT","TP-726"],["GATE","9"],["SEAT","4A"]];
+    cols.forEach((cl,i)=>{ const cx=44+i*165;
+      x.fillStyle="#4a5568"; x.font="700 14px 'DM Sans', sans-serif"; x.fillText(cl[0],cx,560);
+      x.fillStyle="#f0f4ff"; x.font="800 34px Syne, sans-serif"; x.fillText(cl[1],cx,600); });
+    // departure
+    x.fillStyle="#4a5568"; x.font="700 14px 'DM Sans', sans-serif"; x.fillText("DEPARTS",44,672);
+    x.fillStyle=tint; x.font="800 40px Syne, sans-serif"; x.fillText("20 JUL 2026",44,716);
+    // perforation
+    x.strokeStyle="#2a3550"; x.setLineDash([10,9]); x.lineWidth=2.5;
+    x.beginPath(); x.moveTo(0,772); x.lineTo(W,772); x.stroke(); x.setLineDash([]);
+    // barcode
+    let bx=44; while(bx<W-44){ const bw=2+Math.random()*7; x.fillStyle="#f0f4ff"; x.fillRect(bx,808,bw,86); bx+=bw+3+Math.random()*7; }
+    x.fillStyle="#8899bb"; x.font="700 15px 'DM Sans', sans-serif"; x.textAlign="center";
+    x.fillText("teenpilot.co.nz \u00b7 frequent flyer", W/2, 932);
+  }
+  if(bpN){ bpN.addEventListener("input", drawPass); drawPass(); }
+  if(bpD){ bpD.onclick=()=>{
+    drawPass(); unlock("pass");
+    const big=document.createElement("canvas"); big.width=1080; big.height=1920;
+    const bx=big.getContext("2d"); bx.fillStyle="#0a0f1a"; bx.fillRect(0,0,1080,1920);
+    bx.drawImage(bpC,0,0,540,960,0,0,1080,1920); // full bleed
+    const a=document.createElement("a"); a.download="teenpilot-boarding-pass.png"; a.href=big.toDataURL("image/png"); a.click();
+  }; }
   takeover(curAv, false);
 </script>
 <script>
