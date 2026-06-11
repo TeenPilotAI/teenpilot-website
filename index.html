@@ -234,6 +234,27 @@
     @keyframes achSpin{0%{transform:rotate(-180deg) scale(0)}100%{transform:rotate(0) scale(1)}}
     @keyframes achFly{0%{left:-30px;transform:translateY(20px);opacity:0}15%{opacity:1}85%{opacity:1}100%{left:105%;transform:translateY(-30px);opacity:0}}
     .hero-plane{cursor:pointer;pointer-events:auto!important}
+
+    /* ── Tap-to-reveal feature cards ── */
+    .feature{cursor:pointer;position:relative}
+    .feature .feature-desc{display:none;animation:fdIn .3s ease}
+    .feature.open .feature-desc{display:block}
+    .feature::after{content:"+";position:absolute;top:12px;right:16px;color:var(--textDim);font-size:18px;font-weight:700;transition:transform .2s}
+    .feature.open::after{transform:rotate(45deg);color:var(--accent)}
+    @keyframes fdIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+    /* ── Day timeline ── */
+    .dayline{padding:74px 24px;background:var(--bg)}
+    .dl-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:30px 0 26px}
+    .dl-chip{font-family:var(--display);font-size:13px;font-weight:700;color:var(--textDim);background:var(--surface);border:1.5px solid var(--border);border-radius:100px;padding:8px 15px;cursor:pointer;transition:all .18s}
+    .dl-chip:hover{transform:translateY(-2px)}
+    .dl-chip.on{color:#050d08;background:var(--accent);border-color:var(--accent)}
+    .dl-stage{max-width:520px;margin:0 auto;background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:26px 24px;text-align:center;min-height:128px;transition:border-color .3s}
+    .dl-icon{font-size:34px;color:var(--accent);margin-bottom:10px}
+    .dl-line{font-family:var(--display);font-size:19px;font-weight:800;color:var(--text);margin-bottom:6px}
+    .dl-sub{font-size:14px;color:var(--textMid);line-height:1.6}
+    /* ── Story expander ── */
+    .more-btn{display:block;margin:22px auto 0;background:transparent;border:1.5px solid var(--border2);color:var(--textMid);font-family:var(--display);font-weight:700;font-size:14px;padding:11px 26px;border-radius:100px;cursor:pointer;transition:all .2s}
+    .more-btn:hover{border-color:var(--accent);color:var(--accent)}
   </style>
 </head>
 <body>
@@ -317,11 +338,26 @@
 </section>
 
 <!-- FEATURES -->
+
+<!-- DAY TIMELINE -->
+<section class="dayline">
+  <div class="container" style="text-align:center">
+    <span class="section-label reveal">One day, handled</span>
+    <h2 class="section-title reveal">Tap through a school day.</h2>
+    <div class="dl-chips reveal" id="dlChips"></div>
+    <div class="dl-stage reveal" id="dlStage">
+      <div class="dl-icon" id="dlIcon"><i class="ti ti-sunrise"></i></div>
+      <div class="dl-line" id="dlLine"></div>
+      <div class="dl-sub" id="dlSub"></div>
+    </div>
+  </div>
+</section>
+
 <section class="features" id="features">
   <div class="container">
     <span class="section-label reveal">What TeenPilot does</span>
     <h2 class="section-title reveal">One app. Your whole week.</h2>
-    <p class="section-sub reveal">Whether you're juggling school and sport, training for a team, working part-time, hitting the gym, or just need a safe place to chat — TeenPilot connects it all.</p>
+    <p class="section-sub reveal">School, sport, work, gym, mates. One app that connects it all. Tap a card.</p>
     <div class="features-grid reveal">
       <div class="feature"><span class="feature-icon"><i class="ti ti-book" style="color:#818CF8"></i></span><div class="feature-title">Your real timetable</div><p class="feature-desc">Your actual subjects, rooms and teachers. Knows what cycle day it is. Shows what's on before you ask.</p><span class="feature-tag">NZ cycle days · Bell times</span></div>
       <div class="feature"><span class="feature-icon"><i class="ti ti-plane-tilt" style="color:var(--accent)"></i></span><div class="feature-title">AI Co-Pilot chat</div><p class="feature-desc">"What do I have tomorrow?" "Build me a study plan." "I've got training and work Friday — when do I study?" Co-Pilot knows your whole week.</p><span class="feature-tag">Voice input · Always on</span></div>
@@ -987,6 +1023,44 @@
   const sf=document.getElementById("safe"); if(sf) eggObs.observe(sf);
   const hpl=document.querySelector(".hero-plane"); if(hpl) hpl.onclick=()=>unlock("plane");
 
+
+  // ── Tap-to-reveal feature cards ──
+  document.querySelectorAll(".feature").forEach(f=>f.addEventListener("click",()=>f.classList.toggle("open")));
+  // ── Day timeline ──
+  const DAY=[
+    ["7:00am","sunrise","Wake to your flight plan","Today's classes, training and work — already mapped. Coffee optional."],
+    ["8:45am","book","Right room, right day","Cycle day? Bell times? Sorted. You just walk in."],
+    ["3:10pm","bus","Bus tracked","The 3:24 is 4 minutes late. TeenPilot knew before you did."],
+    ["4:00pm","ball-volleyball","Training logged","Study plan auto-shifts around practice. No clash, no stress."],
+    ["7:30pm","brain","One 40-min rep","Tonight's revision block — built around YOUR week, not a template."],
+    ["9:30pm","moon","Wind down","Tomorrow's already loaded. Sleep like someone with a co-pilot."]
+  ];
+  const dlChips=document.getElementById("dlChips"),dlIcon=document.getElementById("dlIcon"),dlLine=document.getElementById("dlLine"),dlSub=document.getElementById("dlSub");
+  let dlIdx=0, dlTouched=false, dlTimer=null;
+  function dlShow(i){
+    dlIdx=i; const [t,icon,line,sub]=DAY[i];
+    dlIcon.innerHTML='<i class="ti ti-'+icon+'"></i>'; dlLine.textContent=line; dlSub.textContent=sub;
+    document.querySelectorAll(".dl-chip").forEach((ch,j)=>ch.classList.toggle("on",j===i));
+  }
+  if(dlChips){
+    DAY.forEach(([t],i)=>{ const b=document.createElement("button"); b.className="dl-chip"; b.textContent=t; b.onclick=()=>{dlTouched=true; clearInterval(dlTimer); dlShow(i);}; dlChips.appendChild(b); });
+    dlShow(0);
+    dlTimer=setInterval(()=>{ if(!dlTouched) dlShow((dlIdx+1)%DAY.length); },3200);
+  }
+  // ── Collapse long story grids: show 2, expand on demand ──
+  const agSec=document.querySelector(".agentic");
+  if(agSec){
+    const grids=[...agSec.querySelectorAll("div")].filter(d=>d.children.length>=4 && [...d.children].every(ch=>ch.tagName==="DIV"));
+    const grid=grids.sort((a,b)=>b.children.length-a.children.length)[0];
+    if(grid && grid.children.length>2){
+      const kids=[...grid.children];
+      kids.slice(2).forEach(k=>k.style.display="none");
+      const btn=document.createElement("button"); btn.className="more-btn"; btn.textContent="More stories ↓";
+      let open=false;
+      btn.onclick=()=>{ open=!open; kids.slice(2).forEach(k=>k.style.display=open?"":"none"); btn.textContent=open?"Show less ↑":"More stories ↓"; };
+      grid.parentNode.insertBefore(btn, grid.nextSibling);
+    }
+  }
   takeover(curAv, false);
 </script>
 <script>
