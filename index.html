@@ -255,6 +255,15 @@
     /* ── Story expander ── */
     .more-btn{display:block;margin:22px auto 0;background:transparent;border:1.5px solid var(--border2);color:var(--textMid);font-family:var(--display);font-weight:700;font-size:14px;padding:11px 26px;border-radius:100px;cursor:pointer;transition:all .2s}
     .more-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* ── Avatar info under picker ── */
+    .avp-info{max-width:430px;margin:0 auto 26px;background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:13px 18px;text-align:center;position:relative;z-index:2;animation:fdIn .3s ease}
+    .avp-info .ai-name{font-family:var(--display);font-weight:800;font-size:15px;color:var(--text)}
+    .avp-info .ai-style{font-size:11px;color:var(--textDim);text-transform:uppercase;letter-spacing:1px;margin:2px 0 6px}
+    .avp-info .ai-quote{font-size:13px;color:var(--textMid);font-style:italic;line-height:1.6}
+    /* ── More-collapse for long paragraphs ── */
+    .clampP{display:none;animation:fdIn .3s ease}
+    .mini-more{background:transparent;border:none;color:var(--accent);font-size:13px;font-weight:700;cursor:pointer;padding:2px 0;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
   </style>
 </head>
 <body>
@@ -297,6 +306,7 @@
   <p class="hero-sub" id="heroSub">School. Sport. Gym. Work. Friends. Music. Transport. Life. TeenPilot is the AI co-pilot that connects everything a teenager goes through — and tells you exactly what to do, before you have to ask.</p>
   <div class="avp-label">Who's flying with you? Tap to find out</div>
   <div class="av-picker" id="avPicker"></div>
+  <div class="avp-info" id="avpInfo" style="display:none"></div>
   <div class="hero-ctas">
     <a href="https://app.teenpilot.co.nz" class="btn-primary" target="_blank">Try it free — 3 mins <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></a>
   </div>
@@ -538,24 +548,6 @@
 </section>
 
 <!-- AVATARS -->
-<section class="avatars">
-  <div class="container">
-    <span class="section-label reveal">Co-Pilot styles</span>
-    <h2 class="section-title reveal">Pick your Co-Pilot. Make it yours.</h2>
-    <p class="section-sub reveal">Same powerful AI. Completely different personality. Choose who you actually want to talk to every day.</p>
-    <div class="avatars-grid reveal">
-      <div class="avatar-card" style="border-color:rgba(74,222,128,0.3)"><div class="av-tile av-hero"><i class="ti ti-plane-tilt"></i></div><div class="avatar-name">Co-Pilot</div><div class="avatar-style">Classic · Aviation</div><p class="avatar-quote">"Cleared for takeoff. Maths test Thursday — let's get that revision locked in tonight."</p><button class="voice-btn" onclick="playVoice('copilot', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
-      <div class="avatar-card" style="border-color:#f472b644"><div class="av-tile" style="border-color:#f472b666;color:#f472b6"><i class="ti ti-music"></i></div><div class="avatar-name">Luna</div><div class="avatar-style">Music & Creative</div><p class="avatar-quote">"Every subject has its own rhythm. Let's find yours and make this revision flow."</p><button class="voice-btn" onclick="playVoice('luna', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
-      <div class="avatar-card" style="border-color:#fbbf2444"><div class="av-tile" style="border-color:#fbbf2466;color:#fbbf24"><i class="ti ti-cube"></i></div><div class="avatar-name">BlockBrain</div><div class="avatar-style">Minecraft</div><p class="avatar-quote">"That Science exam is a diamond-tier challenge. Let's mine through it before Thursday."</p><button class="voice-btn" onclick="playVoice('blockbrain', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
-      <div class="avatar-card" style="border-color:#60a5fa44"><div class="av-tile" style="border-color:#60a5fa66;color:#60a5fa"><i class="ti ti-atom"></i></div><div class="avatar-name">ARIA</div><div class="avatar-style">Marvel / Iron Man</div><p class="avatar-quote">"Study plan engineered and optimised. Run the numbers with me — every session counts."</p><button class="voice-btn" onclick="playVoice('aria', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
-      <div class="avatar-card" style="border-color:#a78bfa44"><div class="av-tile" style="border-color:#a78bfa66;color:#a78bfa"><i class="ti ti-torii"></i></div><div class="avatar-name">Hoshi-sensei</div><div class="avatar-style">Anime</div><p class="avatar-quote">"Every test is a training arc! Dramatic improvement awaits — let's begin!"</p><button class="voice-btn" onclick="playVoice('hoshi', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
-      <div class="avatar-card" style="border-color:#fb923c44"><div class="av-tile" style="border-color:#fb923c66;color:#fb923c"><i class="ti ti-bone"></i></div><div class="avatar-name">Rex</div><div class="avatar-style">Dino Tutor</div><p class="avatar-quote">"Chill. We'll break it into bite-sized chunks — hard stuff gets easy when a dino explains it."</p><button class="voice-btn" onclick="playVoice('rex', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
-      <div class="avatar-card" style="border-color:#f8717144"><div class="av-tile" style="border-color:#f8717166;color:#f87171"><i class="ti ti-trophy"></i></div><div class="avatar-name">Coach</div><div class="avatar-style">Sport & Fitness</div><p class="avatar-quote">"Champions train their brains too. Study sessions are reps, exams are game day. Let's go!"</p><button class="voice-btn" onclick="playVoice('coach', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
-      <div class="avatar-card" style="border-color:#22d3ee44"><div class="av-tile" style="border-color:#22d3ee66;color:#22d3ee"><i class="ti ti-device-gamepad-2"></i></div><div class="avatar-name">Neo</div><div class="avatar-style">Retro Gaming</div><p class="avatar-quote">"New quest unlocked: Science exam. Beat the boss, bank the XP. Ready?"</p><button class="voice-btn" onclick="playVoice('neo', this)"><i class="ti ti-player-play"></i> Hear my voice</button></div>
-    </div>
-  </div>
-</section>
-
 <!-- SAFE BY DESIGN -->
 <section id="safe" style="padding:90px 24px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="container">
@@ -974,6 +966,8 @@
     document.getElementById("heroSub").textContent=a.sub;
     const tile=document.querySelector(".hp-tile"); if(tile){ tile.style.background=a.tint; tile.innerHTML='<i class="ti ti-'+a.icon+'"></i>'; }
     const nm=document.querySelector(".hp-name"); if(nm) nm.textContent=a.name;
+    const info=document.getElementById("avpInfo");
+    if(info){ const m=AV_META[id]; info.style.display="block"; info.innerHTML='<div class="ai-name">'+a.name+'</div><div class="ai-style">'+m[0]+'</div><div class="ai-quote">"'+m[1]+'"</div>'; }
     if(user){ unlock("pick"); playVoice(id, null); resetChips(); }
   }
 
@@ -1061,6 +1055,29 @@
       grid.parentNode.insertBefore(btn, grid.nextSibling);
     }
   }
+
+  const AV_META={
+    copilot:["Classic · Aviation","Cleared for takeoff. Maths test Thursday — let's get that revision locked in tonight."],
+    luna:["Music & Creative","Every subject has its own rhythm. Let's find yours and make this revision flow."],
+    blockbrain:["Minecraft","That Science exam is a diamond-tier challenge. Let's mine through it before Thursday."],
+    aria:["Marvel / Iron Man","Study plan engineered and optimised. Run the numbers with me — every session counts."],
+    hoshi:["Anime","Every test is a training arc! Dramatic improvement awaits — let's begin!"],
+    rex:["Dino Tutor","Chill. We'll break it into bite-sized chunks — hard stuff gets easy when a dino explains it."],
+    coach:["Sport & Fitness","Champions train their brains too. Study sessions are reps, exams are game day. Let's go!"],
+    neo:["Retro Gaming","New quest unlocked: Science exam. Beat the boss, bank the XP. Ready?"]
+  };
+  // ── Collapse long paragraphs in lower sections behind "More" ──
+  ["#advanced","#safe","#how","#parents","#schools"].forEach(sel=>{
+    const sec=document.querySelector(sel); if(!sec) return;
+    sec.querySelectorAll("p").forEach(p=>{
+      if(p.closest(".price-card")||p.classList.contains("section-sub")) return;
+      if((p.textContent||"").trim().length<150) return;
+      p.classList.add("clampP");
+      const b=document.createElement("button"); b.className="mini-more"; b.innerHTML="More ↓";
+      b.onclick=()=>{ const open=p.classList.toggle("open"); p.style.display=open?"block":""; b.innerHTML=open?"Less ↑":"More ↓"; };
+      p.parentNode.insertBefore(b,p);
+    });
+  });
   takeover(curAv, false);
 </script>
 <script>
