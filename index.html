@@ -1076,15 +1076,20 @@
     b.onclick=(e)=>{ e.stopPropagation(); open=!open; sibs.forEach(s=>s.style.display=open?"":"none"); b.innerHTML=open?"Less ↑":"More ↓"; };
     h.parentNode.insertBefore(b, h.nextSibling);
   });
-  // ── Collapse long paragraphs in lower sections behind "More" ──
+  // ── Collapse long paragraphs: consecutive ones share ONE More toggle ──
   ["#advanced","#safe","#how","#parents","#schools"].forEach(sel=>{
     const sec=document.querySelector(sel); if(!sec) return;
     sec.querySelectorAll("p").forEach(p=>{
       if(p.closest(".price-card")||p.closest(".audcard")||p.classList.contains("section-sub")) return;
-      if((p.textContent||"").trim().length<150) return;
-      p.classList.add("clampP");
-      const b=document.createElement("button"); b.className="mini-more"; b.innerHTML="More ↓";
-      b.onclick=()=>{ const open=p.classList.toggle("open"); p.style.display=open?"block":""; b.innerHTML=open?"Less ↑":"More ↓"; };
+      const txt=(p.textContent||"").trim();
+      if(txt.length<150 || txt.startsWith("Express yourself freely")) return;
+      const prev=p.previousElementSibling;
+      if(prev && prev.classList && prev.classList.contains("clampP")){
+        p.classList.add("clampP"); prev._grp.push(p); p._grp=prev._grp; return;
+      }
+      p.classList.add("clampP"); p._grp=[p];
+      const b=document.createElement("button"); b.className="mini-more"; b.innerHTML="More ↓"; let open=false;
+      b.onclick=()=>{ open=!open; p._grp.forEach(g=>g.style.display=open?"block":""); b.innerHTML=open?"Less ↑":"More ↓"; };
       p.parentNode.insertBefore(b,p);
     });
   });
