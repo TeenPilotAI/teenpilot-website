@@ -749,8 +749,12 @@
     <div class="bp-input reveal">
       <input id="bpName" maxlength="14" placeholder="Type your first name..." autocomplete="off">
     </div>
+    <div class="bp-input reveal" style="margin-top:-14px">
+      <input id="bpEmail" type="email" placeholder="Your email — join the waitlist" autocomplete="email">
+    </div>
     <div class="bp-wrap reveal"><canvas id="bpCanvas" width="540" height="960"></canvas></div>
     <button class="bp-dl reveal" id="bpDl"><i class="ti ti-download"></i> Save my pass</button>
+    <div id="bpStatus" class="reveal" style="margin-top:12px;font-size:13px;font-weight:600;min-height:18px"></div>
     <div style="margin-top:14px;font-size:13px;color:var(--textDim)" class="reveal">Then board the real thing — <a href="https://app.teenpilot.co.nz" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">try the app free →</a></div>
   </div>
 </section>
@@ -1200,8 +1204,25 @@
     x.fillText("teenpilot.co.nz \u00b7 frequent flyer", W/2, 932);
   }
   if(bpN){ bpN.addEventListener("input", drawPass); drawPass(); }
+  const SB_URL="https://omoxryeyvcbevsupssru.supabase.co";
+  const SB_KEY="sb_publishable_i2QEdyNj5YQ7DjHxaaHV1Q_69W91soL";
+  const bpE=document.getElementById("bpEmail"), bpS=document.getElementById("bpStatus");
+  async function joinWaitlist(){
+    if(!bpE||!bpS) return;
+    const em=(bpE.value||"").trim(), nm=((bpN&&bpN.value)||"").trim()||"Pilot";
+    if(!em){ bpS.style.color="#8899bb"; bpS.textContent="Tip: add your email above to join the waitlist \u2708"; return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ bpS.style.color="#fbbf24"; bpS.textContent="That email doesn\u2019t look quite right"; return; }
+    bpS.style.color="#8899bb"; bpS.textContent="Adding you to the manifest\u2026";
+    try{
+      const r=await fetch(SB_URL+"/rest/v1/waitlist",{method:"POST",headers:{"apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({name:nm,email:em,source:"website-boardingpass"})});
+      if(r.ok){ bpS.style.color="var(--accent)"; bpS.textContent="You\u2019re on the manifest \u2708 See you 20 July."; }
+      else if(r.status===409){ bpS.style.color="var(--accent)"; bpS.textContent="You\u2019re already on the manifest \u2708"; }
+      else { bpS.style.color="#fbbf24"; bpS.textContent="Couldn\u2019t reach the tower \u2014 pass saved anyway."; }
+    }catch(e){ bpS.style.color="#fbbf24"; bpS.textContent="Couldn\u2019t reach the tower \u2014 pass saved anyway."; }
+  }
+  if(bpE){ bpE.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); joinWaitlist(); } }); }
   if(bpD){ bpD.onclick=()=>{
-    drawPass(); unlock("pass");
+    drawPass(); unlock("pass"); joinWaitlist();
     const big=document.createElement("canvas"); big.width=1080; big.height=1920;
     const bx=big.getContext("2d"); bx.fillStyle="#0a0f1a"; bx.fillRect(0,0,1080,1920);
     bx.drawImage(bpC,0,0,540,960,0,0,1080,1920); // full bleed
