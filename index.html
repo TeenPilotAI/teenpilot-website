@@ -11,24 +11,24 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #060a0f; --surface: #0d1520; --surface2: #111c2e;
+      --bg: #080c14; --surface: #0f1520; --surface2: #151d2e;
       --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
-      --text: #eef2f8; --textMid: #8a9bb5; --textDim: #4a5a72;
-      --accent: #3dff8f; --accentDim: rgba(61,255,143,0.08);
+      --text: #f0f4ff; --textMid: #8899bb; --textDim: #4a5a72;
+      --accent: #4ade80; --accent2: #22c55e; --accentDim: rgba(74,222,128,0.08);
       --blue: #4a9eff; --purple: #a78bfa; --gold: #ffd166;
       --font: 'DM Sans', sans-serif; --display: 'Syne', sans-serif;
       --radius: 16px; --radiusSm: 10px;
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; overflow-x: hidden; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: rgba(6,10,15,0.94); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: rgba(8,12,20,0.94); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
     .nav-logo { font-family: var(--display); font-size: 23px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; text-decoration: none; }
     .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; align-items: center; gap: 28px; }
     .nav-links a { color: var(--textMid); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
     .nav-cta { background: var(--accent); color: #050d08; padding: 10px 24px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; font-family: var(--display); transition: all 0.2s; }
-    .nav-cta:hover { background: #5fffaa; transform: translateY(-1px); }
+    .nav-cta:hover { background: #86efac; transform: translateY(-1px); }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--textMid); border-radius: 2px; }
     .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
@@ -43,25 +43,25 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: none; }
     .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(61,255,143,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(61,255,143,0.04) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%); animation: gridMove 20s linear infinite; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%); animation: gridMove 20s linear infinite; }
     @keyframes gridMove { 0%{background-position:0 0} 100%{background-position:60px 60px} }
     .glow { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
-    .glow-1 { width: 700px; height: 500px; background: radial-gradient(ellipse, rgba(61,255,143,0.08) 0%, transparent 70%); top: -100px; left: 50%; transform: translateX(-50%); }
+    .glow-1 { width: 700px; height: 500px; background: radial-gradient(ellipse, rgba(74,222,128,0.08) 0%, transparent 70%); top: -100px; left: 50%; transform: translateX(-50%); }
     .glow-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(74,158,255,0.06) 0%, transparent 70%); bottom: 0; right: -100px; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2); border-radius: 100px; padding: 7px 18px; font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 28px; position: relative; z-index: 1; animation: fadeUp 0.5s ease both; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accentDim); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; padding: 7px 18px; font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 28px; position: relative; z-index: 1; animation: fadeUp 0.5s ease both; }
     .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
     .hero h1 { font-family: var(--display); font-size: clamp(44px, 7vw, 90px); font-weight: 800; line-height: 0.95; letter-spacing: -4px; margin-bottom: 24px; position: relative; z-index: 1; animation: fadeUp 0.5s 0.1s ease both; }
     .hero h1 em { color: var(--accent); font-style: normal; }
     .hero-sub { font-size: clamp(18px, 2.2vw, 22px); color: var(--textMid); max-width: 540px; line-height: 1.75; margin-bottom: 40px; position: relative; z-index: 1; animation: fadeUp 0.5s 0.2s ease both; }
     .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; animation: fadeUp 0.5s 0.3s ease both; margin-bottom: 14px; }
-    .btn-primary { background: var(--accent); color: #050d08; padding: 17px 38px; border-radius: 100px; font-size: 17px; font-weight: 800; text-decoration: none; transition: all 0.2s; font-family: var(--display); box-shadow: 0 0 40px rgba(61,255,143,0.3); }
-    .btn-primary:hover { background: #5fffaa; transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #050d08; padding: 17px 38px; border-radius: 100px; font-size: 17px; font-weight: 800; text-decoration: none; transition: all 0.2s; font-family: var(--display); box-shadow: 0 0 40px rgba(74,222,128,0.3); }
+    .btn-primary:hover { background: #86efac; transform: translateY(-2px); }
     .btn-ghost { color: var(--textMid); padding: 17px 24px; border-radius: 100px; font-size: 16px; font-weight: 600; text-decoration: none; transition: color 0.2s; }
     .btn-ghost:hover { color: var(--text); }
     .hero-note { font-size: 13px; color: var(--textDim); position: relative; z-index: 1; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
-    .story-banner { background: linear-gradient(135deg, rgba(61,255,143,0.04), rgba(74,158,255,0.03)); border-top: 1px solid rgba(61,255,143,0.1); border-bottom: 1px solid rgba(61,255,143,0.1); padding: 28px 24px; text-align: center; }
+    .story-banner { background: linear-gradient(135deg, rgba(74,222,128,0.04), rgba(74,158,255,0.03)); border-top: 1px solid rgba(74,222,128,0.1); border-bottom: 1px solid rgba(74,222,128,0.1); padding: 28px 24px; text-align: center; }
     .story-inner { max-width: 700px; margin: 0 auto; font-size: 16px; color: var(--textMid); line-height: 1.8; }
     .story-inner strong { color: var(--text); }
     .problems { padding: 90px 24px; }
@@ -89,13 +89,13 @@
     .moment-time { text-align: right; padding-top: 14px; flex-shrink: 0; }
     .moment-time-label { font-size: 12px; color: var(--accent); font-weight: 700; }
     .moment-time-day { font-size: 11px; color: var(--textDim); margin-top: 2px; }
-    .moment-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); position: absolute; left: 43px; top: 18px; box-shadow: 0 0 12px rgba(61,255,143,0.4); }
+    .moment-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); position: absolute; left: 43px; top: 18px; box-shadow: 0 0 12px rgba(74,222,128,0.4); }
     .moment-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 24px; margin-left: 24px; transition: border-color 0.2s; }
-    .moment-card:hover { border-color: rgba(61,255,143,0.2); }
+    .moment-card:hover { border-color: rgba(74,222,128,0.2); }
     .moment-trigger { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
     .moment-title { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
     .moment-desc { font-size: 14px; color: var(--textMid); line-height: 1.75; margin-bottom: 12px; }
-    .moment-notification { background: linear-gradient(135deg, #0f1a28, #0a1420); border: 1px solid rgba(61,255,143,0.15); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #c8d8f0; line-height: 1.75; }
+    .moment-notification { background: linear-gradient(135deg, #0f1a28, #0a1420); border: 1px solid rgba(74,222,128,0.15); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #c8d8f0; line-height: 1.75; }
     .moment-notification strong { color: var(--accent); }
     .moment-tag { display: inline-flex; align-items: center; gap: 4px; background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.2); border-radius: 100px; padding: 3px 10px; font-size: 11px; color: var(--purple); font-weight: 600; margin-top: 10px; }
     .avatars { padding: 90px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -109,7 +109,7 @@
     .how { padding: 90px 24px; }
     .how-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 36px; margin-top: 48px; }
     .how-step { text-align: center; }
-    .how-num { width: 54px; height: 54px; border-radius: 50%; background: var(--accentDim); border: 1px solid rgba(61,255,143,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 20px; font-weight: 800; color: var(--accent); margin: 0 auto 18px; }
+    .how-num { width: 54px; height: 54px; border-radius: 50%; background: var(--accentDim); border: 1px solid rgba(74,222,128,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 20px; font-weight: 800; color: var(--accent); margin: 0 auto 18px; }
     .how-title { font-family: var(--display); font-size: 16px; font-weight: 700; margin-bottom: 10px; }
     .how-desc { font-size: 15px; color: var(--textMid); line-height: 1.7; }
     .parent-section { padding: 90px 24px; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -121,11 +121,11 @@
     .mock-stat-num { font-family: var(--display); font-size: 24px; font-weight: 800; }
     .mock-stat-lbl { font-size: 10px; color: var(--textMid); margin-top: 2px; }
     .mock-alert { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.2); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #f87171; font-weight: 600; margin-bottom: 10px; }
-    .mock-brief { background: linear-gradient(135deg,rgba(61,255,143,0.04),rgba(74,158,255,0.04)); border: 1px solid rgba(61,255,143,0.12); border-radius: 10px; padding: 14px; font-size: 13px; color: var(--textMid); line-height: 1.75; }
+    .mock-brief { background: linear-gradient(135deg,rgba(74,222,128,0.04),rgba(74,158,255,0.04)); border: 1px solid rgba(74,222,128,0.12); border-radius: 10px; padding: 14px; font-size: 13px; color: var(--textMid); line-height: 1.75; }
     .pricing { padding: 90px 24px; }
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap: 16px; margin-top: 48px; align-items: start; }
     .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px; position: relative; }
-    .price-card.featured { border-color: rgba(61,255,143,0.3); background: linear-gradient(135deg, var(--surface), rgba(61,255,143,0.02)); }
+    .price-card.featured { border-color: rgba(74,222,128,0.3); background: linear-gradient(135deg, var(--surface), rgba(74,222,128,0.02)); }
     .price-card.advanced { border-color: rgba(167,139,250,0.3); background: linear-gradient(135deg, var(--surface), rgba(167,139,250,0.02)); }
     .price-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 700; padding: 3px 16px; border-radius: 100px; font-family: var(--display); white-space: nowrap; }
     .price-card.featured .price-badge { background: var(--accent); color: #050d08; }
@@ -142,7 +142,7 @@
     .price-list li.no { opacity: 0.4; }
     .price-btn { display: block; text-align: center; padding: 14px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; font-family: var(--display); }
     .price-btn.primary { background: var(--accent); color: #050d08; }
-    .price-btn.primary:hover { background: #5fffaa; }
+    .price-btn.primary:hover { background: #86efac; }
     .price-btn.outline { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
     .price-btn.outline:hover { background: var(--surface); }
     .price-btn.purple { background: var(--purple); color: #fff; }
@@ -155,7 +155,7 @@
     .school-feat-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
     .school-feat-title { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
     .school-feat-desc { font-size: 14px; color: var(--textMid); line-height: 1.65; }
-    .cta-bottom { padding: 90px 24px; text-align: center; border-top: 1px solid var(--border); background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(61,255,143,0.06), transparent); }
+    .cta-bottom { padding: 90px 24px; text-align: center; border-top: 1px solid var(--border); background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(74,222,128,0.06), transparent); }
     .cta-bottom h2 { font-family: var(--display); font-size: clamp(30px,4vw,54px); font-weight: 800; letter-spacing: -2px; margin-bottom: 18px; }
     footer { padding: 40px; border-top: 1px solid var(--border); }
     .footer-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 32px; margin-bottom: 28px; }
@@ -408,7 +408,7 @@
 <section class="agentic" id="advanced">
   <div class="container">
     <div style="text-align:center;margin-bottom:64px">
-      <div class="plan-badge" style="margin:0 auto 16px;display:inline-flex"><i class="ti ti-rocket" style="color:var(--accent)"></i> Advanced AI — $29.99/mo · Powered by Claude Opus 4.8</div>
+      <div class="plan-badge" style="margin:0 auto 16px;display:inline-flex"><i class="ti ti-rocket" style="color:var(--accent)"></i> Advanced AI — $29.99/mo</div>
       <h2 class="section-title reveal" style="margin-bottom:18px">A helping hand<br>in a busy life.</h2>
       <p style="font-size:18px;color:var(--textMid);line-height:1.85;max-width:620px;margin:0 auto" class="reveal">Advanced Co-Pilot doesn't wait to be asked. It watches your whole life — school, sport, work, health, social — spots what needs attention, and acts before you even realise there's a problem.</p>
     </div>
@@ -470,13 +470,14 @@
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:64px" class="reveal">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
         <div style="font-family:var(--display);font-size:18px;font-weight:800">What actually changes at each tier</div>
-        <div style="font-size:13px;color:var(--textDim)">Haiku · Sonnet · Opus 4.8 · Fable 5</div>
+        <div style="font-size:13px;color:var(--textDim)">AI matched to the task, not the tier</div>
       </div>
+      <p style="font-size:14px;color:var(--textMid);line-height:1.7;max-width:760px;margin:-4px 0 20px">TeenPilot automatically uses the right level of AI for every task — fast models for quick questions, deeper reasoning for complex work. Tiers differ by how many messages you get and what Co-Pilot can do, not by which AI you reach.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden">
         <div style="padding:18px;border-right:1px solid var(--border)">
           <div style="font-size:12px;font-weight:700;color:var(--textDim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px">Free — get started</div>
           <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-message-circle" style="color:var(--accent)"></i></span>10 messages/day · Haiku 4.5</div>
+            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-message-circle" style="color:var(--accent)"></i></span>10 messages/day</div>
             <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-book" style="color:var(--accent)"></i></span>Timetable and calendar</div>
             <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-book" style="color:var(--accent)"></i></span>Assignments tracker</div>
             <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-message-circle" style="color:var(--accent)"></i></span>Squad chat</div>
@@ -486,7 +487,7 @@
         <div style="padding:18px;border-right:1px solid var(--border)">
           <div style="font-size:12px;font-weight:700;color:var(--textMid);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px">Pro — answers when you ask</div>
           <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-message-circle" style="color:var(--accent)"></i></span>30 messages/day · Sonnet 4.6</div>
+            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-message-circle" style="color:var(--accent)"></i></span>30 messages/day</div>
             <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-book" style="color:var(--accent)"></i></span>Exam study plans</div>
             <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-file-text" style="color:var(--accent)"></i></span>Document upload</div>
             <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-users" style="color:var(--accent)"></i></span>Parent portal</div>
@@ -497,7 +498,7 @@
         <div style="padding:20px;border-right:1px solid var(--border);background:rgba(167,139,250,0.04)">
           <div style="font-size:13px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px">Advanced — acts before you ask</div>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)"><i class="ti ti-rocket" style="color:var(--accent)"></i></span>60 messages/day · Opus 4.8</div>
+            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)"><i class="ti ti-rocket" style="color:var(--accent)"></i></span>60 messages/day</div>
             <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>7am morning briefing — automatic</div>
             <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Deadline risk alerts — unprompted</div>
             <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Schedule auto-replanned</div>
@@ -509,7 +510,7 @@
         <div style="padding:20px;background:rgba(251,191,36,0.04)">
           <div style="font-size:13px;font-weight:700;color:#fbbf24;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px">Premium ✨ — the full picture</div>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>100 messages/day · Claude Fable 5</div>
+            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>100 messages/day</div>
             <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Long-running study sessions</div>
             <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Deep exam prep — full paper analysis</div>
             <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>TeenPilot Academy — AI tutorials</div>
@@ -524,9 +525,9 @@
     <!-- Invisible work panel -->
     <div class="agentic-intro">
       <div>
-        <span class="section-label">A week in a student's life</span>
-        <h2 class="section-title reveal" style="margin-bottom:18px">Advanced &amp; Premium<br>in action.</h2>
-        <p style="font-size:17px;color:var(--textMid);line-height:1.85" class="reveal">A week where the AI worked and you didn't. Tap through it.</p>
+        <span class="section-label">An illustrated week</span>
+        <h2 class="section-title reveal" style="margin-bottom:18px">What Advanced &amp; Premium<br>will do.</h2>
+        <p style="font-size:17px;color:var(--textMid);line-height:1.85" class="reveal">An illustration of a week once Advanced is switched on — your Co-Pilot handling the load so you don't have to. Tap through it.</p>
         <div class="dl-chips reveal" id="wkChips" style="margin:26px 0 20px"></div>
         <div class="wk-stage reveal" style="max-width:640px;text-align:left">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
@@ -546,7 +547,7 @@
       <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:20px;padding:24px" class="reveal">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
           <div>
-            <div style="font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Advanced does this automatically</div>
+            <div style="font-size:12px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">What Advanced will do automatically</div>
             <div style="display:flex;flex-direction:column;gap:8px">
               <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">↗</span>Monitors deadlines overnight</div>
               <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">↗</span>Checks calendar for conflicts</div>
@@ -557,7 +558,7 @@
             </div>
           </div>
           <div>
-            <div style="font-size:12px;color:#fbbf24;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Premium adds Fable 5 power</div>
+            <div style="font-size:12px;color:#fbbf24;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Premium goes further</div>
             <div style="display:flex;flex-direction:column;gap:8px">
               <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Works independently for hours</div>
               <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Reads and analyses full exam papers</div>
@@ -590,7 +591,7 @@
           <p style="font-size:15px;color:var(--textMid);line-height:1.8">When your child asks Co-Pilot to build a study plan, break down an assignment or plan their week — it actually understands what they need. And it knows when to support, and when to point to a real person.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;min-width:200px">
-          <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Frontier AI</span> — Claude Fable 5 &amp; Opus 4.8 — Anthropic's most advanced models</div>
+          <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Frontier AI</span> — powered by Anthropic's most advanced Claude models</div>
           <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Safety first</span> — Anthropic is the world's leading AI safety research company</div>
           <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Helps, never cheats</span> — guides learning, never just gives answers</div>
           <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--textMid)"><span style="color:var(--accent);font-weight:700">Wellbeing aware</span> — recognises distress, always points to real support</div>
@@ -617,7 +618,7 @@
       <div style="background:var(--bg);border:1px solid rgba(74,158,255,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px"><i class="ti ti-users" style="color:var(--accent)"></i></div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For parents</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">Built to screen every image before delivery — designed to block harmful content before anyone sees it. Secured by Oracle Cloud — data stored in NZ/AU, never sold.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>Built to AI-screen every message and image</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>Image moderation designed to block nude images — coming before launch</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>NZ Privacy Act 2020 compliant</div></div></div>
       <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px"><i class="ti ti-school" style="color:var(--accent)"></i></div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For schools</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">TeenPilot is designed to meet the standards governments are moving to mandate. Safe messaging is core, not an add-on.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Designed to meet proposed UK and NZ digital safety standards</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>No school liability from student messaging</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Recommend to parents with confidence</div></div></div>
     </div>
-    <div style="background:linear-gradient(135deg,rgba(61,255,143,0.04),rgba(74,158,255,0.04));border:1px solid rgba(61,255,143,0.15);border-radius:var(--radius);padding:24px;text-align:center" class="reveal">
+    <div style="background:linear-gradient(135deg,rgba(74,222,128,0.04),rgba(74,158,255,0.04));border:1px solid rgba(74,222,128,0.15);border-radius:var(--radius);padding:24px;text-align:center" class="reveal">
       <div style="font-family:var(--display);font-size:18px;font-weight:800;margin-bottom:8px">How moderation works</div>
       <p style="font-size:15px;color:var(--textMid);max-width:540px;margin:0 auto 16px;line-height:1.7">Under a second. Invisible when safe. Clear feedback when blocked.</p>
       <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--textMid)">
@@ -716,7 +717,7 @@
           <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>NZ Privacy Act 2020 compliant</div>
           <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>Oracle Cloud Infrastructure</div>
         </div>
-        <a href="mailto:schools@teenpilot.co.nz" style="display:block;text-align:center;padding:13px;background:var(--accentDim);border:1px solid rgba(61,255,143,0.25);color:var(--accent);border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;font-family:var(--display)">Get in touch →</a>
+        <a href="mailto:schools@teenpilot.co.nz" style="display:block;text-align:center;padding:13px;background:var(--accentDim);border:1px solid rgba(74,222,128,0.25);color:var(--accent);border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;font-family:var(--display)">Get in touch →</a>
         <div style="font-size:12px;color:var(--textDim);text-align:center;margin-top:10px">Minimum 50 students · Custom pricing for large schools</div>
       </div>
     </div>
@@ -783,14 +784,11 @@
         <ul class="price-list">
           <li>Timetable and life calendar</li>
           <li>10 Co-Pilot messages/day</li>
-          <li>Powered by Claude Haiku — fast AI</li>
           <li>Assignments and task tracking</li>
           <li>Sport, work and social calendar</li>
           <li>Morning notifications</li>
           <li>Squad chat + @Co-Pilot</li>
-          <li class="no">Exam study plans</li>
-          <li class="no">Document upload</li>
-          <li class="no">Parent portal</li>
+          <li>3 Co-Pilot avatars</li>
         </ul>
         <a href="https://app.teenpilot.co.nz" class="price-btn outline" target="_blank">Get started free</a>
       </div>
@@ -809,7 +807,7 @@
           <li>Voice input · Read aloud</li>
           <li>Microsoft Teams + Google sync</li>
           <li>Parent portal included</li>
-          <li>All 8 Co-Pilot avatar styles</li>
+          <li>6 Co-Pilot avatar styles</li>
         </ul>
         <a href="https://app.teenpilot.co.nz" class="price-btn primary" target="_blank">Start free trial</a>
       </div>
@@ -822,7 +820,7 @@
         <ul class="price-list">
           <li>Everything in Pro</li>
           <li>60 Co-Pilot messages/day</li>
-          <li>Claude Opus 4.8 — Anthropic's best AI</li>
+          <li>All 8 Co-Pilot avatars</li>
           <li>Avatar voices — Co-Pilot speaks to you</li>
           <li>7am morning agent — automatic daily brief</li>
           <li>Absence notification — parent one-tap approval</li>
@@ -842,7 +840,7 @@
         <ul class="price-list">
           <li>Everything in Advanced</li>
           <li>100 Co-Pilot messages/day</li>
-          <li style="color:#fbbf24;font-weight:600">Claude Fable 5 — Anthropic's most advanced AI</li>
+          <li>All 8 Co-Pilot avatars</li>
           <li>Long-running study sessions — Co-Pilot works independently</li>
           <li>Deep exam prep — full paper analysis and revision plan</li>
           <li>TeenPilot Academy — AI-led tutorials and courses</li>
@@ -855,7 +853,7 @@
       </div>
     </div>
     <div style="text-align:center;margin-top:28px;font-size:14px;color:var(--textDim)">
-      All prices NZD · Cancel anytime · Schools contact <a href="mailto:schools@teenpilot.co.nz" style="color:var(--accent);text-decoration:none">schools@teenpilot.co.nz</a> · Powered by Claude Fable 5, Opus 4.8, Sonnet 4.6 &amp; Haiku 4.5 · Oracle Cloud Infrastructure
+      All prices NZD · Cancel anytime · Schools contact <a href="mailto:schools@teenpilot.co.nz" style="color:var(--accent);text-decoration:none">schools@teenpilot.co.nz</a> · Powered by Anthropic Claude · Oracle Cloud Infrastructure
     </div>
   </div>
 </section>
@@ -1133,13 +1131,13 @@
 
   // ── Agentic week timeline ──
   const WEEK=[
-    ["Mon","7:00am","adv","Morning Agent fired automatically","Daily flight plan delivered before school","Co-Pilot analysed the timetable, sport, work and assignments overnight. The push arrived at 7am — before the alarm went off.","Today: English P1, Maths P3 (algebra test Thursday — revise tonight), Volleyball 4pm. Tonight: 30 mins essay intro, 45 mins Maths. You've got this.","Advanced · Auto-generated · No input needed"],
-    ["Tue","3:45pm","adv","Fixture update","Football Saturday changed — Co-Pilot replanned","Game moved: Field 2 → 3, 9:30 → 10:30am. Saturday's plan and the pre-game meal moved themselves.","Fixture updated ✓ Saturday football now 10:30am Field 3. Pre-game meal 8:45am. Friday kept light — early night recommended.","Advanced · Calendar auto-updated · Study protected"],
-    ["Wed","4:15pm","adv","New work shift added","New shift Thursday 2pm — week auto-replanned","Co-Pilot spotted the clash with planned Science study and moved it. Nobody asked it to.","Shift added ✓ Thu 2–5pm. Science study → Wednesday 7pm (you're free). Thursday morning kept for Maths revision.","Advanced · Conflict detected · Auto-resolved"],
-    ["Thu","6:30pm","adv","Deadline risk alert","English essay at risk — Co-Pilot intervened","Essay due Friday, conclusion not started. Co-Pilot detected the risk and sent an unprompted alert.","English essay due tomorrow. Intro and body done. Conclusion takes 20 minutes — you're free right now. Do it tonight.","Advanced · Unprompted · Genuine AI judgement"],
-    ["Fri","7:15am","adv","Sick day","Absence handled in 30 seconds","Woke up unwell → tapped 'Not at school' → parent approved with one tap. Done before roll call.","Absence sent ✓ Formal email to school office from parent's email. Student absent Friday — illness.","Advanced · Parent approved · School notified"],
-    ["Sat","8:45am","adv","Game day briefing","Game day — Co-Pilot prepared everything","Correct field, correct time, nutrition, travel — one notification. No searching, no forgetting.","Game day ✓ Football 10:30am Field 3. Eat now — carbs, nothing heavy. Drive: 20 mins. You trained 3x this week. Play well.","Advanced · Sport-aware · Nutrition timed"],
-    ["Sun","6:00pm","prem","Fable 5 weekly wrap","Parents briefed · next week pre-built","Premium's Fable 5 analysed the week, built next week's plan, and sent parents a clear AI summary.","Weekly wrap ✓ 4 study blocks completed, essay submitted, game won. Next week's flight plan is live. Parent briefing sent.","Premium · Fable 5 · Fully autonomous"]
+    ["Mon","7:00am","adv","The Morning Agent fires automatically","A daily flight plan, before school","Co-Pilot analyses your timetable, sport, work and assignments overnight and sends the plan at 7am — before the alarm goes off.","Today: English P1, Maths P3 (algebra test Thursday — revise tonight), Volleyball 4pm. Tonight: 30 mins essay intro, 45 mins Maths. You've got this.","Advanced · Auto-generated · No input needed"],
+    ["Tue","3:45pm","adv","Fixture update","Football Saturday changes — Co-Pilot replans","A game moves: Field 2 → 3, 9:30 → 10:30am. Saturday's plan and the pre-game meal move themselves.","Fixture updated ✓ Saturday football now 10:30am Field 3. Pre-game meal 8:45am. Friday kept light — early night recommended.","Advanced · Calendar auto-updated · Study protected"],
+    ["Wed","4:15pm","adv","New work shift added","New shift Thursday 2pm — the week auto-replans","Co-Pilot spots the clash with your Science study and moves it. Nobody has to ask.","Shift added ✓ Thu 2–5pm. Science study → Wednesday 7pm (you're free). Thursday morning kept for Maths revision.","Advanced · Conflict detected · Auto-resolved"],
+    ["Thu","6:30pm","adv","Deadline risk alert","English essay at risk — Co-Pilot steps in","Essay due Friday, conclusion not started. Co-Pilot detects the risk and sends an unprompted alert.","English essay due tomorrow. Intro and body done. Conclusion takes 20 minutes — you're free right now. Do it tonight.","Advanced · Unprompted · Genuine AI judgement"],
+    ["Fri","7:15am","adv","Sick day","Absence handled for you in 30 seconds","Wake up unwell → tap 'Not at school' → your parent approves with one tap. Done before roll call.","Absence sent ✓ Formal email to school office from parent's email. Student absent Friday — illness.","Advanced · Parent approved · School notified"],
+    ["Sat","8:45am","adv","Game day briefing","Game day — Co-Pilot prepares everything","Correct field, correct time, nutrition, travel — one notification. No searching, no forgetting.","Game day ✓ Football 10:30am Field 3. Eat now — carbs, nothing heavy. Drive: 20 mins. You trained 3x this week. Play well.","Advanced · Sport-aware · Nutrition timed"],
+    ["Sun","6:00pm","prem","Weekly wrap","Parents briefed · next week pre-built","Premium analyses the week, builds next week's plan, and sends parents a clear AI summary.","Weekly wrap ✓ 4 study blocks completed, essay submitted, game won. Next week's flight plan is live. Parent briefing sent.","Premium · Fully autonomous"]
   ];
   const wkChips=document.getElementById("wkChips"),wkB=document.getElementById("wkBadge"),wkL=document.getElementById("wkLine"),wkS=document.getElementById("wkSub");
   const wkT=document.getElementById("wkTime"),wkD=document.getElementById("wkDay"),wkTr=document.getElementById("wkTrig"),wkN=document.getElementById("wkNote"),wkTg=document.getElementById("wkTags");
@@ -1147,7 +1145,7 @@
   function wkShow(i){
     wkIdx=i; const [d,time,tier,trig,line,sub,note,tags]=WEEK[i];
     wkT.textContent=time; wkD.textContent=d+"DAY".replace("DAY",""); wkD.textContent={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday",Sat:"Saturday",Sun:"Sunday"}[d];
-    wkB.textContent = tier==="prem" ? "Premium · Fable 5" : "Advanced";
+    wkB.textContent = tier==="prem" ? "Premium" : "Advanced";
     wkB.className = "wk-badge " + (tier==="prem"?"prem":"adv");
     wkTr.textContent=trig; wkL.textContent=line; wkS.textContent=sub; wkN.textContent=note; wkTg.textContent=tags;
     [...wkChips.children].forEach((ch,j)=>ch.classList.toggle("on",j===i));
