@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TeenPilot — Never fall behind again.</title>
   <meta name="description" content="The AI co-pilot for NZ secondary school students. School, sport, work and life — all in one place. Free to start."/>
+  <link rel="canonical" href="https://teenpilot-website.vercel.app/"/>
+  <meta name="theme-color" content="#080c14"/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="TeenPilot"/>
+  <meta property="og:title" content="TeenPilot — the AI co-pilot for NZ students"/>
+  <meta property="og:description" content="School, sport, work and life — one AI co-pilot that connects it all and tells you what to do next. Free to start."/>
+  <meta property="og:url" content="https://teenpilot-website.vercel.app/"/>
+  <meta property="og:image" content="https://teenpilot-website.vercel.app/og.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="TeenPilot — the AI co-pilot for NZ students"/>
+  <meta name="twitter:description" content="School, sport, work and life — one AI co-pilot that connects it all. Free to start."/>
+  <meta name="twitter:image" content="https://teenpilot-website.vercel.app/og.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css" />
@@ -220,19 +235,6 @@
     .hp-chip.used{opacity:.35;pointer-events:none}
     .hp-limit{font-size:11px;color:var(--textDim);padding:8px 2px 0;text-align:center}
     .hp-limit a{color:var(--accent);text-decoration:none;font-weight:700}
-    /* ── XP pill + achievement toast ── */
-    .xp-pill{position:fixed;bottom:18px;right:18px;z-index:998;background:#0d1320;border:1px solid var(--border2);border-radius:100px;padding:8px 14px;font-family:var(--display);font-weight:800;font-size:13px;color:var(--accent);display:flex;align-items:center;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.4);transition:transform .2s}
-    .xp-pill.bump{transform:scale(1.15)}
-    .ach-toast{position:fixed;top:74px;left:50%;transform:translateX(-50%);z-index:999;background:#101827;border:1px solid rgba(74,222,128,.35);border-radius:16px;padding:13px 18px;min-width:250px;max-width:330px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);display:flex;align-items:center;gap:12px;animation:achPop .5s cubic-bezier(.34,1.56,.64,1),achGlow 2s ease .5s infinite}
-    .ach-toast .at-tile{width:44px;height:44px;border-radius:13px;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent);font-size:22px;animation:achSpin .6s cubic-bezier(.34,1.56,.64,1)}
-    .ach-toast .at-cap{font-size:10px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2px}
-    .ach-toast .at-title{font-family:var(--display);font-size:15px;font-weight:800;color:var(--text)}
-    .ach-toast .at-xp{font-size:12px;color:var(--accent);font-weight:700;margin-top:1px}
-    .ach-plane{position:absolute;top:45%;left:-30px;color:var(--accent);font-size:22px;opacity:0;animation:achFly 2.2s ease-in-out .3s forwards}
-    @keyframes achPop{0%{transform:translateX(-50%) translateY(-30px) scale(.8);opacity:0}60%{transform:translateX(-50%) translateY(6px) scale(1.04);opacity:1}100%{transform:translateX(-50%) translateY(0) scale(1);opacity:1}}
-    @keyframes achGlow{0%,100%{box-shadow:0 8px 32px rgba(0,0,0,.4)}50%{box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 30px rgba(74,222,128,.5)}}
-    @keyframes achSpin{0%{transform:rotate(-180deg) scale(0)}100%{transform:rotate(0) scale(1)}}
-    @keyframes achFly{0%{left:-30px;transform:translateY(20px);opacity:0}15%{opacity:1}85%{opacity:1}100%{left:105%;transform:translateY(-30px);opacity:0}}
     .hero-plane{cursor:pointer;pointer-events:auto!important}
 
     /* ── Tap-to-reveal feature cards ── */
@@ -272,20 +274,6 @@
     .wk-badge.prem{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.35)}
     .wk-none{margin-top:12px;font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.5px}
 
-    /* ── Boarding pass generator ── */
-    .bpass{padding:84px 24px;background:var(--surface);border-top:1px solid var(--border)}
-    .bp-input{display:flex;gap:8px;justify-content:center;margin:26px auto 22px;max-width:380px}
-    .bp-input input{flex:1;background:var(--bg);border:1.5px solid var(--border2);border-radius:100px;padding:12px 18px;color:var(--text);font-family:var(--font);font-size:15px;outline:none;text-align:center}
-    .bp-input input:focus{border-color:var(--accent)}
-    .bp-wrap{display:flex;justify-content:center}
-    #bpCanvas{width:300px;max-width:88vw;border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 50px rgba(74,222,128,.08)}
-    .bp-dl{display:inline-flex;align-items:center;gap:7px;margin-top:18px;background:var(--accent);color:#050d08;border:none;font-family:var(--display);font-weight:800;font-size:15px;padding:13px 26px;border-radius:100px;cursor:pointer;transition:transform .15s}
-    .bp-dl:hover{transform:translateY(-2px)}
-
-    .xp-pop{position:fixed;bottom:64px;right:18px;z-index:998;background:#101827;border:1px solid var(--border2);border-radius:14px;padding:13px 16px;max-width:250px;font-size:12.5px;color:var(--textMid);line-height:1.65;box-shadow:0 12px 40px rgba(0,0,0,.5);display:none;animation:fdIn .25s ease}
-    .xp-pop.show{display:block}
-    .xp-pop b{color:var(--accent)}
-    .xp-pill{cursor:pointer}
   </style>
 </head>
 <body>
@@ -297,7 +285,7 @@
     <a href="#features">Features</a>
     <a href="#advanced">Advanced AI</a>
     <a href="#parents">Parents</a>
-    <a href="#schools">Schools</a>
+    <a href="#teampilot">TeamPilot</a>
     <a href="#pricing">Pricing</a>
   </div>
   <a href="https://app.teenpilot.co.nz" class="nav-cta" target="_blank">Try it free <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></a>
@@ -305,8 +293,6 @@
     <span></span><span></span><span></span>
   </div>
 </nav>
-<div class="xp-pill" id="xpPill"><i class="ti ti-plane-tilt"></i><span id="xpVal">0 XP</span></div>
-<div class="xp-pop" id="xpPop"><b>You're earning XP</b> by exploring this site — 7 achievements are hidden here. In the app, XP is your flight hours: level up from <b>Cadet to Captain</b>, with perks on the way. ✈</div>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu">
@@ -314,7 +300,7 @@
   <a href="#features" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Features</a>
   <a href="#advanced" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Advanced AI</a>
   <a href="#parents" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Parents</a>
-  <a href="#schools" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Schools</a>
+  <a href="#teampilot" onclick="document.querySelector('.mobile-menu').classList.remove('open')">TeamPilot</a>
   <a href="#pricing" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Pricing</a>
   <a href="https://app.teenpilot.co.nz" target="_blank" style="color:var(--accent)">Try free <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></a>
 </div>
@@ -331,7 +317,8 @@
   <div class="av-picker" id="avPicker"></div>
   <div class="avp-info" id="avpInfo" style="display:none"></div>
   <div class="hero-ctas">
-    <a href="https://app.teenpilot.co.nz" class="btn-primary" target="_blank">Try it free — 3 mins <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></a>
+    <a href="https://app.teenpilot.co.nz" class="btn-primary" target="_blank">Get started free <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></a>
+    <a href="https://app.teenpilot.co.nz" class="btn-ghost" target="_blank" style="border:1px solid var(--border2)">Try the demo</a>
   </div>
   <div style="font-size:15px;color:var(--textMid);margin-bottom:8px;position:relative;z-index:1;font-style:italic">A helping hand in a busy life.</div>
   <div class="hero-note">Free to start · No credit card · No school approval needed</div>
@@ -408,7 +395,7 @@
 <section class="agentic" id="advanced">
   <div class="container">
     <div style="text-align:center;margin-bottom:64px">
-      <div class="plan-badge" style="margin:0 auto 16px;display:inline-flex"><i class="ti ti-rocket" style="color:var(--accent)"></i> Advanced AI — $29.99/mo</div>
+      <div class="plan-badge" style="margin:0 auto 16px;display:inline-flex"><i class="ti ti-rocket" style="color:var(--accent)"></i> Advanced AI</div>
       <h2 class="section-title reveal" style="margin-bottom:18px">A helping hand<br>in a busy life.</h2>
       <p style="font-size:18px;color:var(--textMid);line-height:1.85;max-width:620px;margin:0 auto" class="reveal">Advanced Co-Pilot doesn't wait to be asked. It watches your whole life — school, sport, work, health, social — spots what needs attention, and acts before you even realise there's a problem.</p>
     </div>
@@ -441,85 +428,12 @@
           <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span><span><strong style="color:var(--text)">Privacy respected</strong> — Co-Pilot conversations never shared with parents</span></div>
         </div>
       </div>
-      <div style="background:var(--bg);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius);padding:24px">
-        <div style="font-size:28px;margin-bottom:12px"><i class="ti ti-clipboard" style="color:var(--accent)"></i></div>
-        <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:#fbbf24">For teachers</div>
-        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Population-level insight — not surveillance. Genuine understanding of how your class is tracking.</p>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Class workload overview</strong> — see if your class is overwhelmed before it happens</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Completion trends</strong> — which assignments students struggle with</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Exam pressure forecasting</strong> — AI flags assessment pile-ups</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✓</span><span><strong style="color:var(--text)">Coming soon</strong> — teacher portal with class insights dashboard</span></div>
-        </div>
-      </div>
-      <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius);padding:24px">
-        <div style="font-size:28px;margin-bottom:12px"><i class="ti ti-ball-football" style="color:var(--accent)"></i></div>
-        <div style="font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:10px;color:var(--purple)">For sports clubs</div>
-        <p style="font-size:14px;color:var(--textMid);line-height:1.75;margin-bottom:14px">Replace clunky team apps and endless WhatsApp threads. AI that helps the whole team plan.</p>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Team squad chat</strong> — safe and moderated by design, everyone in one place</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Fixture management</strong> — update once, everyone's calendar syncs</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">@Co-Pilot for the team</strong> — "who's available Saturday?" AI checks and responds</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Live transport</strong> — players see exactly how to get to the venue</span></div>
-          <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--purple)">✓</span><span><strong style="color:var(--text)">Works for any club</strong> — football, netball, swimming, band, dance, gym</span></div>
-        </div>
-      </div>
     </div>
 
-    <!-- Tier comparison -->
+    <!-- AI routing -->
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:64px" class="reveal">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
-        <div style="font-family:var(--display);font-size:18px;font-weight:800">What actually changes at each tier</div>
-        <div style="font-size:13px;color:var(--textDim)">AI matched to the task, not the tier</div>
-      </div>
-      <p style="font-size:14px;color:var(--textMid);line-height:1.7;max-width:760px;margin:-4px 0 20px">TeenPilot automatically uses the right level of AI for every task — fast models for quick questions, deeper reasoning for complex work. Tiers differ by how many messages you get and what Co-Pilot can do, not by which AI you reach.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden">
-        <div style="padding:18px;border-right:1px solid var(--border)">
-          <div style="font-size:12px;font-weight:700;color:var(--textDim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px">Free — get started</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-message-circle" style="color:var(--accent)"></i></span>10 messages/day</div>
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-book" style="color:var(--accent)"></i></span>Timetable and calendar</div>
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-book" style="color:var(--accent)"></i></span>Assignments tracker</div>
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-message-circle" style="color:var(--accent)"></i></span>Squad chat</div>
-            <div style="font-size:12px;color:var(--textDim);display:flex;gap:8px"><span><i class="ti ti-backpack" style="color:var(--accent)"></i></span>Sport + social calendar</div>
-          </div>
-        </div>
-        <div style="padding:18px;border-right:1px solid var(--border)">
-          <div style="font-size:12px;font-weight:700;color:var(--textMid);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px">Pro — answers when you ask</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-message-circle" style="color:var(--accent)"></i></span>30 messages/day</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-book" style="color:var(--accent)"></i></span>Exam study plans</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-file-text" style="color:var(--accent)"></i></span>Document upload</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-users" style="color:var(--accent)"></i></span>Parent portal</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-message-circle" style="color:var(--accent)"></i></span>Squad chat + DMs</div>
-            <div style="font-size:12px;color:var(--textMid);display:flex;gap:8px"><span><i class="ti ti-music" style="color:var(--accent)"></i></span>Avatar voices</div>
-          </div>
-        </div>
-        <div style="padding:20px;border-right:1px solid var(--border);background:rgba(167,139,250,0.04)">
-          <div style="font-size:13px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px">Advanced — acts before you ask</div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)"><i class="ti ti-rocket" style="color:var(--accent)"></i></span>60 messages/day</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>7am morning briefing — automatic</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Deadline risk alerts — unprompted</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Schedule auto-replanned</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Sick day handled end to end</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>Live transport integration</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:var(--purple)">✓</span>AI gym + nutrition timing</div>
-          </div>
-        </div>
-        <div style="padding:20px;background:rgba(251,191,36,0.04)">
-          <div style="font-size:13px;font-weight:700;color:#fbbf24;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px">Premium ✨ — the full picture</div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>100 messages/day</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Long-running study sessions</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Deep exam prep — full paper analysis</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>TeenPilot Academy — AI tutorials</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Voice calls — Co-Pilot speaks and listens</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Group video study sessions</div>
-            <div style="font-size:13px;color:var(--text);display:flex;gap:8px"><span style="color:#fbbf24">✓</span>Advanced parent weekly briefing</div>
-          </div>
-        </div>
-      </div>
+      <div style="font-family:var(--display);font-size:18px;font-weight:800;margin-bottom:10px">One AI, matched to every task</div>
+      <p style="font-size:15px;color:var(--textMid);line-height:1.75;max-width:760px;margin:0">TeenPilot automatically uses the right level of AI for every task — fast models for quick questions, deeper reasoning for complex work. Tiers differ by how many messages you get and what Co-Pilot can do, not by which AI you reach.</p>
     </div>
 
     <!-- Invisible work panel -->
@@ -563,9 +477,7 @@
               <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Works independently for hours</div>
               <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Reads and analyses full exam papers</div>
               <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Verifies its own work and corrections</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Leads interactive Academy tutorials</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Speaks and listens in voice calls</div>
-              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Joins group video study sessions</div>
+              <div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#fbbf24">✨</span>Plans next week before you ask</div>
             </div>
           </div>
         </div>
@@ -615,8 +527,8 @@
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:28px" class="reveal">
       <div style="background:var(--bg);border:1px solid rgba(74,222,128,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px"><i class="ti ti-backpack" style="color:var(--accent)"></i></div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For students</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">Express yourself freely. Your banter, humour and culture are welcome. TeenPilot doesn't police normal teen conversation — it stops content that could genuinely hurt someone.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span>Normal chat, slang and banter — all fine</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span>You'll know if something is blocked and why</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:var(--accent)">✓</span>Designed to block content you don't want being sent to you</div></div></div>
-      <div style="background:var(--bg);border:1px solid rgba(74,158,255,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px"><i class="ti ti-users" style="color:var(--accent)"></i></div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For parents</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">Built to screen every image before delivery — designed to block harmful content before anyone sees it. Secured by Oracle Cloud — data stored in NZ/AU, never sold.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>Built to AI-screen every message and image</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>Image moderation designed to block nude images — coming before launch</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>NZ Privacy Act 2020 compliant</div></div></div>
-      <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px"><i class="ti ti-school" style="color:var(--accent)"></i></div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For schools</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">TeenPilot is designed to meet the standards governments are moving to mandate. Safe messaging is core, not an add-on.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Designed to meet proposed UK and NZ digital safety standards</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>No school liability from student messaging</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Recommend to parents with confidence</div></div></div>
+      <div style="background:var(--bg);border:1px solid rgba(74,158,255,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px"><i class="ti ti-users" style="color:var(--accent)"></i></div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">For parents</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">Built to screen every image before delivery — designed to block harmful content before anyone sees it. And no adult can start a DM with your child — adult ↔ minor direct messages are blocked by design.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>Serious flags notify a parent automatically</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>Image moderation designed to block nude images — coming before launch</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#4a9eff">✓</span>NZ Privacy Act 2020 compliant</div></div></div>
+      <div style="background:var(--bg);border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius);padding:22px"><div style="font-size:26px;margin-bottom:10px"><i class="ti ti-school" style="color:var(--accent)"></i></div><div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">Built to the standard</div><p style="font-size:13px;color:var(--textMid);line-height:1.7;margin-bottom:10px">TeenPilot is designed to meet the standards governments are moving to mandate. Safe messaging is core, not an add-on.</p><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Designed to meet proposed UK and NZ digital safety standards</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Moderation across squad chats, DMs and Co-Pilot</div><div style="font-size:13px;color:var(--textMid);display:flex;gap:8px"><span style="color:#a78bfa">✓</span>Adults and minors kept in separate lanes</div></div></div>
     </div>
     <div style="background:linear-gradient(135deg,rgba(74,222,128,0.04),rgba(74,158,255,0.04));border:1px solid rgba(74,222,128,0.15);border-radius:var(--radius);padding:24px;text-align:center" class="reveal">
       <div style="font-family:var(--display);font-size:18px;font-weight:800;margin-bottom:8px">How moderation works</div>
@@ -686,40 +598,43 @@
   </div>
 </section>
 
-<!-- SCHOOLS -->
-<section class="schools" id="schools">
+<!-- TEAMPILOT -->
+<section id="teampilot" style="padding:90px 24px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="container">
-    <div class="schools-inner">
+    <span class="section-label reveal" style="color:#2dd4bf">TeamPilot · for coaches</span>
+    <h2 class="section-title reveal">The coach's AI<br>team manager.</h2>
+    <p class="section-sub reveal">One instruction — "training's moved to Thursday 5pm" — and TeamPilot makes the event, syncs every player's calendar, and messages the team: a calm note for parents, a hyped one for players. Run the whole season from one line of text.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:44px 0 28px" class="reveal">
+      <div style="background:var(--bg);border:1px solid rgba(45,212,191,0.2);border-radius:var(--radius);padding:24px">
+        <div style="font-size:26px;margin-bottom:12px"><i class="ti ti-calendar-event" style="color:#2dd4bf"></i></div>
+        <div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">One instruction → done</div>
+        <p style="font-size:14px;color:var(--textMid);line-height:1.7">Say it once. TeamPilot creates the fixture or training and syncs it to every player's calendar.</p>
+      </div>
+      <div style="background:var(--bg);border:1px solid rgba(45,212,191,0.2);border-radius:var(--radius);padding:24px">
+        <div style="font-size:26px;margin-bottom:12px"><i class="ti ti-messages" style="color:#2dd4bf"></i></div>
+        <div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">Tone-split messaging</div>
+        <p style="font-size:14px;color:var(--textMid);line-height:1.7">Parents get the calm version, players get the hyped one — same update, two voices, one tap.</p>
+      </div>
+      <div style="background:var(--bg);border:1px solid rgba(45,212,191,0.2);border-radius:var(--radius);padding:24px">
+        <div style="font-size:26px;margin-bottom:12px"><i class="ti ti-ball-football" style="color:#2dd4bf"></i></div>
+        <div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">Game-day live scoring</div>
+        <p style="font-size:14px;color:var(--textMid);line-height:1.7">Score the game live. Parents on the sideline — and the ones stuck at home — follow every play.</p>
+      </div>
+      <div style="background:var(--bg);border:1px solid rgba(45,212,191,0.2);border-radius:var(--radius);padding:24px">
+        <div style="font-size:26px;margin-bottom:12px"><i class="ti ti-clipboard-check" style="color:#2dd4bf"></i></div>
+        <div style="font-family:var(--display);font-size:16px;font-weight:700;margin-bottom:8px">Squad readiness</div>
+        <p style="font-size:14px;color:var(--textMid);line-height:1.7">Who's in, who's out, who's carrying a knock — the whole squad at a glance before you pick.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(45,212,191,0.06),rgba(74,158,255,0.04));border:1px solid rgba(45,212,191,0.2);border-radius:var(--radius);padding:24px 26px" class="reveal">
       <div>
-        <span class="section-label reveal">For schools</span>
-        <h2 class="section-title reveal">The AI layer your students already want.</h2>
-        <p style="font-size:17px;color:var(--textMid);line-height:1.85;margin-bottom:24px" class="reveal">TeenPilot works without school involvement — but works better with it. Schools get a population-level dashboard showing workload, wellbeing trends and engagement.</p>
-        <div class="schools-features reveal">
-          <div class="school-feat"><div class="school-feat-icon"><i class="ti ti-chart-bar" style="color:var(--accent)"></i></div><div><div class="school-feat-title">School dashboard</div><div class="school-feat-desc">Workload trends, XP engagement levels, wellbeing mood data — all anonymised and aggregated.</div></div></div>
-          <div class="school-feat"><div class="school-feat-icon"><i class="ti ti-lock" style="color:var(--accent)"></i></div><div><div class="school-feat-title">Privacy first</div><div class="school-feat-desc">Student conversations and wellbeing check-ins are never visible to school admin. Compliant with NZ Privacy Act 2020.</div></div></div>
-          <div class="school-feat"><div class="school-feat-icon"><i class="ti ti-school" style="color:var(--accent)"></i></div><div><div class="school-feat-title">KAMAR integration</div><div class="school-feat-desc">Timetable, cycle days and NCEA credits sync automatically when school approves API access.</div></div></div>
-          <div class="school-feat"><div class="school-feat-icon"><i class="ti ti-heart" style="color:var(--accent)"></i></div><div><div class="school-feat-title">Wellbeing support</div><div class="school-feat-desc">Co-Pilot surfaces NZ mental health resources when students are struggling — always pointing to real human support.</div></div></div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a href="mailto:schools@teenpilot.co.nz" class="btn-primary" style="font-size:15px;padding:14px 28px">Contact us about schools →</a>
-        </div>
+        <div style="font-family:var(--display);font-weight:800;font-size:19px;margin-bottom:4px"><span style="color:#2dd4bf">Free forever</span> for coaches.</div>
+        <div style="font-size:14px;color:var(--textMid);line-height:1.6">Every player gets TeenPilot. Every parent gets the portal. The whole team, connected.</div>
       </div>
-      <div class="reveal" style="background:var(--bg);border:1px solid rgba(74,222,128,0.15);border-radius:20px;padding:26px">
-        <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:18px">School site licence</div>
-        <div style="font-family:var(--display);font-size:38px;font-weight:800;letter-spacing:-2px;margin-bottom:4px">$49<small style="font-size:18px;color:var(--textMid);font-weight:400;letter-spacing:0">/student</small></div>
-        <div style="font-size:14px;color:var(--textDim);margin-bottom:20px">per year · NZD · billed to school</div>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:22px">
-          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>Full Pro features for every student</div>
-          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>School dashboard and analytics</div>
-          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>Teacher portal and class insights</div>
-          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>KAMAR timetable integration</div>
-          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>Microsoft 365 and Google Workspace</div>
-          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>NZ Privacy Act 2020 compliant</div>
-          <div style="display:flex;gap:8px;font-size:14px;color:var(--textMid)"><span style="color:var(--accent)">✓</span>Oracle Cloud Infrastructure</div>
-        </div>
-        <a href="mailto:schools@teenpilot.co.nz" style="display:block;text-align:center;padding:13px;background:var(--accentDim);border:1px solid rgba(74,222,128,0.25);color:var(--accent);border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;font-family:var(--display)">Get in touch →</a>
-        <div style="font-size:12px;color:var(--textDim);text-align:center;margin-top:10px">Minimum 50 students · Custom pricing for large schools</div>
-      </div>
+      <a href="https://app.teenpilot.co.nz" target="_blank" class="btn-primary" style="background:#2dd4bf;box-shadow:0 0 40px rgba(45,212,191,0.3)">Start your team <i class="ti ti-plane-tilt" style="color:#083344"></i></a>
+    </div>
+    <div style="max-width:660px;margin:30px auto 0;text-align:center;font-size:14px;color:var(--textMid);line-height:1.7" class="reveal">
+      <strong style="color:var(--text)">For schools:</strong> nothing to buy, nothing to set up. Students who use TeenPilot just turn up organised — timetables, sport, assignments and exam prep already handled.
     </div>
   </div>
 </section>
@@ -730,7 +645,8 @@
     <h2 class="reveal">Stop stressing.<br>Start <em style="color:var(--accent);font-style:normal">flying.</em></h2>
     <p style="font-size:18px;color:var(--textMid);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.75" class="reveal">Free to start. 3 minutes to set up. No school approval needed.</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:14px" class="reveal">
-      <a href="https://app.teenpilot.co.nz" class="btn-primary" target="_blank">Try it free <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></a>
+      <a href="https://app.teenpilot.co.nz" class="btn-primary" target="_blank">Get started free <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></a>
+      <a href="https://app.teenpilot.co.nz" class="btn-ghost" target="_blank" style="border:1px solid var(--border2)">Try the demo</a>
     </div>
     <div style="font-size:14px;color:var(--textDim)" class="reveal">
       Already using it? Share with a mate →
@@ -741,30 +657,12 @@
 
 <!-- PRICING -->
 
-<!-- BOARDING PASS GENERATOR -->
-<section class="bpass" id="boardingpass">
-  <div class="container" style="text-align:center">
-    <span class="section-label reveal">Launch · 20 July 2026</span>
-    <h2 class="section-title reveal">Claim your boarding pass.</h2>
-    <p class="section-sub reveal" style="margin-bottom:0">Your name. Your Co-Pilot's colours. Post it — your seat's reserved.</p>
-    <div class="bp-input reveal">
-      <input id="bpName" maxlength="14" placeholder="Type your first name..." autocomplete="off">
-    </div>
-    <div class="bp-input reveal" style="margin-top:-14px">
-      <input id="bpEmail" type="email" placeholder="Your email — join the waitlist" autocomplete="email">
-    </div>
-    <div class="bp-wrap reveal"><canvas id="bpCanvas" width="540" height="960"></canvas></div>
-    <button class="bp-dl reveal" id="bpDl"><i class="ti ti-download"></i> Save my pass</button>
-    <div id="bpStatus" class="reveal" style="margin-top:12px;font-size:13px;font-weight:600;min-height:18px"></div>
-    <div style="margin-top:14px;font-size:13px;color:var(--textDim)" class="reveal">Then board the real thing — <a href="https://app.teenpilot.co.nz" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:700">try the app free →</a></div>
-  </div>
-</section>
 
 <section class="pricing" id="pricing">
   <div class="container">
     <span class="section-label reveal">Pricing</span>
-    <h2 class="section-title reveal">One app. Every part of student life.</h2>
-    <p class="section-sub reveal">Try the demo first — no account needed. Create a free account and get 10 Co-Pilot messages every day. Upgrade when you're ready.</p>
+    <h2 class="section-title reveal">Start free — upgrade when you're ready.</h2>
+    <p class="section-sub reveal">Try the demo — no account needed. Create a free account and get started today. Paid plans add more messages and features, launching soon.</p>
     <div style="display:flex;justify-content:center;margin-bottom:32px" class="reveal">
       <a href="https://app.teenpilot.co.nz" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0f1a10,#0a1420);border:1px solid rgba(74,222,128,0.25);border-radius:14px;padding:14px 24px;text-decoration:none">
         <span style="font-size:22px"><i class="ti ti-plane-tilt" style="color:var(--accent)"></i></span>
@@ -775,85 +673,19 @@
         <span style="font-size:13px;color:var(--accent);font-weight:600;margin-left:8px">Try now →</span>
       </a>
     </div>
-    <div class="pricing-grid reveal">
-      <div class="price-card">
-        <div class="price-plan">Free</div>
-        <div class="price-amount"><small>$</small>0</div>
-        <div class="price-period">forever free</div>
-        <div class="price-annual" style="color:var(--textDim)">No credit card · No catch · Try demo first</div>
-        <ul class="price-list">
-          <li>Timetable and life calendar</li>
-          <li>10 Co-Pilot messages/day</li>
-          <li>Assignments and task tracking</li>
-          <li>Sport, work and social calendar</li>
-          <li>Morning notifications</li>
-          <li>Squad chat + @Co-Pilot</li>
-          <li>3 Co-Pilot avatars</li>
-        </ul>
-        <a href="https://app.teenpilot.co.nz" class="price-btn outline" target="_blank">Get started free</a>
+    <div class="reveal" style="max-width:660px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px 32px;text-align:center">
+      <div style="font-family:var(--display);font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-1.5px;margin-bottom:6px">Free to start.</div>
+      <div style="font-size:16px;color:var(--textMid);margin-bottom:26px">No credit card. No catch. Set up in 3 minutes.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:24px">
+        <a href="https://app.teenpilot.co.nz" class="btn-primary" target="_blank">Get started free <i class="ti ti-plane-tilt" style="color:var(--accent)"></i></a>
+        <a href="https://app.teenpilot.co.nz" class="btn-ghost" target="_blank" style="border:1px solid var(--border2)">Try the demo</a>
       </div>
-      <div class="price-card featured">
-        <div class="price-badge">Most popular</div>
-        <div class="price-plan">Student Pro</div>
-        <div class="price-amount"><small>$</small>14.99</div>
-        <div class="price-period">per month · NZD</div>
-        <div class="price-annual">or $149/year — save $30</div>
-        <ul class="price-list">
-          <li>Everything in Free</li>
-          <li>30 Co-Pilot messages/day</li>
-          <li>Exam study plans + practice questions</li>
-          <li>Upload worksheets and exam papers</li>
-          <li>Squad chat with Co-Pilot</li>
-          <li>Voice input · Read aloud</li>
-          <li>Microsoft Teams + Google sync</li>
-          <li>Parent portal included</li>
-          <li>6 Co-Pilot avatar styles</li>
-        </ul>
-        <a href="https://app.teenpilot.co.nz" class="price-btn primary" target="_blank">Start free trial</a>
-      </div>
-      <div class="price-card advanced">
-        <div class="price-badge">Advanced AI</div>
-        <div class="price-plan">Advanced</div>
-        <div class="price-amount"><small>$</small>29.99</div>
-        <div class="price-period">per month · NZD</div>
-        <div class="price-annual">or $299/year — save $60</div>
-        <ul class="price-list">
-          <li>Everything in Pro</li>
-          <li>60 Co-Pilot messages/day</li>
-          <li>All 8 Co-Pilot avatars</li>
-          <li>Avatar voices — Co-Pilot speaks to you</li>
-          <li>7am morning agent — automatic daily brief</li>
-          <li>Absence notification — parent one-tap approval</li>
-          <li>Deadline risk alerts — unprompted</li>
-          <li>Schedule change auto-replanning</li>
-          <li>Live transport — real-time bus and train</li>
-          <li>Digital balance + study mode</li>
-        </ul>
-        <a href="https://app.teenpilot.co.nz" class="price-btn purple" target="_blank">Try Advanced</a>
-      </div>
-      <div class="price-card" style="border:1px solid rgba(251,191,36,0.3);background:linear-gradient(135deg,rgba(251,191,36,0.04),rgba(251,146,60,0.04))">
-        <div class="price-badge" style="background:linear-gradient(135deg,#fbbf24,#fb923c);color:#050d08">Premium ✨</div>
-        <div class="price-plan" style="color:#fbbf24">Premium</div>
-        <div class="price-amount" style="color:#fbbf24"><small>$</small>49.99</div>
-        <div class="price-period">per month · NZD</div>
-        <div class="price-annual" style="color:rgba(251,191,36,0.7)">or $499/year — save $100</div>
-        <ul class="price-list">
-          <li>Everything in Advanced</li>
-          <li>100 Co-Pilot messages/day</li>
-          <li>All 8 Co-Pilot avatars</li>
-          <li>Long-running study sessions — Co-Pilot works independently</li>
-          <li>Deep exam prep — full paper analysis and revision plan</li>
-          <li>TeenPilot Academy — AI-led tutorials and courses</li>
-          <li>Voice calls — Co-Pilot speaks, listens and responds</li>
-          <li>Group video study sessions</li>
-          <li>Advanced parent dashboard — weekly AI briefing</li>
-          <li>Priority support</li>
-        </ul>
-        <a href="https://app.teenpilot.co.nz" class="price-btn" style="background:linear-gradient(135deg,#fbbf24,#fb923c);color:#050d08;font-weight:700;border:none" target="_blank">Try Premium</a>
+      <div style="display:inline-flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:9px 18px;font-size:14px;color:var(--textMid)">
+        <i class="ti ti-rocket" style="color:var(--accent)"></i> Paid plans from <strong style="color:var(--text)">$14.99/mo</strong> · full plans at launch
       </div>
     </div>
-    <div style="text-align:center;margin-top:28px;font-size:14px;color:var(--textDim)">
-      All prices NZD · Cancel anytime · Schools contact <a href="mailto:schools@teenpilot.co.nz" style="color:var(--accent);text-decoration:none">schools@teenpilot.co.nz</a> · Powered by Anthropic Claude · Oracle Cloud Infrastructure
+    <div style="text-align:center;margin-top:22px;font-size:13px;color:var(--textDim)">
+      Prices in NZD · Cancel anytime · Powered by Anthropic Claude
     </div>
   </div>
 </section>
@@ -862,11 +694,11 @@
 <div style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 24px">
   <div class="container">
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:28px;align-items:center">
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px"><i class="ti ti-lock" style="color:var(--accent)"></i></span><span><strong style="color:var(--text)">Oracle Cloud Infrastructure</strong> · Enterprise-grade security</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px"><i class="ti ti-lock" style="color:var(--accent)"></i></span><span><strong style="color:var(--text)">No adult ↔ minor DMs</strong> · Safe by design</span></div>
       <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px"><i class="ti ti-shield-check" style="color:var(--accent)"></i></span><span><strong style="color:var(--text)">AI Content Moderation</strong> · Screening every message, live at launch</span></div>
       <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px"><i class="ti ti-building-bank" style="color:var(--accent)"></i></span><span><strong style="color:var(--text)">NZ Privacy Act 2020</strong> · Compliant by design</span></div>
       <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px"><i class="ti ti-robot" style="color:var(--accent)"></i></span><span><strong style="color:var(--text)">Powered by Anthropic Claude</strong> · Leading AI safety research</span></div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px">🇳🇿</span><span><strong style="color:var(--text)">Data stored in NZ/AU</strong> · Never sold, never shared</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--textMid)"><span style="font-size:18px">🇳🇿</span><span><strong style="color:var(--text)">Built in New Zealand</strong> · Your data is never sold</span></div>
     </div>
   </div>
 </div>
@@ -889,20 +721,18 @@
       <div class="footer-col">
         <div class="footer-col-title">For</div>
         <a href="#parents">Parents</a>
-        <a href="#schools">Schools</a>
-        <a href="mailto:schools@teenpilot.co.nz">School enquiries</a>
+        <a href="#teampilot">Coaches</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Company</div>
         <a href="mailto:hello@teenpilot.co.nz">Contact us</a>
-        <a href="https://agentec.co.nz" target="_blank">Agentec</a>
         <a href="#privacy">Privacy policy</a>
         <a href="#terms">Terms of use</a>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2026 TeenPilot · A product of Agentec Ltd · Auckland, New Zealand · <span style="color:var(--accent)">Secured by Oracle Cloud Infrastructure</span></div>
+    <div class="footer-copy">© 2026 TeenPilot · Auckland, New Zealand</div>
     <div class="footer-legal"><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="mailto:hello@teenpilot.co.nz">Contact</a></div>
   </div>
 </footer>
@@ -917,11 +747,11 @@
     <h2>What we never share</h2>
     <p>Your Co-Pilot conversations, wellbeing check-ins and personal messages are private. We never share individual student data with schools, teachers or third parties without your explicit consent.</p>
     <h2>School data</h2>
-    <p>If your school connects KAMAR or Microsoft 365, we access only the data needed to power your experience — timetable, assignments and calendar. This is read-only. You can disconnect at any time.</p>
+    <p>If you connect your Microsoft or Google school account, we access only what's needed to power your experience — timetable, assignments and calendar. This is read-only, and you can disconnect at any time.</p>
     <h2>Parent access</h2>
     <p>Parents see aggregated information — upcoming assignments, exam dates, sport schedule and workload level. They never see your Co-Pilot conversations or wellbeing check-ins.</p>
     <h2>Data storage</h2>
-    <p>Your data is stored securely in New Zealand and Australia on Oracle Cloud Infrastructure, operated by Agentec Ltd. We comply with the New Zealand Privacy Act 2020.</p>
+    <p>Your data is stored in a managed Postgres database (Supabase) hosted in Sydney, Australia, and the service is delivered through Vercel. TeenPilot is operated by Agentec Ltd (Auckland, New Zealand). We comply with the New Zealand Privacy Act 2020.</p>
     <h2>Your rights</h2>
     <p>You can request access to, correction of, or deletion of your data, and we will action verified requests. To make a request, email <a href="mailto:privacy@teenpilot.co.nz">privacy@teenpilot.co.nz</a>.</p>
     <h2>Contact</h2>
@@ -973,25 +803,7 @@
   let curAv = localStorage.getItem("tp_site_av") || "copilot";
   let chipUses = 0; const CHIP_LIMIT = 6;
 
-  const ACH = {pick:["Made It Mine",50,"palette"],voice:["Voice Check",25,"volume"],chips:["Test Flight",75,"send"],pricing:["Window Shopper",50,"eye"],safe:["Safety First",25,"shield-check"],plane:["Plane Spotter",100,"plane-tilt"]};
-  let xp = parseInt(localStorage.getItem("tp_site_xp")||"0");
-  let got = JSON.parse(localStorage.getItem("tp_site_ach")||"{}");
-  const xpVal = document.getElementById("xpVal"), xpPill = document.getElementById("xpPill");
-  function setXP(){ xpVal.textContent = xp + " XP"; }
-  setXP();
-  function unlock(id){
-    if(got[id]) return; got[id]=1; const [title,amt,icon]=ACH[id];
-    xp+=amt; localStorage.setItem("tp_site_xp",xp); localStorage.setItem("tp_site_ach",JSON.stringify(got));
-    setXP(); xpPill.classList.add("bump"); setTimeout(()=>xpPill.classList.remove("bump"),300);
-    const t=document.createElement("div"); t.className="ach-toast";
-    t.innerHTML='<div class="ach-plane"><i class="ti ti-plane-tilt"></i></div><div class="at-tile"><i class="ti ti-'+icon+'"></i></div><div><div class="at-cap">Achievement unlocked</div><div class="at-title">'+title+'</div><div class="at-xp">+'+amt+' XP</div></div>';
-    document.body.appendChild(t); setTimeout(()=>t.remove(),5200);
-    if(Object.keys(got).length===Object.keys(ACH).length) setTimeout(()=>{
-      const f=document.createElement("div"); f.className="ach-toast";
-      f.innerHTML='<div class="at-tile"><i class="ti ti-trophy"></i></div><div><div class="at-cap">All found</div><div class="at-title">Frequent Flyer</div><div class="at-xp">You’d love the real thing — try the demo ✈</div></div>';
-      document.body.appendChild(f); setTimeout(()=>f.remove(),6000);
-    }, 5600);
-  }
+  function unlock(){}
 
   const picker = document.getElementById("avPicker");
   Object.entries(AVS).forEach(([id,a])=>{
@@ -1013,7 +825,6 @@
     const nm=document.querySelector(".hp-name"); if(nm) nm.textContent=a.name;
     const info=document.getElementById("avpInfo");
     if(info){ const m=AV_META[id]; info.style.display="block"; info.innerHTML='<div class="ai-name">'+a.name+'</div><div class="ai-style">'+m[0]+'</div><div class="ai-quote">"'+m[1]+'"</div>'; }
-    if(typeof drawPass==="function") drawPass();
     if(user){ unlock("pick"); playVoice(id, null); resetChips(); }
   }
 
@@ -1112,7 +923,7 @@
     h.parentNode.insertBefore(b, h.nextSibling);
   });
   // ── Collapse long paragraphs: consecutive ones share ONE More toggle ──
-  ["#advanced","#safe","#how","#parents","#schools"].forEach(sel=>{
+  ["#advanced","#safe","#how","#parents","#teampilot"].forEach(sel=>{
     const sec=document.querySelector(sel); if(!sec) return;
     sec.querySelectorAll("p").forEach(p=>{
       if(p.closest(".price-card")||p.closest(".audcard")||p.classList.contains("section-sub")) return;
@@ -1156,78 +967,6 @@
     wkTimer=setInterval(()=>{ if(!wkTouched) wkShow((wkIdx+1)%WEEK.length); },4200);
   }
 
-  // ── Boarding pass generator ──
-  const ACH_PASS=["Boarding Pass",100,"ticket"]; ACH.pass=ACH_PASS;
-  const bpC=document.getElementById("bpCanvas"), bpN=document.getElementById("bpName"), bpD=document.getElementById("bpDl");
-  function drawPass(){
-    if(!bpC) return;
-    const x=bpC.getContext("2d"), W=540, H=960;
-    const a=AVS[curAv], tint=a.tint;
-    const name=(bpN.value||"YOUR NAME").trim().toUpperCase().slice(0,14);
-    x.fillStyle="#0a0f1a"; x.fillRect(0,0,W,H);
-    // accent header
-    x.fillStyle=tint; x.fillRect(0,0,W,14);
-    const g=x.createLinearGradient(0,0,0,H); g.addColorStop(0,tint+"14"); g.addColorStop(.5,"transparent"); x.fillStyle=g; x.fillRect(0,0,W,H);
-    // top brand
-    x.fillStyle="#f0f4ff"; x.font="800 34px Syne, sans-serif"; x.textAlign="left";
-    x.fillText("Teen", 44, 86); const w1=x.measureText("Teen").width;
-    x.fillStyle=tint; x.fillText("Pilot", 44+w1, 86);
-    x.fillStyle="#8899bb"; x.font="700 15px 'DM Sans', sans-serif"; x.textAlign="right";
-    x.fillText("BOARDING PASS", W-44, 82);
-    // plane glyph
-    x.fillStyle=tint; x.font="120px sans-serif"; x.textAlign="center";
-    x.fillText("\u2708", W/2, 250);
-    // passenger
-    x.textAlign="left"; x.fillStyle="#4a5568"; x.font="700 14px 'DM Sans', sans-serif";
-    x.fillText("PASSENGER", 44, 330);
-    x.fillStyle="#f0f4ff"; x.font="800 52px Syne, sans-serif";
-    x.fillText(name, 44, 384);
-    // co-pilot row
-    x.fillStyle="#4a5568"; x.font="700 14px 'DM Sans', sans-serif"; x.fillText("CO-PILOT", 44, 446);
-    x.fillStyle=tint; x.font="800 30px Syne, sans-serif"; x.fillText(a.name.toUpperCase(), 44, 482);
-    // flight / gate / seat
-    const cols=[["FLIGHT","TP-726"],["GATE","9"],["SEAT","4A"]];
-    cols.forEach((cl,i)=>{ const cx=44+i*165;
-      x.fillStyle="#4a5568"; x.font="700 14px 'DM Sans', sans-serif"; x.fillText(cl[0],cx,560);
-      x.fillStyle="#f0f4ff"; x.font="800 34px Syne, sans-serif"; x.fillText(cl[1],cx,600); });
-    // departure
-    x.fillStyle="#4a5568"; x.font="700 14px 'DM Sans', sans-serif"; x.fillText("DEPARTS",44,672);
-    x.fillStyle=tint; x.font="800 40px Syne, sans-serif"; x.fillText("20 JUL 2026",44,716);
-    // perforation
-    x.strokeStyle="#2a3550"; x.setLineDash([10,9]); x.lineWidth=2.5;
-    x.beginPath(); x.moveTo(0,772); x.lineTo(W,772); x.stroke(); x.setLineDash([]);
-    // barcode
-    let bx=44; while(bx<W-44){ const bw=2+Math.random()*7; x.fillStyle="#f0f4ff"; x.fillRect(bx,808,bw,86); bx+=bw+3+Math.random()*7; }
-    x.fillStyle="#8899bb"; x.font="700 15px 'DM Sans', sans-serif"; x.textAlign="center";
-    x.fillText("teenpilot.co.nz \u00b7 frequent flyer", W/2, 932);
-  }
-  if(bpN){ bpN.addEventListener("input", drawPass); drawPass(); }
-  const SB_URL="https://omoxryeyvcbevsupssru.supabase.co";
-  const SB_KEY="sb_publishable_i2QEdyNj5YQ7DjHxaaHV1Q_69W91soL";
-  const bpE=document.getElementById("bpEmail"), bpS=document.getElementById("bpStatus");
-  async function joinWaitlist(){
-    if(!bpE||!bpS) return;
-    const em=(bpE.value||"").trim(), nm=((bpN&&bpN.value)||"").trim()||"Pilot";
-    if(!em){ bpS.style.color="#8899bb"; bpS.textContent="Tip: add your email above to join the waitlist \u2708"; return; }
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ bpS.style.color="#fbbf24"; bpS.textContent="That email doesn\u2019t look quite right"; return; }
-    bpS.style.color="#8899bb"; bpS.textContent="Adding you to the manifest\u2026";
-    try{
-      const r=await fetch(SB_URL+"/rest/v1/waitlist",{method:"POST",headers:{"apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({name:nm,email:em,source:"website-boardingpass"})});
-      if(r.ok){ bpS.style.color="var(--accent)"; bpS.textContent="You\u2019re on the manifest \u2708 See you 20 July."; }
-      else if(r.status===409){ bpS.style.color="var(--accent)"; bpS.textContent="You\u2019re already on the manifest \u2708"; }
-      else { bpS.style.color="#fbbf24"; bpS.textContent="Couldn\u2019t reach the tower \u2014 pass saved anyway."; }
-    }catch(e){ bpS.style.color="#fbbf24"; bpS.textContent="Couldn\u2019t reach the tower \u2014 pass saved anyway."; }
-  }
-  if(bpE){ bpE.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); joinWaitlist(); } }); }
-  if(bpD){ bpD.onclick=()=>{
-    drawPass(); unlock("pass"); joinWaitlist();
-    const big=document.createElement("canvas"); big.width=1080; big.height=1920;
-    const bx=big.getContext("2d"); bx.fillStyle="#0a0f1a"; bx.fillRect(0,0,1080,1920);
-    bx.drawImage(bpC,0,0,540,960,0,0,1080,1920); // full bleed
-    const a=document.createElement("a"); a.download="teenpilot-boarding-pass.png"; a.href=big.toDataURL("image/png"); a.click();
-  }; }
-  const xpPop=document.getElementById("xpPop");
-  if(xpPill&&xpPop){ xpPill.onclick=()=>xpPop.classList.toggle("show"); document.addEventListener("click",e=>{ if(!xpPill.contains(e.target)&&!xpPop.contains(e.target)) xpPop.classList.remove("show"); }); }
   takeover(curAv, false);
 </script>
 <script>
