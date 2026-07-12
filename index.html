@@ -29,7 +29,7 @@
       --bg: rgba(9,13,22,0.80); --surface: rgba(16,22,33,0.80); --surface2: rgba(23,32,49,0.82); --bgSolid: #080c14;
       --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
       --text: #f0f4ff; --textMid: #8899bb; --textDim: #4a5a72;
-      --accent: #4ade80; --accent2: #22c55e; --accentDim: rgba(74,222,128,0.08); --accentHi: #86efac; --accentGlow: rgba(74,222,128,0.30);
+      --accent: #4ade80; --accent2: #22c55e; --accentDim: rgba(74,222,128,0.08); --accentHi: #86efac; --accentGlow: rgba(74,222,128,0.30); --skyTint: 45,212,191;
       --blue: #4a9eff; --purple: #a78bfa; --gold: #ffd166;
       --font: 'DM Sans', sans-serif; --display: 'Syne', sans-serif;
       --radius: 16px; --radiusSm: 10px;
@@ -325,6 +325,10 @@
     #flightPlane{position:fixed;right:7px;top:6%;z-index:3;color:var(--accent);font-size:18px;pointer-events:none;transform:translateY(-50%);filter:drop-shadow(0 0 6px var(--accentGlow));transition:top .18s cubic-bezier(.22,.61,.36,1),color .35s}
     #flightPlane i{display:block;transform:rotate(90deg)}
     @media(max-width:600px){#flightRail,#flightPlane{display:none}}
+    /* TeamPilot: teal glow lerps with the sky, over content (content wins) */
+    #teampilot{position:relative;isolation:isolate}
+    #teampilot::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 92% 62% at 50% 30%, rgba(var(--skyTint),0.17), transparent 72%)}
+    #teampilot>*{position:relative;z-index:1}
     /* ── A day with TeenPilot (clip story) ── */
     .daystory{padding:18px 24px 90px}
     .ds-chapter{display:grid;grid-template-columns:1fr 300px;gap:44px;align-items:center;max-width:960px;margin:0 auto;padding:30px 0}
@@ -634,7 +638,7 @@
 </section>
 
 <!-- TEAMPILOT -->
-<section id="teampilot" style="padding:90px 24px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<section id="teampilot" style="padding:90px 24px;background:rgba(16,22,33,0.72);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="container">
     <span class="section-label reveal" style="color:#2dd4bf">TeamPilot · for coaches</span>
     <h2 class="section-title reveal">The coach's AI<br>team manager.</h2>
@@ -1124,8 +1128,8 @@
     var MOODS = {
       hero:   mood(1.25, 0.55, 1.00, null),
       cruise: mood(0.90, 0.40, 0.80, null),
-      team:   mood(1.00, 0.90, 0.90, [45,212,191]),
-      parent: mood(0.60, 0.30, 0.50, [124,152,196]),
+      team:   mood(1.00, 1.00, 0.90, {r:45,g:212,b:191}),
+      parent: mood(0.60, 0.35, 0.55, {r:130,g:158,b:200}),
       close:  mood(1.15, 0.60, 0.95, null, true)
     };
     var cur = {stars:1, aur:0.5, parts:0.9, tr:accent.r, tg:accent.g, tb:accent.b, shoot:false};
@@ -1134,6 +1138,8 @@
 
     var stars=[], parts=[], rings=[], trails=[], shoots=[];
     var pointer={x:-999,y:-999,active:0};
+    var docEl=document.documentElement, lastTintKey='';
+    var ctaVis=false, lastScrollMs=0, nowMs=0, nextStar=0;
 
     function rnd(a,b){ return a + Math.random()*(b-a); }
 
@@ -1162,18 +1168,21 @@
     function lerp(a,b,t){ return a+(b-a)*t; }
 
     function drawAurora(t){
-      var ti = tintOf(tgt); // aurora leads toward target tint (already lerped in cur)
-      var baseY = H*(tgt===MOODS.team?0.62:0.78);
-      var n = 2;
+      var team = (tgt===MOODS.team);
+      var baseY = H*(team?0.52:0.78);
+      var boost = team?1.9:1.0;
+      var n = team?3:2;
+      var cc = Math.round(cur.tr)+','+Math.round(cur.tg)+','+Math.round(cur.tb);
       for(var i=0;i<n;i++){
-        var yo = Math.sin(t*0.0003 + i*2.1)*30;
-        var cx = W*(0.35+0.3*i) + Math.sin(t*0.00022 + i)*W*0.12;
-        var cy = baseY + yo + i*40;
-        var rad = Math.max(W,H)*(0.55 - i*0.12);
+        var yo = Math.sin(t*0.0003 + i*2.1)*38;
+        var cx = W*(0.3+0.24*i) + Math.sin(t*0.00022 + i)*W*0.14;
+        var cy = baseY + yo + i*46;
+        var rad = Math.max(W,H)*((team?0.72:0.55) - i*0.12);
         var g = ctx.createRadialGradient(cx,cy,0,cx,cy,rad);
-        var al = cur.aur * (0.11 - i*0.03) * (0.85+0.15*Math.sin(t*0.0005+i));
-        g.addColorStop(0,'rgba('+Math.round(cur.tr)+','+Math.round(cur.tg)+','+Math.round(cur.tb)+','+al.toFixed(3)+')');
-        g.addColorStop(1,'rgba('+Math.round(cur.tr)+','+Math.round(cur.tg)+','+Math.round(cur.tb)+',0)');
+        var al = cur.aur * (0.12 - i*0.028) * boost * (0.82+0.18*Math.sin(t*0.0005+i));
+        if(al<0) al=0;
+        g.addColorStop(0,'rgba('+cc+','+al.toFixed(3)+')');
+        g.addColorStop(1,'rgba('+cc+',0)');
         ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
       }
     }
@@ -1192,14 +1201,19 @@
       cur.stars = lerp(cur.stars, tgt.stars, k);
       cur.aur   = lerp(cur.aur,   tgt.aur,   k);
       cur.parts = lerp(cur.parts, tgt.parts, k);
-      var tt = tintOf(tgt);
-      cur.tr = lerp(cur.tr, tt.r, k); cur.tg = lerp(cur.tg, tt.g, k); cur.tb = lerp(cur.tb, tt.b, k);
+      var tt = tintOf(tgt), kt=0.011;
+      cur.tr = lerp(cur.tr, tt.r, kt); cur.tg = lerp(cur.tg, tt.g, kt); cur.tb = lerp(cur.tb, tt.b, kt);
+      if(cur.tr!==cur.tr){ cur.tr=accent.r; cur.tg=accent.g; cur.tb=accent.b; }
+      nowMs = now;
+      var tk=Math.round(cur.tr)+','+Math.round(cur.tg)+','+Math.round(cur.tb);
+      if(tk!==lastTintKey){ docEl.style.setProperty('--skyTint', tk); lastTintKey=tk; }
 
       // base
       ctx.fillStyle='#05070e'; ctx.fillRect(0,0,W,H);
       var g0 = ctx.createLinearGradient(0,0,0,H);
       g0.addColorStop(0,'rgba(10,16,28,0.7)'); g0.addColorStop(1,'rgba(4,6,12,0.9)');
       ctx.fillStyle=g0; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='rgba('+Math.round(cur.tr)+','+Math.round(cur.tg)+','+Math.round(cur.tb)+',0.030)'; ctx.fillRect(0,0,W,H);
 
       if(tier>=2) drawAurora(now);
 
@@ -1208,7 +1222,7 @@
       for(var i=0;i<stars.length;i++){ var s=stars[i];
         var y = s.y - scrollY*s.sp; y = ((y % fieldH)+fieldH) % fieldH; if(y>H+2) continue;
         var tw = 0.7 + 0.3*Math.sin(now*0.001*s.tw + s.ph);
-        ctx.globalAlpha = Math.min(1, s.a*tw*cur.stars);
+        ctx.globalAlpha = Math.min(1, s.a*tw*cur.stars*1.14);
         ctx.fillStyle = s.layer===2 ? 'rgba('+Math.round(cur.tr)+','+Math.round(cur.tg)+','+Math.round(cur.tb)+',1)' : '#dfe8ff';
         ctx.beginPath(); ctx.arc(s.x, y, s.r, 0, 6.283); ctx.fill();
       }
@@ -1256,14 +1270,18 @@
         ctx.fillRect(T.x, T.y, 1.4, T.len); }
       ctx.globalAlpha=1;
 
-      // shooting star (closing mood)
-      if(tgt.shoot && shoots.length<1 && Math.random()<0.004) shoots.push({x:rnd(W*0.1,W*0.6), y:rnd(H*0.05,H*0.3), v:rnd(6,9), a:1, ang:rnd(0.35,0.5)});
-      for(var sh=shoots.length-1;sh>=0;sh--){ var S=shoots[sh]; S.x+=S.v*Math.cos(S.ang)*dt*0.06; S.y+=S.v*Math.sin(S.ang)*dt*0.06; S.a-=dt*0.0011;
-        if(S.a<=0||S.x>W||S.y>H){ shoots.splice(sh,1); continue; }
-        var tx=S.x-40*Math.cos(S.ang), ty=S.y-40*Math.sin(S.ang);
+      // shooting star — ambient: only when parked on the CTA (>=60% + scroll settled), near the text, repeats
+      if(ctaVis && (nowMs-lastScrollMs>500)){
+        if(nextStar===0) nextStar = nowMs + 700;
+        if(nowMs>nextStar && shoots.length<1){ shoots.push({x:rnd(W*0.14,W*0.42), y:rnd(H*0.26,H*0.40), v:rnd(7,9), a:1, ang:rnd(0.28,0.42), len:rnd(92,120)}); nextStar = nowMs + rnd(12000,20000); }
+      } else if(!ctaVis){ nextStar=0; }
+      for(var sh=shoots.length-1;sh>=0;sh--){ var S=shoots[sh]; S.x+=S.v*Math.cos(S.ang)*dt*0.06; S.y+=S.v*Math.sin(S.ang)*dt*0.06; S.a-=dt*0.00075;
+        if(S.a<=0||S.x>W+40||S.y>H+40){ shoots.splice(sh,1); continue; }
+        var L=S.len||100, tx=S.x-L*Math.cos(S.ang), ty=S.y-L*Math.sin(S.ang), cc2=Math.round(cur.tr)+','+Math.round(cur.tg)+','+Math.round(cur.tb);
         var sg=ctx.createLinearGradient(S.x,S.y,tx,ty);
-        sg.addColorStop(0,'rgba(230,240,255,'+S.a.toFixed(2)+')'); sg.addColorStop(1,'rgba(230,240,255,0)');
-        ctx.strokeStyle=sg; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(S.x,S.y); ctx.lineTo(tx,ty); ctx.stroke(); }
+        sg.addColorStop(0,'rgba(236,244,255,'+S.a.toFixed(2)+')'); sg.addColorStop(0.5,'rgba('+cc2+','+(S.a*0.55).toFixed(2)+')'); sg.addColorStop(1,'rgba(230,240,255,0)');
+        ctx.strokeStyle=sg; ctx.lineWidth=2.6; ctx.beginPath(); ctx.moveTo(S.x,S.y); ctx.lineTo(tx,ty); ctx.stroke();
+        ctx.globalAlpha=Math.min(1,S.a); ctx.fillStyle='rgba(240,248,255,1)'; ctx.beginPath(); ctx.arc(S.x,S.y,1.9,0,6.283); ctx.fill(); ctx.globalAlpha=1; }
 
       raf = requestAnimationFrame(frame);
     }
@@ -1303,7 +1321,7 @@
       var sc; window.addEventListener('scroll', function(){ var y=window.pageYOffset||0, dv=y-lastScroll;
         if(Math.abs(dv)>34 && trails.length<28){ var dir=dv>0?1:-1;
           for(var i=0;i<3;i++) trails.push({x:rnd(0,W), y:rnd(0,H), vy:dir*rnd(6,12), len:rnd(10,26), life:360, max:360}); }
-        lastScroll=y; }, {passive:true});
+        lastScroll=y; lastScrollMs=nowMs; }, {passive:true});
     }
 
     // altitude journey — observe sections, set target mood
@@ -1318,6 +1336,8 @@
     if('IntersectionObserver' in window){
       var so=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) tgt=moodForEl(e.target); }); }, {threshold:0.35});
       document.querySelectorAll('section').forEach(function(sec){ so.observe(sec); });
+      var cta=document.getElementById('closeCta');
+      if(cta){ new IntersectionObserver(function(es){ es.forEach(function(e){ ctaVis = e.isIntersecting && e.intersectionRatio>=0.6; }); }, {threshold:[0,0.6,1]}).observe(cta); }
     }
 
     // live retint hook (called by avatar takeover)
