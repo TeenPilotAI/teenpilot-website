@@ -57,3 +57,6 @@ date (until Stripe is live).
   the earlier "remove all model names" pass is **superseded for the tier cards**.
 - Marketing screenshots load from `app.teenpilot.co.nz/marketing/*.png` via
   self-healing device frames (styled placeholder until the assets deploy).
+- **Living Sky — planets: don't re-add.** Tried 12 Jul 2026, removed the same day —
+  a uniform depth *field* (stars · aurora · atmosphere · altitude journey) beats fixed
+  focal objects in this sky; celestial bodies read as uneven and break the texture.
