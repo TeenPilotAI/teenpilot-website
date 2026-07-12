@@ -28,6 +28,12 @@ This is the **marketing website only** — currently live at
   must be framed as "coming / built to," NOT present-tense guarantees.**
   - ✅ "built to keep teens safe", "designed to…", "coming soon"
   - ❌ "we keep your teen safe", "fully compliant", present-tense promises
+- **Tier cards = launch build spec (build-first).** The four **Plans** cards
+  (`#pricing`) advertise the full launch line-up, framed as **"arrives at
+  launch"** — a commitment we control, not a present-tense claim (paid plans
+  aren't purchasable until Stripe is live). **Card ↔ build parity:** if a
+  feature is cut from the build, cut it from the card **before launch**. Full
+  spec + permanently-excluded list → **`ROADMAP.md`**.
 
 ## Merge rule (governance)
 
