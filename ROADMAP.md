@@ -60,3 +60,9 @@ date (until Stripe is live).
 - **Living Sky — planets: don't re-add.** Tried 12 Jul 2026, removed the same day —
   a uniform depth *field* (stars · aurora · atmosphere · altitude journey) beats fixed
   focal objects in this sky; celestial bodies read as uneven and break the texture.
+
+- **App-repo binaries aren't reachable from the website session.** Brand SVGs (text)
+  come through the Vercel fetch clean; but `/brand/*.png|*.ico` can't be pulled byte-exact
+  (git clone scoped-denied, GitHub MCP scoped to this repo, curl policy-blocked, web-fetch
+  lossy for binary). For byte-identity with the app, the founder relays the exact PNG/ICO;
+  otherwise the site uses faithful reproductions rendered from the kit's exact SVG vectors.
